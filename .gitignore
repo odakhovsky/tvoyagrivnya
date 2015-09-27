@@ -1,0 +1,6 @@
+target/
+.idea/
+logs/
+tvoyagrivnya.iml
+src/main/resources/hibernate-mysql.properties
+src/main/resources/email.properties

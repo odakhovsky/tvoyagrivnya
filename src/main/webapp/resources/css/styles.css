@@ -1,0 +1,65 @@
+.no-bullets{
+    list-style-type: none;
+}
+.about-list {
+    background-color: #285e8e;
+    padding: 25px;
+    opacity: 0.8;
+    border-radius: 5px;
+}
+.about-list li{
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+
+.about-finally{
+    background-color: #1abc9c;
+    padding: 10px;
+}
+
+.comfirmFont {
+    color: black;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.sign-in-modal{
+    background-color: #497E6A;
+    margin: 0 0 35px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;;
+}
+
+.sign-in-tittle{
+    color:white;
+}
+
+.btn-cursor{
+    cursor: pointer;
+}
+
+.margin-top-5{
+    margin-top: 5px;
+}
+
+.feed-back-area{
+    height: 200px;!important;
+    column-span: 7;
+    width: 600px;
+    background: white;
+    color: black;
+    resize: none;
+}
+
+.margin-bottom-105{
+   margin-bottom: 105px;
+}
+
+.feedback h1, h2, h3, h4, h5, h6{
+    color: black;
+}
