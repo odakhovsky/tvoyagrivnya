@@ -6,6 +6,7 @@
         <put-attribute name="header" value="/WEB-INF/jsp/layout/common/header.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/jsp/layout/common/footer.jsp"/>
         <put-attribute name="nav" value="/WEB-INF/jsp/layout/common/nav.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/layout/common/sidebar.jsp"/>
     </definition>
 
     <definition name="mainLayout" template="/WEB-INF/jsp/layout/mainLayout.jsp">
@@ -15,6 +16,10 @@
 
     <definition name="index" extends="mainLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
+    </definition>
+
+    <definition name="cabinet/main" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/main.jsp"></put-attribute>
     </definition>
 
 </tiles-definitions>
