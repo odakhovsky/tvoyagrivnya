@@ -12,6 +12,7 @@
 <head>
     <title><tiles:insertAttribute name="title" ignore="true"/></title>
     <tiles:insertAttribute name="header"/>
+    <link href="<c:url value="/resources/css/grayscale.css" />" rel="stylesheet">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -109,12 +110,12 @@
 
                 <form action="/registration" method="POST" class= form-inline" id="registration-form">
                     <div class="col-lg-4">
-                        <input name="email" class="registration-input form-control" type="email"
+                        <input id="reg-email" name="email" class="registration-input form-control" type="email"
                                placeholder="Ваша скринька"
                                required>
                     </div>
                     <div class="col-lg-5">
-                        <input name="name" class="registration-input form-control" type="text" placeholder="Ваше ім`я"
+                        <input id="reg-name" name="name" class="registration-input form-control" type="text" placeholder="Ваше ім`я"
                                required>
                     </div>
                     <div class="col-lg-3">
