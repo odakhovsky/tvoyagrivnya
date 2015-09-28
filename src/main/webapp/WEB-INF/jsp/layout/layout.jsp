@@ -41,6 +41,4 @@
 
 </div>
 </body>
-<script type="text/javascript" data-main="/resources/js/groupView.js" src="/resources/js/libs/require.js"></script>
-
 </html>

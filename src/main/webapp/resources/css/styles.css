@@ -63,3 +63,21 @@
 .feedback h1, h2, h3, h4, h5, h6{
     color: black;
 }
+
+.invite-form{
+    padding: 25px;
+}
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.invite-members-list{
+    padding: 15px;
+}

@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,6 +34,13 @@ public class UserDaoImpl implements IUserDao {
                 .add(Restrictions.eq("email", email))
                 .add(Restrictions.eq("active", true))
                 .uniqueResult();
+    }
+
+    @Override
+    public List<UserEntity> getUserMembers(int user) {
+        return getSession().createQuery("from UserEntity as u  where u.inviter.id = :id")
+                .setParameter("id", user)
+                .list();
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Set;
 
@@ -34,4 +36,16 @@ public interface IUserService{
         public boolean hasRole(int userId, RoleEntity.Name roleName);
 
         public UserEntity toUserEntity(UserBean user);
+
+        UserBean inviteNewUser(UserBean inviter, UserBean invited);
+
+        List<UserBean> getUserMembers(int userId);
+
+        public void updateSingleField(int userId, String fieldName, String fielValue)
+                throws IntrospectionException, InvocationTargetException, IllegalAccessException;
+
+        public void addRole(int userId, RoleEntity.Name role);
+
+        public void removeRole(int userId, RoleEntity.Name role);
+
 }

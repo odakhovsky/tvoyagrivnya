@@ -24,6 +24,9 @@
                 <li>
                     <a href="/cabinet/settings/">Налаштування</a>
                 </li>
+                <li class="pull-right">
+                    <a onclick="logout()">Вихід</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

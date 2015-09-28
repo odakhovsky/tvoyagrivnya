@@ -46,6 +46,14 @@ public class UserEntity {
     )
     private Set<UserEntity> members;
 
+    @ManyToOne
+    @JoinTable(
+            name = "USER_MEMBERS",
+            joinColumns = {@JoinColumn(name = "MEMBER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_ID")}
+    )
+    private UserEntity inviter;
+
     @OneToOne
     @JoinColumn(name = "SETTINGS_ID", updatable=true)
     private UserSettingsEntity settings;
@@ -127,5 +135,13 @@ public class UserEntity {
 
     public void setMembers(Set<UserEntity> members) {
         this.members = members;
+    }
+
+    public UserEntity getInviter() {
+        return inviter;
+    }
+
+    public void setInviter(UserEntity inviter) {
+        this.inviter = inviter;
     }
 }
