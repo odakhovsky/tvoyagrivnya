@@ -3,15 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<link rel="shortcut icon" href="/resources/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/resources/img/favicon.ico" type="image/x-icon">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap-select.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-editable.css" />" rel="stylesheet">
 <link href="/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <script src="<c:url value="/resources/js/libs/jquery.min.js" />"></script>
 <script src="<c:url value="/resources/js/libs/knockout.min.js" />"></script>
 <script src="<c:url value="/resources/js/libs/Knockout-Validation/knockout.validation.min.js" />"></script>
@@ -25,6 +22,7 @@
 <script src="<c:url value="/resources/js/libs/bootstrap3-wysihtml5.js" />"></script>
 <script src="<c:url value="/resources/js/libs/jquery.json-2.4.min.js" />"></script>
 <script src="<c:url value="/resources/js/libs/jquery.validate.min.js" />"></script>
+<script src="<c:url value="/resources/js/libs/additional-methods.min.js" />"></script>
 <script src="<c:url value="/resources/js/libs/jquery.alert.js" />"></script>
 <script src="<c:url value="/resources/js/libs/jquery.confirm.js" />"></script>
 <script src="<c:url value="/resources/js/libs/jquery.easing.min.js" />"></script>
@@ -37,3 +35,10 @@
 <![endif]-->
 <script src="/resources/js/libs/jquery-form.js"></script>
 <script src="/resources/js/main/main.js"></script>
+<script src="<c:url value="/resources/js/libs/moment.js" />"></script>
+<script src="<c:url value="/resources/js/libs/bootstra-datetime.js" />"></script>
+
+
+<link href="<c:url value="/resources/css/flora.datepick.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">

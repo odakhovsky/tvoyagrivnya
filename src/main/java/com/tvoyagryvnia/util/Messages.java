@@ -12,4 +12,13 @@ public class Messages {
 
     public static String CONTROL_MEMBERS_ADDITION_ROLE = "Повноваження надає можливість переглядати загальну статистику членів сімї";
     public static String EMAIL_IS_USER_ALREADY = "Пошта вже використовується, спробуйте іншу.";
+
+    public static String INVITE_SUBJECT = "Запрошення до  tvoyagrivnya!";
+    public static String INVITATION_BODY = "Привіт %s ,<br>%s запросив вас до системи управління сімейним бюджетом<br> " +
+            "Твій логін: %s , твій пароль: %s<br>" +
+            "Ти маєш можливість змінити його в панелі керування.";
+
+    public static String PASSWORD_CHANGE_SUBJECT = "Зміна паролю до акаунту tvoyagrivnya!";
+    public static String PASSWORD_CHANGE__BODY = "Ваш пароль було змінено, новий пароль: %s";
+
 }

@@ -165,6 +165,7 @@
     <div class="container text-center">
         <p>&copy; Твоя Гривня 2015</p>
     </div>
+
 </footer>
 <jsp:include page="../main/registrationComfirn.jsp"/>
 <jsp:include page="../main/signIn.jsp"/>

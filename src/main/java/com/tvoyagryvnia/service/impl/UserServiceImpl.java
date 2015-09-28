@@ -1,6 +1,7 @@
 package com.tvoyagryvnia.service.impl;
 
 
+import com.tvoyagryvnia.bean.user.EditUserPass;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.dao.IUserDao;
@@ -8,17 +9,20 @@ import com.tvoyagryvnia.dao.IUserSettingsDao;
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
 import com.tvoyagryvnia.model.UserSettingsEntity;
+import com.tvoyagryvnia.service.ISendMailService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.util.Cipher;
 import com.tvoyagryvnia.util.password.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +40,9 @@ public class UserServiceImpl implements IUserService {
     IRoleDao roleDao;
     @Autowired
     PasswordGenerator passwordGenerator;
+
+    @Autowired
+    private ISendMailService sendMailService;
 
     @Override
     public int saveUser(UserBean user) {
@@ -65,7 +72,7 @@ public class UserServiceImpl implements IUserService {
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_SUPER_MEMBER);
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_OWNER);
 
-            //todo send notification to user
+            sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
             return userID;
 
         }
@@ -179,9 +186,7 @@ public class UserServiceImpl implements IUserService {
         if (invited.isSuperMember()) {
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_SUPER_MEMBER);
         }
-
-        //todo send notification to user
-        //todo send invite to email
+        sendMailService.sendInviteInformation(inviter.getName(), invited.getName(), invited.getEmail(), password);
         return invited;
     }
 
@@ -219,6 +224,23 @@ public class UserServiceImpl implements IUserService {
                 userDao.removeRole(user, role);
             }
         }
+    }
+
+
+    private UserEntity toUserEntity(EditUserPass editUserPass) {
+        UserEntity userEntity = userDao.getUserById(editUserPass.getUserId());
+        if (userEntity == null) {
+            userEntity = userDao.findUserByLogin(editUserPass.getEmail());
+        }
+        userEntity.setActive(true);
+        userEntity.setPassword(Cipher.encrypt(editUserPass.getPassword()));
+        return userEntity;
+    }
+
+    @Override
+    public void updateUser(EditUserPass user) {
+        userDao.updateUser(toUserEntity(user));
+        sendMailService.sendPasswordUpdateNotification(user.getEmail(), user.getPassword());
     }
 
 

@@ -81,3 +81,15 @@
 .invite-members-list{
     padding: 15px;
 }
+
+.margin-top-15{
+    margin-top: 15px;
+}
+
+.edit-user-form{
+    padding: 45px;
+}
+
+.edit-password-form{
+    padding: 45px;
+}
