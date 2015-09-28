@@ -46,7 +46,14 @@
                     <a class="page-scroll" href="#contact">Контакти</a>
                 </li>
                 <li>
-                    <a class="btn-cursor" id="signIn">Увійти</a>
+                    <c:choose>
+                        <c:when test="${not empty userBean}">
+                            <a class="btn-cursor" href="/cabinet/">Мій кабінет</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="btn-cursor" id="signIn">Увійти</a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
         </div>

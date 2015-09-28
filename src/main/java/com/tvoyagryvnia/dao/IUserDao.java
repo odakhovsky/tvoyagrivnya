@@ -12,6 +12,8 @@ public interface IUserDao {
 
    UserEntity findUserByEmail(String email);
 
+   List<UserEntity> getUserMembers(int user);
+
    public int saveUser(UserEntity user);
 
    public void updateUser(UserEntity user);

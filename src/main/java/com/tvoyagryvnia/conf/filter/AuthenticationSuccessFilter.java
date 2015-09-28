@@ -31,7 +31,6 @@ public class AuthenticationSuccessFilter extends SavedRequestAwareAuthentication
         request.getSession().setAttribute("userBean", userBean);
 
         request.getSession().setMaxInactiveInterval((int) TimeUnit.HOURS.toSeconds(48));
-        System.out.println("log in");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

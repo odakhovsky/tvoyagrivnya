@@ -10,5 +10,6 @@ public class Messages {
     public static String FEEDBACK_BODY = "Привіт %s ,<br>Дякуємо за вашу думку<br> " +
             "Очікуйте відповідь найблищим часом, з повагою адміністрація tvoyagrivnya.";
 
-
+    public static String CONTROL_MEMBERS_ADDITION_ROLE = "Повноваження надає можливість переглядати загальну статистику членів сімї";
+    public static String EMAIL_IS_USER_ALREADY = "Пошта вже використовується, спробуйте іншу.";
 }

@@ -3,6 +3,7 @@ package com.tvoyagryvnia.bean.user;
 
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
+import com.tvoyagryvnia.util.validation.login.Login;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,6 +20,7 @@ public class UserBean {
     private String name;
 
     @NotEmpty
+    @Login(message = "Користувач з такою поштою вже існує")
     private String email;
 
     @DateTimeFormat(pattern = "dd.MM.yyyy")
@@ -26,6 +28,8 @@ public class UserBean {
     private Date dateOfBirth;
 
     private String password;
+
+    private Integer inviter;
 
     private Set<Integer> roles = new HashSet<>();
 
@@ -55,6 +59,7 @@ public class UserBean {
         this.members = (null != userEntity.getMembers()) ?
                 userEntity.getMembers().stream().map(UserBean::new).collect(Collectors.toSet()) : new HashSet<>();
 
+        this.inviter = (null == userEntity.getInviter()) ? null : userEntity.getInviter().getId();
     }
 
     public UserBean(String name, String email) {
@@ -150,5 +155,13 @@ public class UserBean {
 
     public void setSuperMember(boolean superMember) {
         this.superMember = superMember;
+    }
+
+    public Integer getInviter() {
+        return inviter;
+    }
+
+    public void setInviter(Integer inviter) {
+        this.inviter = inviter;
     }
 }

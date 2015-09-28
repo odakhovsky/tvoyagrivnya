@@ -22,4 +22,7 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/main.jsp"></put-attribute>
     </definition>
 
+    <definition name="cabinet/control/members" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/control/members.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

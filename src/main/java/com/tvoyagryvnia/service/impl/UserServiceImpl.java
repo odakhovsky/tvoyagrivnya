@@ -15,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -145,6 +149,76 @@ public class UserServiceImpl implements IUserService {
         userEntity.setRoles(toRoleEntitySet(userBean.getRoles()));
         userEntity.setActive(userBean.isActive());
         return userEntity;
+    }
+
+    @Override
+    public UserBean inviteNewUser(UserBean inviter, UserBean invited) {
+        System.out.println(invited);
+        String password = passwordGenerator.generate();
+        invited.setPassword(password);
+        System.out.println(password);
+
+//todo remove sout
+        UserEntity userEntity = toUserEntity(invited);
+        userEntity.setActive(true);
+        userEntity.setPassword(Cipher.encrypt(invited.getPassword()));
+        userEntity.setInviter(toUserEntity(inviter));
+
+
+        UserSettingsEntity settings = new UserSettingsEntity();
+        userSettingsDao.saveOrUpdate(settings);
+
+        userEntity.setSettings(settings);
+        int userID = userDao.saveUser(userEntity);
+        userEntity = userDao.getUserById(userID);
+        settings.setUser(userEntity);
+        userSettingsDao.saveOrUpdate(settings);
+
+
+        userDao.addRole(userEntity, RoleEntity.Name.ROLE_MEMBER);
+        if (invited.isSuperMember()) {
+            userDao.addRole(userEntity, RoleEntity.Name.ROLE_SUPER_MEMBER);
+        }
+
+        //todo send notification to user
+        //todo send invite to email
+        return invited;
+    }
+
+    @Override
+    public List<UserBean> getUserMembers(int userId) {
+        return userDao.getUserMembers(userId).stream().map(UserBean::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateSingleField(int userId, String fieldName, String fielValue) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+        UserEntity user = userDao.getUserById(userId);
+
+        Method setter = new PropertyDescriptor(fieldName, user.getClass()).getWriteMethod();
+        setter.invoke(user, fielValue);
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public void addRole(int userId, RoleEntity.Name role) {
+        UserEntity user = userDao.getUserById(userId);
+        if (null != user) {
+            RoleEntity roleEntity = roleDao.getRoleByName(role);
+            if (null != roleEntity) {
+                userDao.addRole(user, role);
+            }
+        }
+    }
+
+    @Override
+    public void removeRole(int userId, RoleEntity.Name role) {
+        UserEntity user = userDao.getUserById(userId);
+        if (null != user) {
+            RoleEntity roleEntity = roleDao.getRoleByName(role);
+            if (null != roleEntity) {
+                userDao.removeRole(user, role);
+            }
+        }
     }
 
 
