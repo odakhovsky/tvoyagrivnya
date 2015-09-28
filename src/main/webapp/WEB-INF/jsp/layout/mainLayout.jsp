@@ -153,7 +153,7 @@
                 </div>
                 <div class="col-xs-3">
                     <div class="col-lg-3">
-                        <textarea placeholder="Ваше повідомлення" class="registration-input feed-back-area"></textarea></div>
+                        <textarea placeholder="Ваше повідомлення" class="registration-input feed-back-area" style="height: 200px!important;"></textarea></div>
                 </div>
             </form>
         </div>
@@ -165,6 +165,7 @@
     <div class="container text-center">
         <p>&copy; Твоя Гривня 2015</p>
     </div>
+
 </footer>
 <jsp:include page="../main/registrationComfirn.jsp"/>
 <jsp:include page="../main/signIn.jsp"/>

@@ -26,4 +26,19 @@ public class SendMailServiceImpl implements ISendMailService {
                 name, password);
         emailSender.sendMessage(email, subject, content);
     }
+
+    @Override
+    public void sendInviteInformation(String inviterName, String name, String email, String password) {
+        MessageBuilder subject = () -> String.format(Messages.INVITATION_BODY);
+        MessageBuilder content = () -> String.format(Messages.INVITE_SUBJECT,
+                inviterName,name,email, password);
+        emailSender.sendMessage(email, subject, content);
+    }
+
+    @Override
+    public void sendPasswordUpdateNotification(String email, String password) {
+        MessageBuilder subject = () -> String.format(Messages.PASSWORD_CHANGE_SUBJECT);
+        MessageBuilder content = () -> String.format(Messages.PASSWORD_CHANGE__BODY, password);
+        emailSender.sendMessage(email, subject, content);
+    }
 }

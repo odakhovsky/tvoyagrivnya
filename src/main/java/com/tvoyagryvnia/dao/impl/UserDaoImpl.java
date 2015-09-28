@@ -4,6 +4,7 @@ import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by root on 02.09.2015.
@@ -51,6 +53,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public void updateUser(UserEntity user) {
+
         getSession().update(user);
     }
 
@@ -122,5 +125,14 @@ public class UserDaoImpl implements IUserDao {
 
         user.getRoles().remove(roleEntity);
         updateUser(user);
+    }
+
+    @Override
+    public List<UserEntity> getUsersByIds(Set<Integer> usersId) {
+        String hql = "FROM UserEntity where id IN (:ids)";
+        Query query = getSession().createQuery(hql);
+        query.setParameterList("ids", usersId);
+
+        return query.list();
     }
 }

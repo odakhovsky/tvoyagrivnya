@@ -6,6 +6,7 @@
     <ul class="nav nav-pills">
         <li role="presentation"><a href="#">Члени сім'ї</a></li>
         <li role="presentation"><a href="#">Категорії</a></li>
+        <li role="presentation"><a href="#">Валюти</a></li>
     </ul>
 </div>
 <div class="row">
