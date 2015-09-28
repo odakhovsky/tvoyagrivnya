@@ -6,7 +6,7 @@
 <div class="row well">
 
     <form:form id="edit-user-form" action="/cabinet/settings/user-edit" modelAttribute="profile">
-
+        <form:input path="id" hidden="hidden"/>
         <fieldset class="main edit-user-form ">
             <div class="row fieldrow">
                 <div class="col-md-3">

@@ -36,11 +36,8 @@ public class UserSettingsController {
 
     @RequestMapping(value = "/editPassword", method = RequestMethod.POST)
     public String newPass(@ModelAttribute("editUserPass") EditUserPass userPass, HttpSession session) {
-
         UserBean userBean = (UserBean) session.getAttribute("userBean");
-
         userPass.setUserId(userBean.getId());
-
         userPass.setUserId(userBean.getId());
         userPass.setEmail(userBean.getEmail());
         userService.updateUser(userPass);
@@ -49,7 +46,11 @@ public class UserSettingsController {
 
     @RequestMapping(value = "/user-edit", method = RequestMethod.POST)
     public String newPass(@ModelAttribute("profile") UserBean userBean) {
-        userService.updateUser(userBean);
+        UserBean user = userService.getUserById(userBean.getId());
+        user.setName(userBean.getName());
+        user.setEmail(userBean.getEmail());
+        user.setDateOfBirth(userBean.getDateOfBirth());
+        userService.updateUser(user);
         return "redirect:/cabinet/settings/";
     }
 }

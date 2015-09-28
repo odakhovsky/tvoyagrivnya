@@ -126,7 +126,10 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void updateUser(UserBean userBean) {
-        userDao.updateUser(toUserEntity(userBean));
+
+        UserEntity entity = toUserEntity(userBean);
+
+        userDao.updateUser(entity);
     }
 
 
@@ -146,15 +149,27 @@ public class UserServiceImpl implements IUserService {
         return userBeanRolesSet.isEmpty() ? new HashSet<>() : new HashSet<>(roleDao.getRolesByIds(userBeanRolesSet));
     }
 
+    private Set<UserEntity> toMemberEntitySet(Set<Integer> userBeanMemberSet) {
+        return userBeanMemberSet.isEmpty() ? new HashSet<>() : new HashSet<>(userDao.getUsersByIds(userBeanMemberSet));
+    }
+
     @Override
     public UserEntity toUserEntity(UserBean userBean) {
-        UserEntity userEntity = userBean.toEntity(new UserEntity());
+        UserEntity userEntity = userBean.toEntity(userDao.getUserById(userBean.getId()));
 
         userEntity.setEmail(userBean.getEmail());
         userEntity.setDateOfBirth(userBean.getDateOfBirth());
         userEntity.setPassword(userBean.getPassword());
         userEntity.setRoles(toRoleEntitySet(userBean.getRoles()));
+        userEntity.setMembers(toMemberEntitySet(userBean.getMembers().stream().map(UserBean::getId).collect(Collectors.toSet())));
         userEntity.setActive(userBean.isActive());
+
+        if (null != userBean.getInviter()) {
+            userEntity.setInviter(userDao.getUserById(userBean.getInviter()));
+        }
+
+        userEntity.setSettings(userSettingsDao.getByUserID(userBean.getId()));
+
         return userEntity;
     }
 
