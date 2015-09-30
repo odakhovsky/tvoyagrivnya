@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -14,23 +12,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/cabinet/main/">Головна</a>
+                    <a href="/admin/">Головна</a>
                 </li>
                 <li>
-                    <a href="/cabinet/new-transaction/">Нова операція</a>
+                    <a href="/admin/categories/">Категорії</a>
                 </li>
 
-                <li>
-                    <a href="/cabinet/control/">Управління</a>
-                </li>
-                <li>
-                    <a href="/cabinet/settings/">Налаштування</a>
-                </li>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li>
-                        <a href="/admin/">Адмін панель</a>
-                    </li>
-                </sec:authorize>
                 <li class="pull-right">
                     <a onclick="logout()">Вихід</a>
                 </li>

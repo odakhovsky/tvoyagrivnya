@@ -14,6 +14,12 @@
         <put-attribute name="footer" value="/WEB-INF/jsp/layout/common/footer.jsp"/>
     </definition>
 
+    <definition name="adminLayout" template="/WEB-INF/jsp/layout/adminLayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/layout/common/footer.jsp"/>
+        <put-attribute name="nav" value="/WEB-INF/jsp/layout/common/adminnav.jsp"/>
+    </definition>
+
     <definition name="index" extends="mainLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
     </definition>
@@ -27,5 +33,15 @@
     </definition>
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>
+    </definition>
+
+
+    <!--ADMIN PANEL PAGES-->
+    <definition name="admin/index" extends="adminLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/index.jsp"></put-attribute>
+    </definition>
+
+    <definition name="admin/categories" extends="adminLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/categories.jsp"></put-attribute>
     </definition>
 </tiles-definitions>
