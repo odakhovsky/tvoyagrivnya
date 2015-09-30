@@ -25,8 +25,15 @@ public class CategoryNode {
         text = categoryBean.getName();
         selectable = true;
         base = (0 == categoryBean.getParent());
-        nodes = categoryBean.getChildrens().stream().map(CategoryNode::new).collect(Collectors.toList());
-        tags = new Object[]{categoryBean.getChildrens().size()};
+        nodes = categoryBean.getChildrens().stream().filter(CategoryBean::getActive).map(CategoryNode::new).collect(Collectors.toList());
+        tags = new Object[]{nodes.size()};
+        if (categoryBean.getMainCategory() > 0) {
+            state.removed = false;
+            state.edited = false;
+        }else{
+            state.removed = true;
+            state.edited = true;
+        }
     }
 
     public String getText() {

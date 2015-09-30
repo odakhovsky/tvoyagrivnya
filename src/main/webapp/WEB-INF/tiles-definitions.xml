@@ -28,9 +28,17 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/main.jsp"></put-attribute>
     </definition>
 
+    <!-- CONTROL PAGES -->
     <definition name="cabinet/control/members" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/control/members.jsp"></put-attribute>
     </definition>
+
+    <definition name="cabinet/control/categories" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/control/categories.jsp"></put-attribute>
+    </definition>
+
+
+    <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>
     </definition>

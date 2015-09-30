@@ -1,13 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="row">
-    <ul class="nav nav-pills">
-        <li role="presentation"><a href="#">Члени сім'ї</a></li>
-        <li role="presentation"><a href="#">Категорії</a></li>
-        <li role="presentation"><a href="#">Валюти</a></li>
-    </ul>
+    <jsp:include page="menu.jsp"/>
 </div>
 <div class="row">
     <div class="invite-form">
@@ -52,15 +49,19 @@
                     <div class="col-sm-4">
                         <c:choose>
                             <c:when test="${member.superMember}">
-                                <form method="post"  action="/cabinet/control/user/${member.id}/superMember">
+                                <form method="post" action="/cabinet/control/user/${member.id}/superMember">
                                     <input type="hidden" name="value" value="false">
-                                    <button  type="submit" onclick="return confirm('Ви впевнені?')" class="btn btn-sm">Отключити</button>
+                                    <button type="submit" onclick="return confirm('Ви впевнені?')" class="btn btn-sm">
+                                        Отключити
+                                    </button>
                                 </form>
                             </c:when>
                             <c:otherwise>
                                 <form method="post" action="/cabinet/control/user/${member.id}/superMember">
                                     <input type="hidden" name="value" value="true">
-                                    <button  type="submit" onclick="return confirm('Ви впевнені?')" class="btn btn-sm">Включити</button>
+                                    <button type="submit" onclick="return confirm('Ви впевнені?')" class="btn btn-sm">
+                                        Включити
+                                    </button>
                                 </form>
                             </c:otherwise>
                         </c:choose>

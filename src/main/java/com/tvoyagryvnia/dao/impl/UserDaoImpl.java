@@ -10,15 +10,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by root on 02.09.2015.
- */
+
 @Repository
 public class UserDaoImpl implements IUserDao {
 

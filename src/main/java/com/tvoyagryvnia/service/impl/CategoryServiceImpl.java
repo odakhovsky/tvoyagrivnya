@@ -32,11 +32,6 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public CategoryBean getByName(String name) {
-        return new CategoryBean(categoryDao.getByName(name));
-    }
-
-    @Override
     public List<CategoryBean> getAllByType(OperationType operationType) {
         return categoryDao.getAllByType(operationType).stream().map(CategoryBean::new).collect(Collectors.toList());
     }

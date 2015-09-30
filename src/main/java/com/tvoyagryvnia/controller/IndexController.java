@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/")
 public class IndexController {
 
-    @Autowired
-    IUserService userService;
+    @Autowired IUserService userService;
 
 
     @RequestMapping(method = RequestMethod.GET)

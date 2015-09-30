@@ -3,12 +3,8 @@ package com.tvoyagryvnia.service.impl;
 
 import com.tvoyagryvnia.bean.user.EditUserPass;
 import com.tvoyagryvnia.bean.user.UserBean;
-import com.tvoyagryvnia.dao.IRoleDao;
-import com.tvoyagryvnia.dao.IUserDao;
-import com.tvoyagryvnia.dao.IUserSettingsDao;
-import com.tvoyagryvnia.model.RoleEntity;
-import com.tvoyagryvnia.model.UserEntity;
-import com.tvoyagryvnia.model.UserSettingsEntity;
+import com.tvoyagryvnia.dao.*;
+import com.tvoyagryvnia.model.*;
 import com.tvoyagryvnia.service.ISendMailService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.util.Cipher;
@@ -16,13 +12,11 @@ import com.tvoyagryvnia.util.password.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +34,10 @@ public class UserServiceImpl implements IUserService {
     IRoleDao roleDao;
     @Autowired
     PasswordGenerator passwordGenerator;
+    @Autowired
+    private ICategoryDao baseCategoriesDao;
+    @Autowired
+    private IUserCategoryDao userCategoryDao;
 
     @Autowired
     private ISendMailService sendMailService;
@@ -73,10 +71,40 @@ public class UserServiceImpl implements IUserService {
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_OWNER);
 
             sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
+
+            addCategoriesForUser(userEntity);
             return userID;
 
         }
         return 0;
+    }
+
+    private void addCategoriesForUser(UserEntity userEntity) {
+        for (CategoryEntity categoryEntity : baseCategoriesDao.getAll(true)) {
+            UserCategoryEntity entity = userCategoryDao.getParentByMain(userEntity.getId(), categoryEntity.getId());
+            if (null == entity) {// if category not edded as parent
+                UserCategoryEntity userCategory = fillUserCategory(userEntity, categoryEntity);
+                if (null != categoryEntity.getParent()) {//check if category has parent
+                    UserCategoryEntity parent = userCategoryDao.getParentByMain(userEntity.getId(), categoryEntity.getParent().getId());
+                    if (null == parent) {//set parent of category
+                        parent = fillUserCategory(userEntity, categoryEntity.getParent());
+                        userCategoryDao.save(parent);
+                    }
+                    userCategory.setParent(parent);
+                }
+                userCategoryDao.save(userCategory);
+            }
+        }
+    }
+
+    private UserCategoryEntity fillUserCategory(UserEntity userEntity, CategoryEntity categoryEntity) {
+        UserCategoryEntity entity = new UserCategoryEntity();
+        entity.setActive(true);
+        entity.setName(categoryEntity.getName());
+        entity.setMain(categoryEntity);
+        entity.setOperation(categoryEntity.getOperation());
+        entity.setOwner(userEntity);
+        return entity;
     }
 
 
@@ -155,7 +183,10 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserEntity toUserEntity(UserBean userBean) {
-        UserEntity userEntity = userBean.toEntity(userDao.getUserById(userBean.getId()));
+        UserEntity userEntity = userBean.toEntity(new UserEntity());
+        if (isRegisteredUser(userBean)) {
+            userEntity = userBean.toEntity(userDao.getUserById(userBean.getId()));
+        }
 
         userEntity.setEmail(userBean.getEmail());
         userEntity.setDateOfBirth(userBean.getDateOfBirth());
@@ -171,6 +202,10 @@ public class UserServiceImpl implements IUserService {
         userEntity.setSettings(userSettingsDao.getByUserID(userBean.getId()));
 
         return userEntity;
+    }
+
+    private boolean isRegisteredUser(UserBean userBean) {
+        return null != userBean.getId() && userBean.getId() > 0;
     }
 
     @Override

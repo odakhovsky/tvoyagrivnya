@@ -1,12 +1,17 @@
 package com.tvoyagryvnia.controller;
 
 import com.tvoyagryvnia.bean.UserFieldBean;
+import com.tvoyagryvnia.bean.category.CategoryBean;
+import com.tvoyagryvnia.bean.category.CategoryNode;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.model.RoleEntity;
+import com.tvoyagryvnia.model.enums.OperationType;
+import com.tvoyagryvnia.service.IUserCategoryService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.service.impl.UserServiceImpl;
 import com.tvoyagryvnia.util.Messages;
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +25,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/cabinet/control")
@@ -33,8 +42,16 @@ public class CabinetControlController {
     @Autowired
     private IRoleDao roleDao;
 
+    @Autowired
+    private IUserCategoryService userCategoryService;
+
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String index(ModelMap modelMap, @ModelAttribute("userBean") UserBean userBean) {
+    public String index(ModelMap modelMap) {
+        return "redirect:/cabinet/control/categories/";
+    }
+
+    @RequestMapping(value = {"/members/"}, method = RequestMethod.GET)
+    public String members(ModelMap modelMap, @ModelAttribute("userBean") UserBean userBean) {
         fillMap(modelMap, userBean);
         return "cabinet/control/members";
     }
@@ -92,7 +109,7 @@ public class CabinetControlController {
                 switch (value) {
                     case "true":
                         if (!userBean.isSuperMember()) {
-                           userService.addRole(userId, roleEntity.getName());
+                            userService.addRole(userId, roleEntity.getName());
                         }
                         break;
                     case "false":
