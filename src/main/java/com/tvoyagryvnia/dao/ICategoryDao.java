@@ -10,7 +10,6 @@ public interface ICategoryDao {
 
     List<CategoryEntity> getAll();
     List<CategoryEntity> getAll(boolean active);
-    CategoryEntity getByName(String name);
     List<CategoryEntity> getAllByType(OperationType operationType);
     CategoryEntity getById(int id);
 

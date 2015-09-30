@@ -97,3 +97,14 @@
 .categories-block{
     padding: 25px;
 }
+
+.categories-block-user{
+    padding: 0 25px 0 25px;
+}
+.categories-form-user{
+     padding: 0 25px 0 25px;
+ }
+
+.hide{
+    visibility: hidden;
+}

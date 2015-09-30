@@ -31,13 +31,6 @@ public class CategoryDaoImpl implements ICategoryDao {
     }
 
     @Override
-    public CategoryEntity getByName(String name) {
-        return (CategoryEntity) getSession().createCriteria(CategoryEntity.class)
-                .add(Restrictions.eq("name", name))
-                .uniqueResult();
-    }
-
-    @Override
     public List<CategoryEntity> getAllByType(OperationType operationType) {
         return getSession().createCriteria(CategoryEntity.class)
                 .add(Restrictions.eq("operation", operationType))

@@ -2,6 +2,7 @@ package com.tvoyagryvnia.bean.category;
 
 
 import com.tvoyagryvnia.model.CategoryEntity;
+import com.tvoyagryvnia.model.UserCategoryEntity;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ public class CategoryBean {
     private Set<CategoryBean> childrens;
     private String operation;
     private Boolean active;
+    private int mainCategory;
 
     public CategoryBean(CategoryEntity entity) {
         this.id = entity.getId();
@@ -25,10 +27,28 @@ public class CategoryBean {
         if (parent != 0) {
             parentName = entity.getParent().getName();
         }
+        this.active = entity.getActive();
         this.childrens = (null == entity.getChildrens()) ? new HashSet<>() : entity.getChildrens()
-                .stream().map(CategoryBean::new).collect(Collectors.toSet());
+                .stream().filter(CategoryEntity::getActive).map(CategoryBean::new).collect(Collectors.toSet());
+        this.operation = entity.getOperation().name();
+    }
+
+    public CategoryBean(UserCategoryEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.parent = (null == entity.getParent()) ? 0 : entity.getParent().getId();
+        if (parent != 0) {
+            parentName = entity.getParent().getName();
+        }
+        if (null == entity.getChildrens()) {
+            this.childrens = new HashSet<>();
+        }else {
+            this.childrens = entity.getChildrens().stream().map(CategoryBean::new).collect(Collectors.toSet());
+        }
+
         this.operation = entity.getOperation().name();
         this.active = entity.getActive();
+        this.mainCategory = (null == entity.getMain()) ? 0 : entity.getMain().getId();
     }
 
     public CategoryBean(CategoryBean bean) {
@@ -38,6 +58,7 @@ public class CategoryBean {
         this.childrens = bean.getChildrens();
         this.operation = bean.getOperation();
         this.active = bean.getActive();
+        this.mainCategory = bean.getMainCategory();
     }
 
     public CategoryBean(){}
@@ -96,5 +117,13 @@ public class CategoryBean {
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public int getMainCategory() {
+        return mainCategory;
+    }
+
+    public void setMainCategory(int mainCategory) {
+        this.mainCategory = mainCategory;
     }
 }
