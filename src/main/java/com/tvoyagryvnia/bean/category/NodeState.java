@@ -7,5 +7,8 @@ public class NodeState {
     public boolean disabled;
     public boolean selected;
     public boolean expanded;
+    //states for extended categories e.g. for userCategory
+    public boolean removed;
+    public boolean edited;
 
 }
