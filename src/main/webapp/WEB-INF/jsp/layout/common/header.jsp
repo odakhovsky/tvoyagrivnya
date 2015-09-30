@@ -1,11 +1,18 @@
 <!--importing bootstrap> <-->
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <link rel="icon" href="/resources/img/favicon.ico" type="image/x-icon">
+<link href="<c:url value="/resources/css/select2-bootstrap.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/select2.css" />" rel="stylesheet">
+
+<link href="<c:url value="/resources/css/flora.datepick.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap-treeview.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-editable.css" />" rel="stylesheet">
 <link href="/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -36,9 +43,7 @@
 <script src="/resources/js/libs/jquery-form.js"></script>
 <script src="/resources/js/main/main.js"></script>
 <script src="<c:url value="/resources/js/libs/moment.js" />"></script>
+<script src="<c:url value="/resources/js/libs/bootstrap-treeview.js" />"></script>
 <script src="<c:url value="/resources/js/libs/bootstra-datetime.js" />"></script>
+<script src="<c:url value="/resources/js/libs/select2.full.js" />"></script>
 
-
-<link href="<c:url value="/resources/css/flora.datepick.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/humanity.datepick.css" />" rel="stylesheet">

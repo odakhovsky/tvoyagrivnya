@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<p class="lead" align="center">Accounts</p>
+<p class="lead" align="center">Твої рахунки</p>
 
 <div class="list-group">
     <a href="#" class="list-group-item">Category 1</a>
