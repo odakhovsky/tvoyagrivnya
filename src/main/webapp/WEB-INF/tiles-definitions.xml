@@ -52,4 +52,8 @@
     <definition name="admin/categories" extends="adminLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/admin/categories.jsp"></put-attribute>
     </definition>
+
+    <definition name="admin/currencies" extends="adminLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/currencies.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

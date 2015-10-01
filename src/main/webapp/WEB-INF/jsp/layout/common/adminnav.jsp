@@ -17,7 +17,9 @@
                 <li>
                     <a href="/admin/categories/">Категорії</a>
                 </li>
-
+                <li>
+                    <a href="/admin/currency/">Валюти</a>
+                </li>
                 <li class="pull-right">
                     <a onclick="logout()">Вихід</a>
                 </li>
