@@ -6,6 +6,7 @@ import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.*;
 import com.tvoyagryvnia.model.*;
 import com.tvoyagryvnia.service.ISendMailService;
+import com.tvoyagryvnia.service.IUserCurrencyService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.util.Cipher;
 import com.tvoyagryvnia.util.password.PasswordGenerator;
@@ -26,31 +27,24 @@ import java.util.stream.Collectors;
 @Transactional
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
-    IUserDao userDao;
-    @Autowired
-    IUserSettingsDao userSettingsDao;
-    @Autowired
-    IRoleDao roleDao;
-    @Autowired
-    PasswordGenerator passwordGenerator;
-    @Autowired
-    private ICategoryDao baseCategoriesDao;
-    @Autowired
-    private IUserCategoryDao userCategoryDao;
-
-    @Autowired
-    private ISendMailService sendMailService;
+    @Autowired IUserDao userDao;
+    @Autowired IUserSettingsDao userSettingsDao;
+    @Autowired IRoleDao roleDao;
+    @Autowired PasswordGenerator passwordGenerator;
+    @Autowired private ICategoryDao baseCategoriesDao;
+    @Autowired private IUserCategoryDao userCategoryDao;
+    @Autowired private ISendMailService sendMailService;
+    @Autowired private IUserCurrencyService currencyService;
 
     @Override
     public int saveUser(UserBean user) {
 
-        if(isUserLoginFree(user.getEmail())) {
+        if (isUserLoginFree(user.getEmail())) {
 
             String password = passwordGenerator.generate();
             user.setPassword(password);
             System.out.println(password);
-//todo remove sout
+            //todo remove sout
             UserEntity userEntity = toUserEntity(user);
             userEntity.setActive(true);
             userEntity.setPassword(Cipher.encrypt(user.getPassword()));
@@ -70,9 +64,10 @@ public class UserServiceImpl implements IUserService {
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_SUPER_MEMBER);
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_OWNER);
 
-            sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
+            //sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
 
             addCategoriesForUser(userEntity);
+            currencyService.addAllForUser(userID);
             return userID;
 
         }

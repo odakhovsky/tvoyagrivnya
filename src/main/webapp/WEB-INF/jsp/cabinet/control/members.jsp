@@ -75,5 +75,4 @@
 <script>
     $(".InfoTooltip").tooltip({placement: "right", html: true});
     $('.editable').editable();
-
 </script>

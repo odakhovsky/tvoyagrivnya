@@ -84,7 +84,7 @@
 <!-- About Section -->
 <section id="about" class=" intro about container content-section ">
     <div class="col-lg-8 col-lg-offset-2">
-        <h2 class="text-center" style="color: white">Ви хочете</h2>
+        <h2 class="text-center text-border">Ви хочете</h2>
 
         <p align="center">
         <ul class="no-bullets about-list text-center">
@@ -113,7 +113,7 @@
     <div class="download-section">
         <div class="container">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2  style="color: white">Реєстрація</h2>
+                <h2  class="text-border">Реєстрація</h2>
 
                 <form action="/registration" method="POST" class= form-inline" id="registration-form">
                     <div class="col-lg-4">
@@ -126,7 +126,7 @@
                                required>
                     </div>
                     <div class="col-lg-3">
-                        <button type="submit" class="btn-reg btn btn-default btn-lg">
+                        <button type="submit" id="registration-btn" class="btn-reg btn btn-default btn-lg">
                             Підтвердити дані
                         </button>
                     </div>
@@ -141,7 +141,7 @@
 <section id="contact" class="feedback container content-section text-center">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 margin-bottom-105" >
-            <h2 >Зворотній зв'язок</h2>
+            <h2 class="text-border">Зворотній зв'язок</h2>
 
             <form  action="/feedback" method="POST" class="form-inline">
                 <div class="col-xs-3">
@@ -160,13 +160,13 @@
     </div>
     </div>
 </section>
-<!-- Footer -->
+<%--<!-- Footer -->
 <footer>
     <div class="container text-center">
         <p>&copy; Твоя Гривня 2015</p>
     </div>
 
-</footer>
+</footer>--%>
 <jsp:include page="../main/registrationComfirn.jsp"/>
 <jsp:include page="../main/signIn.jsp"/>
 </body>

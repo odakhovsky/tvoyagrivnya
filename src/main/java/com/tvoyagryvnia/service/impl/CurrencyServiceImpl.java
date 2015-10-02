@@ -3,11 +3,17 @@ package com.tvoyagryvnia.service.impl;
 import com.tvoyagryvnia.bean.currency.CurrencyBean;
 import com.tvoyagryvnia.dao.ICurrencyDao;
 import com.tvoyagryvnia.model.CurrencyEntity;
+import com.tvoyagryvnia.model.UserEntity;
 import com.tvoyagryvnia.service.ICurrencyService;
+import com.tvoyagryvnia.util.NumberFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +26,7 @@ public class CurrencyServiceImpl implements ICurrencyService {
     @Override
     public void create(CurrencyBean bean) {
         CurrencyEntity entity = toEntity(bean);
+        entity.setCrossRate(NumberFormatter.cutFloat(entity.getCrossRate()));
         currencyDao.save(entity);
     }
 
@@ -29,7 +36,7 @@ public class CurrencyServiceImpl implements ICurrencyService {
         entity.setShortName(shortName);
         entity.setName(name);
         entity.setCurrency(currency);
-        entity.setCrossRate(rate);
+        entity.setCrossRate(NumberFormatter.cutFloat(rate));
         currencyDao.save(entity);
     }
 
@@ -53,13 +60,26 @@ public class CurrencyServiceImpl implements ICurrencyService {
         currencyDao.update(toEntity(currencyEntity));
     }
 
+    @Override
+    public void updateSingleField(int curr, String fieldName, String fielValue) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+
+        CurrencyEntity currencyEntity = currencyDao.getById(curr);
+        if (!fieldName.equals("crossRate")){
+            Method setter = new PropertyDescriptor(fieldName, currencyEntity.getClass()).getWriteMethod();
+            setter.invoke(currencyEntity, fielValue);
+        }else{
+            currencyEntity.setCrossRate(Float.valueOf(fielValue));
+        }
+        currencyDao.update(currencyEntity);
+    }
+
     private CurrencyEntity toEntity(CurrencyBean currencyBean) {
         CurrencyEntity entity = new CurrencyEntity();
         if (currencyBean.getId() != 0) {
             entity = currencyDao.getById(currencyBean.getId());
         }
         entity.setName(currencyBean.getName());
-        entity.setCrossRate(currencyBean.getCrossRate());
+        entity.setCrossRate(NumberFormatter.cutFloat(currencyBean.getCrossRate()));
         entity.setCurrency(currencyBean.getCurrency());
         entity.setShortName(currencyBean.getShortName());
         return entity;

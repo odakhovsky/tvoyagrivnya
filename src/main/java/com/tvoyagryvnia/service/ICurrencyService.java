@@ -3,6 +3,8 @@ package com.tvoyagryvnia.service;
 
 import com.tvoyagryvnia.bean.currency.CurrencyBean;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface ICurrencyService {
@@ -13,4 +15,6 @@ public interface ICurrencyService {
     CurrencyBean getByShortName(String name);
     List<CurrencyBean> getAll();
     void update(CurrencyBean currencyEntity);
+    public void updateSingleField(int userId, String fieldName, String fielValue)
+            throws IntrospectionException, InvocationTargetException, IllegalAccessException;
 }
