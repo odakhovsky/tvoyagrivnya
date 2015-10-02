@@ -5,5 +5,5 @@
   <sec:authorize access="hasRole('ROLE_OWNER')">
     <li role="presentation"><a href="/cabinet/control/members/">Члени сім'ї</a></li>
   </sec:authorize>
-  <li role="presentation"><a href="#">Валюти</a></li>
+  <li role="presentation"><a href="/cabinet/control/currencies/">Валюти</a></li>
 </ul>

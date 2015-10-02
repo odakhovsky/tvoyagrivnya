@@ -8,7 +8,6 @@ import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.CategoryEntity;
 import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
-import com.tvoyagryvnia.service.ICategoryService;
 import com.tvoyagryvnia.service.IUserCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

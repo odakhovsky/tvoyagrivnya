@@ -38,6 +38,11 @@
     </definition>
 
 
+    <definition name="cabinet/control/currencies" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/control/currencies.jsp"></put-attribute>
+    </definition>
+
+
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>
@@ -51,5 +56,9 @@
 
     <definition name="admin/categories" extends="adminLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/admin/categories.jsp"></put-attribute>
+    </definition>
+
+    <definition name="admin/currencies" extends="adminLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/currencies.jsp"></put-attribute>
     </definition>
 </tiles-definitions>
