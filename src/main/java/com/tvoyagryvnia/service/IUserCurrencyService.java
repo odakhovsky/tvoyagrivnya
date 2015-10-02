@@ -19,4 +19,7 @@ public interface IUserCurrencyService {
 
     void setAsDefault(int user, int currency);
 
+
+    void updateCrossRate(int pk, float rate);
+
 }

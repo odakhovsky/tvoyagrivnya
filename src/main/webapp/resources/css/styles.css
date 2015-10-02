@@ -54,6 +54,7 @@
     background: white;
     color: black;
     resize: none;
+    opacity: 0.9;
 }
 
 .margin-bottom-105{
@@ -108,3 +109,16 @@
 .hide{
     visibility: hidden;
 }
+
+.currencies-list{
+    padding: 55px;
+}
+.text-bold{
+    font-weight: bold;
+}
+
+.text-border{
+    color:white;
+    text-shadow: 2px 0 black, 0 2px black, 2px 0 black, 0 2px black;
+}
+

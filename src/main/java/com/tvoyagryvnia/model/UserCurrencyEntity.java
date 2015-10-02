@@ -26,6 +26,7 @@ public class UserCurrencyEntity {
     private boolean def;
 
     @OneToMany(mappedBy = "currency", cascade = CascadeType.PERSIST)
+    @OrderBy("date DESC")
     private List<RateEntity> crossRates;
 
     public UserCurrencyEntity(){}
