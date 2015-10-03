@@ -43,8 +43,11 @@ $(function () {
         messages: {
             editusername: {
                 pattern: "Should contain letters - ` ' ’</br> symbols and space",
-                required:"Поле обов'язкове до заповнення"
+                required:"Обов'язкове поле"
             },
+            email:{
+                required:"Обов'язкове поле"
+            }
         },
 
         ignore: ':hidden:not(.chzn-done)',
@@ -125,13 +128,13 @@ $("#edit-user-pass").validate({
     messages: {
         password: {
             pattern: "Перевірте структуру пароля",
-            required:"Поле обов'язкове до заповнення",
+            required:"Обов'язкове поле",
             minlength:"Мін. довжина {0}",
             maxlength:"Макс. довжина {0}"
         },
         confirmPass: {
             pattern: "Should contain letters - ` ' ’</br> symbols and space",
-            required:"Поле обов'язкове до заповнення",
+            required:"Обов'язкове поле",
             minlength:"Мін. довжина {0}",
             maxlength:"Макс. довжина {0}",
             equalTo:"Паролі мають бути однакові"

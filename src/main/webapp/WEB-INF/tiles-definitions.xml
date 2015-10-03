@@ -43,6 +43,20 @@
     </definition>
 
 
+    <definition name="cabinet/accounts/manage" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/manage.jsp"></put-attribute>
+    </definition>
+
+    <definition name="cabinet/accounts/create" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/create.jsp"></put-attribute>
+    </definition>
+
+
+    <definition name="cabinet/accounts/account" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/account.jsp"></put-attribute>
+    </definition>
+
+
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>

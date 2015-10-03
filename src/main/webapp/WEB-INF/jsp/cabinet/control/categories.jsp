@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<div class="well">
 <div class="row">
     <jsp:include page="menu.jsp"/>
 </div>
@@ -19,3 +20,4 @@
     <li><a tabindex="-1" href="#">Перейменувати</a></li>
     <li><a tabindex="-1" href="#">Змінити категорію</a></li>
 </ul>
+</div>

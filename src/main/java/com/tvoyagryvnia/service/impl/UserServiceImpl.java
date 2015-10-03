@@ -5,6 +5,7 @@ import com.tvoyagryvnia.bean.user.EditUserPass;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.*;
 import com.tvoyagryvnia.model.*;
+import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.ISendMailService;
 import com.tvoyagryvnia.service.IUserCurrencyService;
 import com.tvoyagryvnia.service.IUserService;
@@ -18,23 +19,29 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {
 
-    @Autowired IUserDao userDao;
-    @Autowired IUserSettingsDao userSettingsDao;
-    @Autowired IRoleDao roleDao;
-    @Autowired PasswordGenerator passwordGenerator;
-    @Autowired private ICategoryDao baseCategoriesDao;
-    @Autowired private IUserCategoryDao userCategoryDao;
-    @Autowired private ISendMailService sendMailService;
-    @Autowired private IUserCurrencyService currencyService;
+    @Autowired
+    IUserDao userDao;
+    @Autowired
+    IUserSettingsDao userSettingsDao;
+    @Autowired
+    IRoleDao roleDao;
+    @Autowired
+    PasswordGenerator passwordGenerator;
+    @Autowired
+    private ICategoryDao baseCategoriesDao;
+    @Autowired
+    private IUserCategoryDao userCategoryDao;
+    @Autowired
+    private ISendMailService sendMailService;
+    @Autowired
+    private IUserCurrencyService currencyService;
 
     @Override
     public int saveUser(UserBean user) {
@@ -64,7 +71,7 @@ public class UserServiceImpl implements IUserService {
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_SUPER_MEMBER);
             userDao.addRole(userEntity, RoleEntity.Name.ROLE_OWNER);
 
-            //sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
+            sendMailService.sendRegistrationInformation(user.getName(), user.getEmail(), password);
 
             addCategoriesForUser(userEntity);
             currencyService.addAllForUser(userID);
@@ -75,21 +82,36 @@ public class UserServiceImpl implements IUserService {
     }
 
     private void addCategoriesForUser(UserEntity userEntity) {
-        for (CategoryEntity categoryEntity : baseCategoriesDao.getAll(true)) {
-            UserCategoryEntity entity = userCategoryDao.getParentByMain(userEntity.getId(), categoryEntity.getId());
-            if (null == entity) {// if category not edded as parent
-                UserCategoryEntity userCategory = fillUserCategory(userEntity, categoryEntity);
-                if (null != categoryEntity.getParent()) {//check if category has parent
-                    UserCategoryEntity parent = userCategoryDao.getParentByMain(userEntity.getId(), categoryEntity.getParent().getId());
-                    if (null == parent) {//set parent of category
-                        parent = fillUserCategory(userEntity, categoryEntity.getParent());
-                        userCategoryDao.save(parent);
-                    }
-                    userCategory.setParent(parent);
-                }
-                userCategoryDao.save(userCategory);
+        fillCategories(userEntity, OperationType.plus);
+        fillCategories(userEntity, OperationType.minus);
+    }
+
+    private void fillCategories(UserEntity userEntity, OperationType type) {
+        List<CategoryEntity> categoryEntities = baseCategoriesDao.getAllByType(type)
+                .stream().filter(cat -> Objects.isNull(cat.getParent()))
+                .collect(Collectors.toList());
+
+        for (CategoryEntity cat : categoryEntities) {
+            UserCategoryEntity entity = fillUserCategory(userEntity, cat);
+            entity.setOwner(userEntity);
+            userCategoryDao.save(entity);
+            if (cat.getChildrens().size() > 0) {
+                fillCategory(cat.getChildrens(), entity);
             }
         }
+    }
+
+    private void fillCategory(Set<CategoryEntity> childrens, UserCategoryEntity parent) {
+        for (CategoryEntity c : childrens) {
+            UserCategoryEntity entity = fillUserCategory(parent.getOwner(), c);
+            entity.setParent(parent);
+            entity.setOwner(parent.getOwner());
+            userCategoryDao.save(entity);
+            if (c.getChildrens().size() > 0) {
+                fillCategory(c.getChildrens(), entity);
+            }
+        }
+
     }
 
     private UserCategoryEntity fillUserCategory(UserEntity userEntity, CategoryEntity categoryEntity) {
