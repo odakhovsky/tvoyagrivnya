@@ -1,12 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<p class="lead" align="center">Твої рахунки</p>
-
-<div class="list-group">
-    <a href="#" class="list-group-item">Category 1</a>
-    <a href="#" class="list-group-item">Category 2</a>
-    <a href="#" class="list-group-item">Category 3</a>
-</div>
-<small class="pull-right"><a href="#">Управління рахунками</a></small>
+<jsp:include page="../../cabinet/sidebar/accounts.jsp"/>
+<%--
 <br>
 <p class="lead" align="center">Борги</p>
 
@@ -20,4 +14,4 @@
     <a href="#" class="list-group-item">Category 1</a>
     <a href="#" class="list-group-item">Category 2</a>
     <a href="#" class="list-group-item">Category 3</a>
-</div>
+</div>--%>

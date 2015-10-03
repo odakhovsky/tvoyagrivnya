@@ -32,7 +32,7 @@
                     </li>
                 </sec:authorize>
                 <li class="pull-right">
-                    <a onclick="logout()">Вихід</a>
+                    <a class="btn-cursor" onclick="logout()">Вихід</a>
                 </li>
             </ul>
         </div>

@@ -122,3 +122,13 @@
     text-shadow: 2px 0 black, 0 2px black, 2px 0 black, 0 2px black;
 }
 
+.add-account-description{
+    resize: none;
+    min-height: 75px;
+}
+
+.total-acc-balance{
+    background-color: #2a6496;
+    color:white;
+    opacity: 0.7;
+}

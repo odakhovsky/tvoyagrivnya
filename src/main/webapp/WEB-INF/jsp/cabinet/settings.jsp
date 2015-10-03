@@ -4,12 +4,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="row well">
-
+    <h3 align="center"> Налаштування </h3>
     <form:form id="edit-user-form" action="/cabinet/settings/user-edit" modelAttribute="profile">
         <form:input path="id" hidden="hidden"/>
-        <fieldset class="main edit-user-form ">
+        <fieldset class="main edit-user-form col-lg-offset-2 ">
             <div class="row fieldrow">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label>Ім`я:</label>
                 </div>
                 <div class="col-md-4">
@@ -23,7 +23,7 @@
 
 
             <div class="row fieldrow margin-top-15">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label>Рік народження:</label>
                 </div>
                 <div class="col-md-4">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="row fieldrow">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label>Пошта:</label>
                 </div>
                 <div class="col-md-4">
@@ -51,16 +51,18 @@
                 <label for="_email"></label>
                 <span class="correct" id="uniqueEmail" style="font-size: 10px; color: red"></span>
             </div>
-            <button type="submit" class="btn btn-sm center-block margin-top-5">
-                Прийняти зміни
-            </button>
+            <div class="row fieldrow col-lg-offset-3">
+                <button type="submit" class=" col-lg-4 btn btn-sm margin-top-15 ">
+                    Прийняти зміни
+                </button>
+            </div>
         </fieldset>
     </form:form>
 
     <form:form id="edit-user-pass" action="/cabinet/settings/editPassword"
                modelAttribute="editPass" method="post" cssClass="edit-password-form col-lg-12">
-        <div class="row fieldrow">
-            <div class="col-md-3">
+        <div class="row fieldrow col-lg-offset-2">
+            <div class="col-md-4">
                 <label>Пароль:</label>
             </div>
             <div class="col-md-4">
@@ -71,8 +73,8 @@
             <label for="_password"></label>
         </div>
 
-        <div class="row fieldrow">
-            <div class="col-md-3">
+        <div class="row fieldrow col-lg-offset-2">
+            <div class="col-md-4">
                 <label>Повторити пароль:</label>
             </div>
             <div class="col-md-4">
@@ -82,8 +84,8 @@
             <form:errors path="confirmPass" cssClass="error"/>
             <label for="_confirmPass"></label>
         </div>
-        <div class="text-center">
-            <input class="btn  btn-sm fieldrow margin-top-15" type="submit" value="Змінити пароль">
+        <div class="row fieldrow col-lg-4 col-lg-offset-4">
+            <input class="btn btn-block btn-sm  margin-top-15" type="submit" value="Змінити пароль">
         </div>
     </form:form>
 </div>

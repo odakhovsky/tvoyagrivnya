@@ -48,7 +48,7 @@
                 <li>
                     <c:choose>
                         <c:when test="${not empty userBean}">
-                            <a class="btn-cursor" href="/cabinet/">Мій кабінет</a>
+                            <a class="btn-cursor" href="/cabinet/">Мій кабінет </a>
                         </c:when>
                         <c:otherwise>
                             <a class="btn-cursor" id="signIn">Увійти</a>

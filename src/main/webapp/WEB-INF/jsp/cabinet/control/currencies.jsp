@@ -4,52 +4,53 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<div class="row">
-    <jsp:include page="menu.jsp"/>
-</div>
-<div class="row">
-    <div class="col-lg-10 col-lg-offset-2 margin-top-15">
-        <form action="/cabinet/control/currencies/default" method="post">
-            <div class="col-lg-3">
-                <label class="text-center">Основна валюта</label>
-            </div>
-            <div class="col-lg-4">
-                <select name="curr" class="form-control">
-                    <c:forEach items="${currs}" var="c">
-                        <option value="${c.id}" <c:if test="${c.def}">selected="selected"</c:if>>${c.name}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="col-lg-4">
-                <button type="submit" class="btn btn-sm">Прийняти</button>
-            </div>
-        </form>
+<div class="well">
+    <div class="row">
+        <jsp:include page="menu.jsp"/>
     </div>
-    <div class="currencies-list">
-        <div class="list-group col-lg-12 margin-top-15 text-center">
-            <div class="col-lg-3">Повна назва</div>
-            <div class="col-lg-2">Назва</div>
-            <div class="col-lg-2">Скорочення</div>
-            <div class="col-lg-2">Курс до баз.</div>
-            <div class="col-lg-3">Дата оновлення</div>
-            <c:forEach items="${currs}" var="c">
-                <div class="list-group-item col-lg-12 <c:if test="${c.def}">alert alert-info text-bold</c:if>">
-                    <div class="col-sm-3">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-2 margin-top-15">
+            <form action="/cabinet/control/currencies/default" method="post">
+                <div class="col-lg-3">
+                    <label class="text-center">Основна валюта</label>
+                </div>
+                <div class="col-lg-4">
+                    <select name="curr" class="form-control">
+                        <c:forEach items="${currs}" var="c">
+                            <option value="${c.id}" <c:if test="${c.def}">selected="selected"</c:if>>${c.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <button type="submit" class="btn btn-sm">Прийняти</button>
+                </div>
+            </form>
+        </div>
+        <div class="currencies-list">
+            <div class="list-group col-lg-12 margin-top-15 text-center">
+                <div class="col-lg-3">Повна назва</div>
+                <div class="col-lg-2">Назва</div>
+                <div class="col-lg-2">Скорочення</div>
+                <div class="col-lg-2">Курс до баз.</div>
+                <div class="col-lg-3">Дата оновлення</div>
+                <c:forEach items="${currs}" var="c">
+                    <div class="list-group-item col-lg-12 <c:if test="${c.def}">alert alert-info text-bold</c:if>">
+                        <div class="col-sm-3">
                         <span>
                                 ${c.name}
                         </span>
-                    </div>
-                    <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
                         <span>
                                 ${c.currency}
                         </span>
-                    </div>
-                    <div class="col-sm-1">
+                        </div>
+                        <div class="col-sm-1">
                         <span>
                                 ${c.shortName}
                         </span>
-                    </div>
-                    <div class="col-sm-2"><span>
+                        </div>
+                        <div class="col-sm-2"><span>
                         <c:choose>
                             <c:when test="${not c.def}">
                                 <a href="#"
@@ -69,14 +70,15 @@
                         </c:choose>
 
                     </span></div>
-                    <div class="col-sm-3">
+                        <div class="col-sm-3">
                         <span>
-                            ${c.stringDate}
+                                ${c.stringDate}
                         </span>
+                        </div>
                     </div>
-                </div>
 
-            </c:forEach>
+                </c:forEach>
+            </div>
         </div>
     </div>
 </div>
