@@ -26,22 +26,11 @@
     <div class="row margin-top-25 note-list">
         <c:forEach items="${notes}" var="n">
             <div class="col-lg-12 margin-top-15 note-item-border">
-                <div class="col-lg-7 " title="${n.text}">
-                    <span class="truncate-note-organizer note-text-size"><a href="#"
-                                                                            class="editable editable-container editable-inline"
-                                                                            data-type="textarea"
-                                                                            data-pk="${n.id}"
-                                                                            data-name="text"
-                                                                            data-url="/cabinet/organizer/editField"
-                                                                            data-title="Текст нотатки">${n.text}</a></span>
+                <div class="col-lg-7 truncate-note-organizer" title="${n.text}">
+                    <span class="  ">${n.text}</span>
                 </div>
                 <div class="col-lg-2 ">
-                    <a href="#" class="editable editable-container editable-inline"
-                       data-type="select2"
-                       data-pk="${n.id}"
-                       data-name="category"
-                       data-url="/cabinet/organizer/editField"
-                       data-title="Категорія">${n.category}</a>
+                    ${n.category}
                 </div>
                 <div class="col-lg-2">
                     <span>${n.date}</span>

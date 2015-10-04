@@ -4,11 +4,13 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="well">
-    <div class="row">
-        <h3 align="center">Нотатка №${note.id}</h3>
+    <div class="row padding-25">
+        <a class="btn btn-primary" href="/cabinet/organizer/">Нотатки</a>
 
+        <h3 align="center">Нотатка №${note.id}</h3>
         <div class="box">
-            <form id="createnot" name="createnot" class="form-inline" action="/cabinet/organizer/edit" method="post">
+
+            <form id="createnot" name="createnot" class="form-inline " action="/cabinet/organizer/edit" method="post">
                 <input hidden="hidden" name="noteId" value="${note.id}"/>
                 <textarea id="text" name="text" class="form-control create-note-text" placeholder="Текст замітки"
                           required>${note.text}</textarea>

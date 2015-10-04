@@ -155,9 +155,11 @@
     font-size: 14px;!important;
 }
 .truncate-note-organizer {
+    width: 58%;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: white;
+    overflow: hidden;
+    color: black;
 }
 
 .note-item-border{
@@ -167,5 +169,9 @@
 }
 
 .note-list{
+    padding: 25px;
+}
+
+.padding-25{
     padding: 25px;
 }
