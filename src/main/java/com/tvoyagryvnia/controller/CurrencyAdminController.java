@@ -1,8 +1,7 @@
 package com.tvoyagryvnia.controller;
 
-import com.tvoyagryvnia.bean.UserFieldBean;
+import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.currency.CurrencyBean;
-import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.service.ICurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

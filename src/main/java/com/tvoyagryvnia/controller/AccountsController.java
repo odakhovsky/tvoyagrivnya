@@ -1,6 +1,6 @@
 package com.tvoyagryvnia.controller;
 
-import com.tvoyagryvnia.bean.UserFieldBean;
+import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.account.AccountBean;
 import com.tvoyagryvnia.bean.account.SideBarAccountBean;
 import com.tvoyagryvnia.bean.currency.CurrencyBean;

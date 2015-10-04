@@ -24,6 +24,9 @@
                     <a href="/cabinet/control/">Управління</a>
                 </li>
                 <li>
+                    <a href="/cabinet/organizer/">Органайзер</a>
+                </li>
+                <li>
                     <a href="/cabinet/settings/">Налаштування</a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">

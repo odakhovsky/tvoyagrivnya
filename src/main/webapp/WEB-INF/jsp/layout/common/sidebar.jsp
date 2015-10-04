@@ -1,17 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script type="text/javascript" data-main="/resources/js/sidebarView.js" src="/resources/js/libs/require.js"></script>
+
 <jsp:include page="../../cabinet/sidebar/accounts.jsp"/>
-<%--
-<br>
-<p class="lead" align="center">Борги</p>
+<jsp:include page="../../cabinet/sidebar/notes.jsp"/>
 
-<div class="list-group">
-    <a href="#" class="list-group-item">Category 1</a>
-</div>
-<br>
-<p class="lead" align="center">Нагадування</p>
 
-<div class="list-group">
-    <a href="#" class="list-group-item">Category 1</a>
-    <a href="#" class="list-group-item">Category 2</a>
-    <a href="#" class="list-group-item">Category 3</a>
-</div>--%>

@@ -56,6 +56,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/account.jsp"></put-attribute>
     </definition>
 
+    <!-- CABINET ORGANIZER -->
+    <definition name="cabinet/organizer" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/organizer.jsp"></put-attribute>
+    </definition>
 
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
