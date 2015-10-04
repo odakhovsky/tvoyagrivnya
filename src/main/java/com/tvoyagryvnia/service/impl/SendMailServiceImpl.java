@@ -24,7 +24,6 @@ public class SendMailServiceImpl implements ISendMailService {
         MessageBuilder subject = () -> String.format(Messages.REGISTRATION_SUBJECT);
         MessageBuilder content = () -> String.format(Messages.REGISTRATION_BODY,
                 name, password);
-        System.out.println(Messages.REGISTRATION_BODY);
         emailSender.sendMessage(email, subject, content);
     }
 
