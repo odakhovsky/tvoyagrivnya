@@ -148,7 +148,7 @@
 
 .create-note-text{
     resize: vertical;
-    max-height: 300px;
+    max-height: 250px;
 }
 
 .note-text-size{
