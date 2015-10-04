@@ -1,35 +1,23 @@
 package com.tvoyagryvnia.controller;
 
-import com.tvoyagryvnia.bean.UserFieldBean;
-import com.tvoyagryvnia.bean.category.CategoryBean;
-import com.tvoyagryvnia.bean.category.CategoryNode;
+import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.model.RoleEntity;
-import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.IUserCategoryService;
 import com.tvoyagryvnia.service.IUserService;
-import com.tvoyagryvnia.service.impl.UserServiceImpl;
 import com.tvoyagryvnia.util.Messages;
-import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/cabinet/control")

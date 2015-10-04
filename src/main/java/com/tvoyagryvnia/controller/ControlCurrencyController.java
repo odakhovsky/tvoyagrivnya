@@ -1,10 +1,7 @@
 package com.tvoyagryvnia.controller;
 
-import com.tvoyagryvnia.bean.UserFieldBean;
-import com.tvoyagryvnia.bean.currency.ExtendedCurrencyBean;
+import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.user.UserBean;
-import com.tvoyagryvnia.dao.IUserCurrencyDao;
-import com.tvoyagryvnia.model.UserCurrencyEntity;
 import com.tvoyagryvnia.service.IUserCurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.tvoyagryvnia.bean;
+package com.tvoyagryvnia.bean.user;
 
 
 import com.tvoyagryvnia.model.UserSettingsEntity;

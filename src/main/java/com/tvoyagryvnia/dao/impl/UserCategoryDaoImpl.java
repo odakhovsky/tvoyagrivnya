@@ -92,6 +92,7 @@ public class UserCategoryDaoImpl implements IUserCategoryDao {
         return (UserCategoryEntity) getSession().get(UserCategoryEntity.class, id);
     }
 
+
     @Override
     public void save(UserCategoryEntity UserCategoryEntity) {
         getSession().save(UserCategoryEntity);

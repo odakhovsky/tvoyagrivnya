@@ -13,5 +13,4 @@
     <span class="pull-right text-bold margin-left-5" data-bind="text:currency"></span>
     <span class="pull-right " data-bind="text:totalCount"></span>
 </div>
-<script type="text/javascript" data-main="/resources/js/accView.js" src="/resources/js/libs/require.js"></script>
 
