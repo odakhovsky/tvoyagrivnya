@@ -61,6 +61,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/organizer.jsp"></put-attribute>
     </definition>
 
+    <definition name="cabinet/organizer/note/info" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/noteinfo.jsp"></put-attribute>
+    </definition>
+
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>

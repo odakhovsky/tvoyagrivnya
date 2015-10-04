@@ -55,11 +55,23 @@ public class CabinetOrganizerController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
-    public String index(@RequestParam("text") String text,
+    public String create(@RequestParam("text") String text,
                         @RequestParam("category") Integer category,
                         @ModelAttribute("userBean") UserBean user) {
         noteService.create(text, category, user.getId());
         return "redirect:/cabinet/organizer/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String update(@RequestParam("noteId")Integer noteId,
+                        @RequestParam("text") String text,
+                        @RequestParam("category") Integer category,
+                        @ModelAttribute("userBean") UserBean user) {
+        NoteBean noteBean = noteService.getById(noteId);
+        noteBean.setText(text);
+        noteBean.setCategoryId(category);
+        noteService.update(noteBean);
+        return "redirect:/cabinet/organizer/note/" + noteId + "/info/";
     }
 
     @RequestMapping(value = "/notes/list", method = RequestMethod.GET)
@@ -103,4 +115,18 @@ public class CabinetOrganizerController {
         noteService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/note/{noteId}/info/", method = RequestMethod.GET)
+    public String showpage(@PathVariable("noteId")Integer noteId,ModelMap map) {
+        NoteBean note = noteService.getById(noteId);
+        if (null != note) {
+            map.addAttribute("note", note);
+            List<UserCategoryEntity> cats = userCategoryDao.getAll(note.getOwner(), true);
+            map.addAttribute("cats", cats);
+            return "cabinet/organizer/note/info";
+        }else {
+            return "redirect:/cabinet/organizer/";
+        }
+    }
+
 }
