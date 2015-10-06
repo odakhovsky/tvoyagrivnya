@@ -3,8 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<div class="well">
-    <div class="row">
+<div class="well ">
+    <div class="row padding-25">
         <h3 align="center">Рахунок #${account.id}(${account.name})</h3>
 
         <div class="form-group">
@@ -32,7 +32,7 @@
             </span>
         </div>
     </div>
-    <div class="row">
+    <div class="row padding-25">
         <h4 align="center">Баланс</h4>
         <c:forEach items="${account.balances}" var="balance">
             <div class="badge">
@@ -42,10 +42,34 @@
         </c:forEach>
     </div>
 
-    <div class="row">
+    <div class="row padding-25">
         <h4 align="center">Останні 30 операцій по рахунку</h4>
-    </div>
+        <c:forEach items="${operations}" var="operation">
+        <c:choose>
+        <c:when test="${operation.type eq 'plus'}">
+        <div class="col-lg-12 alert alert-success account-operation-line"></c:when>
+            <c:otherwise>
+            <div class="col-lg-12 alert alert-danger account-operation-line"></c:otherwise>
+                </c:choose>
+                <div class="col-lg-2">
+                    <span>${operation.date}</span>
+                </div>
+                <div class="col-lg-2">
+                    <span>${operation.money}</span>
 
+                    <span>${operation.currency.shortName}</span>
+                </div>
+                <div class="col-lg-4">
+                    <span>${operation.category}</span>
+                </div>
+                <div class="col-lg-4 truncate-note " title="${operation.note}">
+                    <span >${operation.note}</span>
+                </div>
+            </div>
+            </c:forEach>
+        </div>
+
+    </div>
 </div>
 <script>
     $('.editable').editable({placement: 'down'});

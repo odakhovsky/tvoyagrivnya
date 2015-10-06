@@ -3,6 +3,7 @@ package com.tvoyagryvnia.bean.account;
 import com.tvoyagryvnia.model.AccountEntity;
 import com.tvoyagryvnia.model.BalanceEntity;
 import com.tvoyagryvnia.model.UserCurrencyEntity;
+import com.tvoyagryvnia.util.NumberFormatter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class AccountBean {
         this.active = accountEntity.isActive();
         this.enabled = accountEntity.isEnabled();
         this.owner = accountEntity.getOwner().getId();
-        this.totalBalance = calcTotalBalance();
+        this.totalBalance = NumberFormatter.cutFloat(calcTotalBalance(), 2);
         this.currency = accountEntity.getBalances().stream()
                 .map(BalanceEntity::getCurrency)
                 .filter(UserCurrencyEntity::isDef)

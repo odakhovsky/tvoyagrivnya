@@ -1,6 +1,7 @@
 package com.tvoyagryvnia.bean.account;
 
 import com.tvoyagryvnia.model.BalanceEntity;
+import com.tvoyagryvnia.util.NumberFormatter;
 
 public class BalanceBean {
 
@@ -18,7 +19,7 @@ public class BalanceBean {
         this.currName = balanceEntity.getCurrency().getCurrency().getCurrency();
         this.currFull = balanceEntity.getCurrency().getCurrency().getName();
         this.currShort = balanceEntity.getCurrency().getCurrency().getShortName();
-        this.balance = balanceEntity.getBalance();
+        this.balance = NumberFormatter.cutFloat(balanceEntity.getBalance(), 2);
         this.rate = balanceEntity.getCurrency().getCrossRate();
     }
 

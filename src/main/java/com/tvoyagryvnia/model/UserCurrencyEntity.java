@@ -2,6 +2,7 @@ package com.tvoyagryvnia.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "USER_CURRENCY")
@@ -29,7 +30,8 @@ public class UserCurrencyEntity {
     @OrderBy("date DESC")
     private List<RateEntity> crossRates;
 
-    public UserCurrencyEntity(){}
+    public UserCurrencyEntity() {
+    }
 
     public int getId() {
         return id;
@@ -77,5 +79,10 @@ public class UserCurrencyEntity {
 
     public void setCrossRates(List<RateEntity> crossRates) {
         this.crossRates = crossRates;
+    }
+
+    public RateEntity getLastRate() {
+        return crossRates.stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .collect(Collectors.toList()).get(0);
     }
 }

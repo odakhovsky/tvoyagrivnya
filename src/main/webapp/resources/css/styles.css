@@ -175,3 +175,30 @@
 .padding-25{
     padding: 25px;
 }
+
+.create-note-text-edit{
+    resize: vertical;
+    max-height: 200px;
+}
+
+.operation-form #date{
+    width: 130px
+}
+
+.account-operation-line {
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.truncate-note {
+    width:33%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.main-chart{
+    width: 250px;
+    height: 250px;
+}

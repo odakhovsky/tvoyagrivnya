@@ -11,12 +11,14 @@ public class RateBean {
     private int currency;
     private Date date;
     private Float rate;
+    private int rateId;
 
     public RateBean(RateEntity rate) {
         id = rate.getId();
         currency = rate.getCurrency().getId();
         date = rate.getDate();
         this.rate = rate.getRate();
+        this.rateId = rate.getId();
     }
 
     public int getId() {
@@ -49,5 +51,13 @@ public class RateBean {
 
     public void setRate(Float rate) {
         this.rate = rate;
+    }
+
+    public int getRateId() {
+        return rateId;
+    }
+
+    public void setRateId(int rateId) {
+        this.rateId = rateId;
     }
 }

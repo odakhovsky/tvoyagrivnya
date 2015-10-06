@@ -26,6 +26,8 @@ public class CategoryBean {
         this.parent = (null == entity.getParent()) ? 0 : entity.getParent().getId();
         if (parent != 0) {
             parentName = entity.getParent().getName();
+        }else{
+            parentName = "";
         }
         this.active = entity.getActive();
         this.childrens = (null == entity.getChildrens()) ? new HashSet<>() : entity.getChildrens()

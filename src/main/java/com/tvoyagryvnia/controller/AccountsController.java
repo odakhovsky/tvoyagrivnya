@@ -7,6 +7,7 @@ import com.tvoyagryvnia.bean.currency.CurrencyBean;
 import com.tvoyagryvnia.bean.response.ResultBean;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.service.IAccountService;
+import com.tvoyagryvnia.service.IOperationService;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class AccountsController {
 
     @Autowired
     private IAccountService accountService;
+    @Autowired private IOperationService operationService;
 
     @RequestMapping(value = {"", "/"})
     public String index() {
@@ -50,6 +52,7 @@ public class AccountsController {
         boolean canDisplay = (accountBean.getOwner() == user.getId() && accountBean.isActive());
         if (canDisplay) {
             map.addAttribute("account", accountBean);
+            map.addAttribute("operations", operationService.getLast30Operation(accId));
             return "cabinet/accounts/account";
         } else {
             return "redirect:/cabinet/accounts/accmanage/";
@@ -151,5 +154,11 @@ public class AccountsController {
         }else {
             return new ResponseEntity<>(new ResultBean(false),HttpStatus.OK);
         }
+    }
+
+    @RequestMapping(value = "/view/", method = RequestMethod.GET)
+    public String view(ModelMap map, @ModelAttribute("userBean")UserBean user) {
+        map.addAttribute("accounts", accountService.getAllOfUserEnabled(user.getId(), true, true));
+        return "cabinet/accounts/view";
     }
 }

@@ -17,7 +17,7 @@
                     <a href="/cabinet/main/">Головна</a>
                 </li>
                 <li>
-                    <a href="/cabinet/new-transaction/">Нова операція</a>
+                    <a href="/cabinet/operations/new/">Нова операція</a>
                 </li>
 
                 <li>
@@ -25,6 +25,9 @@
                 </li>
                 <li>
                     <a href="/cabinet/organizer/">Органайзер</a>
+                </li>
+                <li>
+                    <a href="#">Бюджет</a>
                 </li>
                 <li>
                     <a href="/cabinet/settings/">Налаштування</a>

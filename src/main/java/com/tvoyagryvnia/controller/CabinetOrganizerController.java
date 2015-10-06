@@ -129,4 +129,11 @@ public class CabinetOrganizerController {
         }
     }
 
+    @RequestMapping(value = "/note/view/", method = RequestMethod.GET)
+    public String noteView(@ModelAttribute("userBean")UserBean user, ModelMap map) {
+        List<NoteBean> notes = noteService.getLastFiveOfUser(user.getId());
+        map.addAttribute("notes", notes);
+        return "cabinet/organizer/note/view";
+    }
+
 }

@@ -47,3 +47,17 @@
 <script src="<c:url value="/resources/js/libs/bootstra-datetime.js" />"></script>
 <script src="<c:url value="/resources/js/libs/select2.full.js" />"></script>
 
+<!-- CALCULATOR -->
+<script src="<c:url value="/resources/js/libs/calculator/jquery.plugin.js" />"></script>
+<script src="<c:url value="/resources/js/libs/calculator/jquery.calculator.js" />"></script>
+<script src="<c:url value="/resources/js/libs/calculator/jquery.calculator-uk.js" />"></script>
+
+<link href="<c:url value="/resources/css/calculator/jquery.calculator.alt.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/calculator/jquery.calculator.css" />" rel="stylesheet">
+
+
+<!-- CHARTS -->
+
+<link href="<c:url value="/resources/css/morris.css" />" rel="stylesheet">
+
+
