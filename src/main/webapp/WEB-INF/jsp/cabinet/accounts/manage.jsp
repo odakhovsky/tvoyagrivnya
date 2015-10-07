@@ -113,6 +113,21 @@
             rows: []
 
         });
+        $("#accounts").paging({
+
+            limit: 4,
+            rowDisplayStyle: 'block',
+            activePage: 0,
+            rows: []
+
+        });$("#exchanges").paging({
+
+            limit: 10,
+            rowDisplayStyle: 'block',
+            activePage: 0,
+            rows: []
+
+        });
     });
     function activate(id) {
         $.ajax({

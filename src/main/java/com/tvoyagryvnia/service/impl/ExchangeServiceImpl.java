@@ -99,6 +99,7 @@ public class ExchangeServiceImpl implements IExchangeService {
         exchangeDao.save(exchange);
     }
 
+
     private UserCategoryEntity determineCategory(int user, boolean isTransfer) {
         UserCategoryEntity category;
         if(isTransfer){
