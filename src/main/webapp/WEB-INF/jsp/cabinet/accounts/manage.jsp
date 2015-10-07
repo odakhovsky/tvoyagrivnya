@@ -9,14 +9,15 @@
             <a class="btn  btn-sm btn-primary" href="/cabinet/accounts/createAccount/">Додати рахунок</a>
 
             <h3 align="center">Мої рахунки</h3>
-
-            <c:forEach var="acc" items="${accounts}">
-                <div class="list-group-item col-lg-12 margin-top-5">
-                    <div class="col-sm-1"><span>#${acc.id}</span></div>
-                    <div class="col-sm-8">
-                        <p align="center"><a
-                                href="/cabinet/accounts/accmanage/${acc.id}/info/">${acc.name}</a></p></div>
-                    <div class="col-sm-3">
+            <table id="accounts">
+                <c:forEach var="acc" items="${accounts}">
+                    <tr class="col-lg-10 col-lg-offset-1 list-group-item margin-top-5">
+                        <td>
+                            <div class="col-sm-1"><span>#${acc.id}</span></div>
+                            <div class="col-sm-8">
+                                <p align="center"><a
+                                        href="/cabinet/accounts/accmanage/${acc.id}/info/">${acc.name}</a></p></div>
+                            <div class="col-sm-3">
                         <span>
                             <c:choose>
                                 <c:when test="${acc.enabled}">
@@ -30,21 +31,34 @@
                         <span class="pull-right">
                             <a class="btn-cursor" onclick="remove(${acc.id})"> <i class="fa fa-remove"></i> </a>
                         </span>
-                    </div>
-                    <c:forEach items="${acc.balances}" var="balance">
-                        <div title="${balance.currFull}"
-                             class="margin-left-5 margin-top-15 label label-primary pull-left">
-                                ${balance.balance} <b>${balance.currShort}</b>
-                        </div>
-                    </c:forEach>
+                            </div>
+                            <c:forEach items="${acc.balances}" var="balance">
+                                <div title="${balance.currFull}"
+                                     class="margin-left-5 margin-top-15 label label-primary pull-left">
+                                        ${balance.balance} <b>${balance.currShort}</b>
+                                </div>
+                            </c:forEach>
 
-                </div>
-            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </div>
 </div>
 </div>
 <script>
+    $(document).ready(function () {
+
+        $("#accounts").paging({
+
+            limit: 4,
+            rowDisplayStyle: 'block',
+            activePage: 0,
+            rows: []
+
+        });
+    });
     function activate(id) {
         $.ajax({
             type: "POST",

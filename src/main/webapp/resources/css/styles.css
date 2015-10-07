@@ -203,17 +203,19 @@
     height: 250px;
 }
 
+
 .paging-nav {
-    text-align: right;
-    padding-top: 2px;
+    text-align: center;
+    padding-top: 5px;
 }
+
 
 .paging-nav a {
     margin: auto 1px;
     text-decoration: none;
     display: inline-block;
     padding: 1px 7px;
-    background: #91b9e6;
+    background: #428bca;
     color: white;
     border-radius: 3px;
 }

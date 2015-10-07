@@ -69,7 +69,7 @@
 
         $('#operation-list').paging({
 
-            limit: 5,
+            limit: 25,
             rowDisplayStyle: 'block',
             activePage: 0,
             rows: []
