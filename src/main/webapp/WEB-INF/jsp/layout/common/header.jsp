@@ -61,3 +61,10 @@
 <link href="<c:url value="/resources/css/morris.css" />" rel="stylesheet">
 
 
+<link href="<c:url value="/resources/css/ui/jquery-ui.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/ui/jquery-ui.structure.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/ui/jquery-ui.theme.css" />" rel="stylesheet">
+
+<script src="<c:url value="/resources/js/libs/paging.js" />"></script>
+
+<script src="<c:url value="/resources/js/libs/jquery-ui.js" />"></script>

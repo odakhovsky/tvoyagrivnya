@@ -32,7 +32,7 @@
             </div>
             <div class="row margin-top-15">
                 <div class="col-lg-4">
-                    Кошелек
+                    Рахунок
                     <select name="accounts" id="accounts" class="form-control" required>
                         <c:forEach var="acc" items="${accounts}">
                             <option value="${acc.id}">${acc.name}</option>
@@ -64,8 +64,7 @@
     </div>
 </div>
 <script>
-    $("#money").calculator({
-    });
+    $("#money").calculator({});
 </script>
 <script>
     $('#date').datetimepicker({

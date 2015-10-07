@@ -1,9 +1,11 @@
 package com.tvoyagryvnia.controller;
 
+import com.tvoyagryvnia.bean.operation.OperationBean;
 import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.model.RoleEntity;
+import com.tvoyagryvnia.service.IOperationService;
 import com.tvoyagryvnia.service.IUserCategoryService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.util.Messages;
@@ -17,12 +19,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.util.List;
 import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/cabinet/control")
 @SessionAttributes("userBean")
 public class CabinetControlController {
+
+    @Autowired private IOperationService operationService;
 
     @Autowired
     private IUserService userService;
@@ -34,9 +39,7 @@ public class CabinetControlController {
     private IUserCategoryService userCategoryService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String index(ModelMap modelMap) {
-        return "redirect:/cabinet/control/categories/";
-    }
+    public String index(ModelMap modelMap) {return "redirect:/cabinet/control/categories/";}
 
     @RequestMapping(value = {"/members/"}, method = RequestMethod.GET)
     public String members(ModelMap modelMap, @ModelAttribute("userBean") UserBean userBean) {

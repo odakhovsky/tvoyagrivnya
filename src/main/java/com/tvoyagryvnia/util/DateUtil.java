@@ -14,6 +14,9 @@ import java.util.Date;
 public class DateUtil {
     public static final SimpleDateFormat DF_HYPHEN = new SimpleDateFormat("dd-MM-yyyy");
     public static final SimpleDateFormat DF_POINT = new SimpleDateFormat("dd.MM.yyyy");
+    public static final SimpleDateFormat DF_POINT_REVERSE = new SimpleDateFormat("yyyy.MM.dd");
+    public static final SimpleDateFormat DF_HYPHEN_REVERSE = new SimpleDateFormat("yyyy-MM-dd");
+
 
     private static Logger log = LoggerFactory.getLogger(DateUtil.class);
 
@@ -32,5 +35,10 @@ public class DateUtil {
         cal.set(Calendar.MILLISECOND, 0);
 
         return cal.getTime();
+    }
+
+    public static Date convertToPatternDate(Date date, SimpleDateFormat to) {
+        SimpleDateFormat sdf = new SimpleDateFormat(to.toPattern());
+        return parseDate(sdf.format(date), to.toPattern());
     }
 }

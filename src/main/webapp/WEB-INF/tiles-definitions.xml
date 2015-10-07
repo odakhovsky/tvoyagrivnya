@@ -85,6 +85,9 @@
     <definition name="cabinet/operations/new" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/newOperation.jsp"></put-attribute>
     </definition>
+    <definition name="cabinet/operations/edit/view" extends="viewLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/edit-operation.jsp"></put-attribute>
+    </definition>
 
     <!--ADMIN PANEL PAGES-->
     <definition name="admin/index" extends="adminLayout">

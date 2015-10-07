@@ -20,6 +20,10 @@
             return parseFloat(sum).toFixed(2) + ' ' +stats.currency;
         }, this);
 
+        visibleblock = ko.computed(function() {
+            var val = statistic().spending.length != 0 || statistic().incoming.length != 0;
+            return val;
+        }, this);
 
 
     }

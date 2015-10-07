@@ -86,4 +86,12 @@ public class ExtendedCurrencyBean extends CurrencyBean {
     public void setStringDate(String stringDate) {
         this.stringDate = stringDate;
     }
+
+    public int getRateId() {
+        return rateId;
+    }
+
+    public void setRateId(int rateId) {
+        this.rateId = rateId;
+    }
 }

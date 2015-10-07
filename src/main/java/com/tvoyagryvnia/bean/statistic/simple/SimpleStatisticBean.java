@@ -21,7 +21,10 @@ public class SimpleStatisticBean {
         incoming = new ArrayList<>();
         parseList(operations, OperationType.plus);
         parseList(operations, OperationType.minus);
-        currency = operations.stream().filter(o -> o.getCurrency().isDef()).map(o -> o.getCurrency().getShortName()).findFirst().get();
+        if (operations.size() > 0) {
+            currency = operations.stream().filter(o -> o.getCurrency().isDef()).map(o -> o.getCurrency().getShortName()).findFirst().get();
+
+        }
     }
 
     private void parseList(List<OperationBean> operations, OperationType type) {

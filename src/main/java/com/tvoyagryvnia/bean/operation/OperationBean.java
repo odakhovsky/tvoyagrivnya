@@ -6,6 +6,7 @@ import com.tvoyagryvnia.bean.currency.CurrencyBean;
 import com.tvoyagryvnia.bean.currency.ExtendedCurrencyBean;
 import com.tvoyagryvnia.bean.currency.RateBean;
 import com.tvoyagryvnia.model.OperationEntity;
+import com.tvoyagryvnia.util.DateUtil;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class OperationBean {
     private float money;
     private String type;
     private String category;
+    private int categoryId;
 
     public OperationBean(OperationEntity operationEntity){
         this.id = operationEntity.getId();
@@ -35,7 +37,10 @@ public class OperationBean {
         this.money = operationEntity.getMoney();
         this.type = operationEntity.getCategory().getOperation().name();
         this.category = operationEntity.getCategory().getName();
+        this.categoryId = operationEntity.getCategory().getId();
     }
+
+    public OperationBean(){}
 
     public int getId() {
         return id;
@@ -125,5 +130,12 @@ public class OperationBean {
         this.category = category;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
 }

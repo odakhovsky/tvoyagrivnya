@@ -1,12 +1,10 @@
 package com.tvoyagryvnia.service.impl;
 
 import com.tvoyagryvnia.bean.account.AccountBean;
-import com.tvoyagryvnia.dao.IAccountDao;
-import com.tvoyagryvnia.dao.IBalanceDao;
-import com.tvoyagryvnia.dao.IUserCurrencyDao;
-import com.tvoyagryvnia.dao.IUserDao;
+import com.tvoyagryvnia.dao.*;
 import com.tvoyagryvnia.model.AccountEntity;
 import com.tvoyagryvnia.model.BalanceEntity;
+import com.tvoyagryvnia.model.OperationEntity;
 import com.tvoyagryvnia.model.UserCurrencyEntity;
 import com.tvoyagryvnia.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,9 @@ public class AccountServiceImpl implements IAccountService {
     private IUserCurrencyDao userCurrencyDao;
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private IOperationDao operationDao;
+    @Autowired private IExchangeDao exchangeDao;
 
     @Override
     public void create(int owner, String name, String description) {
@@ -65,6 +66,19 @@ public class AccountServiceImpl implements IAccountService {
             acc.setEnabled(account.getEnabled());
             acc.setDescription(account.getDescription());
             accountDao.update(acc);
+            if (!acc.isActive()) {
+                deactivateOperationForAccount(acc.getId());
+            }
+        }
+    }
+
+    private void deactivateOperationForAccount(int id) {
+        AccountEntity accountEntity = accountDao.getById(id);
+        if (null != accountEntity && !accountEntity.isActive()){
+            for (OperationEntity operation : accountEntity.getOperations()) {
+                operation.setActive(false);
+                operationDao.update(operation);
+            }
         }
     }
 
@@ -114,5 +128,15 @@ public class AccountServiceImpl implements IAccountService {
         Method setter = new PropertyDescriptor(fieldName, entity.getClass()).getWriteMethod();
         setter.invoke(entity, fielValue);
         accountDao.update(entity);
+    }
+
+    @Override
+    public void deactivate(int account) {
+        AccountEntity accountEntity = accountDao.getById(account);
+        if (null != accountEntity) {
+            accountEntity.setActive(false);
+            accountDao.update(accountEntity);
+            deactivateOperationForAccount(account);
+        }
     }
 }

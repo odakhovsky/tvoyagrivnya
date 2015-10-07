@@ -19,6 +19,7 @@ public interface IOperationService {
     List<OperationBean> getAllOfUserByCurrency(int user, int currency);
 
     void create(String date, String description, float money, int account, int currency, int category, int user);
+    void update(int id,String date, String description, float money, int account, int currency, int category, int user);
 
     List<OperationBean> getLast30Operation(int account);
 
