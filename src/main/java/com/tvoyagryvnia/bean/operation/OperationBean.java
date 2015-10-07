@@ -40,6 +40,8 @@ public class OperationBean {
         this.categoryId = operationEntity.getCategory().getId();
     }
 
+
+
     public OperationBean(){}
 
     public int getId() {

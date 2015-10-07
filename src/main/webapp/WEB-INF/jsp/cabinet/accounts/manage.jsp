@@ -7,6 +7,7 @@
     <div class="row">
         <div class="invite-members-list">
             <a class="btn  btn-sm btn-primary" href="/cabinet/accounts/createAccount/">Додати рахунок</a>
+            <a class="btn  btn-sm btn-primary" href="/cabinet/accounts/exchange/">Обмін\перевод</a>
 
             <h3 align="center">Мої рахунки</h3>
             <table id="accounts">
@@ -14,10 +15,10 @@
                     <tr class="col-lg-10 col-lg-offset-1 list-group-item margin-top-5">
                         <td>
                             <div class="col-sm-1"><span>#${acc.id}</span></div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 <p align="center"><a
                                         href="/cabinet/accounts/accmanage/${acc.id}/info/">${acc.name}</a></p></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                         <span>
                             <c:choose>
                                 <c:when test="${acc.enabled}">
@@ -44,9 +45,63 @@
                 </c:forEach>
             </table>
         </div>
+        <div class="row padding-25">
+            <h4 align="center">Обміни по рахунках</h4>
+            <table id="exchanges" class="col-lg-12" >
+                <c:forEach items="${exchanges}" var="operation">
+                <tbody>
+                <tr class="alert alert-info ">
+                    <td>
+                        <div class="col-lg-2">
+                            <span>${operation.date}</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <span>${operation.money}</span>
+                            <span>${operation.currency.shortName}</span>
+                            <c:choose>
+                                <c:when test="${operation.category eq 'Перевод'}">
+                                    <i class="fa fa-arrow-circle-o-right"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-arrow-left"></i>
+                                    <i class="fa fa-arrow-right"></i>
+                                </c:otherwise>
+                            </c:choose>
+                            <span>${operation.moneyTo}</span>
+                            <span>${operation.currencyTo.shortName}</span>
+                        </div>
+
+                        <div class="col-lg-4 truncate-note">
+                        <span><a
+                                href="/cabinet/accounts/accmanage/${operation.account.id}/info/">${operation.account.name}</a></span>
+                            <c:choose>
+                                <c:when test="${operation.category eq 'Перевод'}">
+                                    <i class="fa fa-arrow-circle-o-right"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-arrow-circle-o-left"></i>
+                                    <i class="fa fa-arrow-circle-o-right"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        <span><a
+                                href="/cabinet/accounts/accmanage/${operation.accountTo.id}/info/">${operation.accountTo.name}</a></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <span>${operation.category}</span>
+                        </div>
+                    </td>
+                </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
 </div>
+</div>
+</div>
+
 <script>
     $(document).ready(function () {
 

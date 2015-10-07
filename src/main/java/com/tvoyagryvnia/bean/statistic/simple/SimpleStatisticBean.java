@@ -16,15 +16,12 @@ public class SimpleStatisticBean {
     private List<SimpleStatisticChartLine> spending;
     private String currency;
 
-    public SimpleStatisticBean(List<OperationBean> operations) {
+    public SimpleStatisticBean(List<OperationBean> operations, String currency) {
         spending = new ArrayList<>();
         incoming = new ArrayList<>();
         parseList(operations, OperationType.plus);
         parseList(operations, OperationType.minus);
-        if (operations.size() > 0) {
-            currency = operations.stream().filter(o -> o.getCurrency().isDef()).map(o -> o.getCurrency().getShortName()).findFirst().get();
-
-        }
+        this.currency = currency;
     }
 
     private void parseList(List<OperationBean> operations, OperationType type) {

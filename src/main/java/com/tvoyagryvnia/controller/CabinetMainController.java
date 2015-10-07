@@ -3,6 +3,7 @@ package com.tvoyagryvnia.controller;
 import com.tvoyagryvnia.bean.operation.OperationBean;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.IOperationDao;
+import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.IOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +32,12 @@ public class CabinetMainController {
     @RequestMapping(value = "/main/", method = RequestMethod.GET)
     public String main(ModelMap map, @ModelAttribute("userBean") UserBean user) {
         List<OperationBean> operations = operationService.getAllOfUser(user.getId(), true)
-                .stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .stream()
+                .filter(ob -> ob.getType()
+                        .equals(OperationType.plus.name()) || ob.getType().equals(OperationType.minus.name()))
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
                 .sorted((o1, o2) -> Integer.compare(o2.getId(), o1.getId())).collect(Collectors.toList());
+
         map.addAttribute("operations", operations);
         return "cabinet/main";
     }

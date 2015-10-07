@@ -56,4 +56,5 @@ public class ExchangeEntity  extends OperationEntity
     public void setMoneyTo(float moneyTo) {
         this.moneyTo = moneyTo;
     }
+
 }

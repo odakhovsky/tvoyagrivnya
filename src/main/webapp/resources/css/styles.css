@@ -198,6 +198,14 @@
     color: black;
 }
 
+.truncate-note-transfer{
+    width:16%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
 .main-chart{
     width: 250px;
     height: 250px;

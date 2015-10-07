@@ -12,4 +12,6 @@ public interface IUserCurrencyDao {
     List<UserCurrencyEntity> getAllOfUser(int user);
     void update(UserCurrencyEntity currencyEntity);
     UserCurrencyEntity getDefCurrency(int user);
+    UserCurrencyEntity getDefaultCurrencyOfUser(int user);
+
 }

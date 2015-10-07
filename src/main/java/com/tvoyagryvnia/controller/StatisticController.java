@@ -28,7 +28,8 @@ public class StatisticController {
     @ResponseBody
     public SimpleStatisticBean simpleStatistic(@ModelAttribute("userBean")UserBean user) {
         List<OperationBean> operations = operationService.getAllOfUser(user.getId(), true);
-        SimpleStatisticBean statistic = new SimpleStatisticBean(operations);
+        String currency = userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getName();
+        SimpleStatisticBean statistic = new SimpleStatisticBean(operations, currency);
         return statistic;
     }
 

@@ -2,6 +2,7 @@ package com.tvoyagryvnia.service;
 
 
 import com.tvoyagryvnia.bean.currency.ExtendedCurrencyBean;
+import com.tvoyagryvnia.model.UserCurrencyEntity;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public interface IUserCurrencyService {
 
     void setAsDefault(int user, int currency);
 
-
     void updateCrossRate(int pk, float rate);
+
+    ExtendedCurrencyBean getDefaultCurrencyOfUser(int user);
 
 }

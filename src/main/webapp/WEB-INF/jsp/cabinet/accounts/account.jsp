@@ -49,26 +49,78 @@
         <c:when test="${operation.type eq 'plus'}">
         <div class="col-lg-12 alert alert-success account-operation-line"></c:when>
             <c:otherwise>
-            <div class="col-lg-12 alert alert-danger account-operation-line"></c:otherwise>
-                </c:choose>
-                <div class="col-lg-2">
-                    <span>${operation.date}</span>
-                </div>
-                <div class="col-lg-2">
-                    <span>${operation.money}</span>
+            <c:choose>
+            <c:when test="${operation.type eq 'minus'}">
+            <div class="col-lg-12 alert alert-danger account-operation-line">
+                </c:when>
+                <c:otherwise>
+                <div class="col-lg-12 alert alert-info account-operation-line">
+                    </c:otherwise>
+                    </c:choose>
+                    </c:otherwise>
+                    </c:choose>
+                    <div class="col-lg-2">
+                        <span>${operation.date}</span>
+                    </div>
+                    <c:choose>
+                        <c:when test="${operation.type eq 'transfer'}">
+                            <div class="col-lg-3 truncate-note">
+                                <span>${operation.money}</span>
+                                <span>${operation.currency.shortName}</span>
+                                <c:choose>
+                                    <c:when test="${operation.category eq 'Перевод'}">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="fa fa-arrow-circle-o-left"></i>
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span>${operation.moneyTo}</span>
+                                <span>${operation.currencyTo.shortName}</span>
+                            </div>
+                            <div class="col-lg-5 truncate-note">
+                                <span>${operation.account.name}</span>
+                                <c:choose>
+                                    <c:when test="${operation.category eq 'Перевод'}">
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="fa fa-arrow-circle-o-left"></i>
+                                        <i class="fa fa-arrow-circle-o-right"></i>
+                                    </c:otherwise>
+                                </c:choose>
+                                <span>${operation.accountTo.name}</span>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="col-lg-2">
+                                <span>${operation.money}</span>
 
-                    <span>${operation.currency.shortName}</span>
+                                <span>${operation.currency.shortName}</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span>${operation.category}</span>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                        <c:choose>
+                            <c:when test="${operation.type eq 'transfer'}">
+                                <div class="col-lg-2 truncate-note-transfer " title="${operation.note}">
+                                    <span>${operation.note}</span>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-lg-2 truncate-note " title="${operation.note}">
+                                    <span>${operation.note}</span>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                 </div>
-                <div class="col-lg-4">
-                    <span>${operation.category}</span>
-                </div>
-                <div class="col-lg-4 truncate-note " title="${operation.note}">
-                    <span >${operation.note}</span>
-                </div>
+                </c:forEach>
             </div>
-            </c:forEach>
-        </div>
 
+        </div>
     </div>
 </div>
 <script>
