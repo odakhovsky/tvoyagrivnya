@@ -84,6 +84,7 @@ public class UserServiceImpl implements IUserService {
     private void addCategoriesForUser(UserEntity userEntity) {
         fillCategories(userEntity, OperationType.plus);
         fillCategories(userEntity, OperationType.minus);
+        fillCategories(userEntity, OperationType.transfer);
     }
 
     private void fillCategories(UserEntity userEntity, OperationType type) {

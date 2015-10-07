@@ -98,4 +98,10 @@ public class NoteService implements INoteService {
         }
         noteDao.update(note);
     }
+
+    @Override
+    public List<NoteBean> getLastFiveOfUser(int user) {
+        return getAllOfUser(user).stream().sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .limit(5).collect(Collectors.toList());
+    }
 }

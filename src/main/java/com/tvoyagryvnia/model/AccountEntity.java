@@ -30,6 +30,9 @@ public class AccountEntity {
     @OneToMany(mappedBy = "account")
     private List<BalanceEntity> balances;
 
+    @OneToMany(mappedBy = "account")
+    private List<OperationEntity> operations;
+
     public AccountEntity(){}
 
     public int getId() {
@@ -86,5 +89,13 @@ public class AccountEntity {
 
     public void setBalances(List<BalanceEntity> balances) {
         this.balances = balances;
+    }
+
+    public List<OperationEntity> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<OperationEntity> operations) {
+        this.operations = operations;
     }
 }

@@ -18,4 +18,5 @@ public interface IAccountService {
     boolean isAccountNameIsFree(int user, String accName);
     public void updateSingleField(int userId, String fieldName, String fielValue)
             throws Exception;
+    void deactivate(int account);
 }

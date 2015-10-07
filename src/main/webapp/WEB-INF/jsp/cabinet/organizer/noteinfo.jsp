@@ -12,7 +12,7 @@
 
             <form id="createnot" name="createnot" class="form-inline " action="/cabinet/organizer/edit" method="post">
                 <input hidden="hidden" name="noteId" value="${note.id}"/>
-                <textarea id="text" name="text" class="form-control create-note-text" placeholder="Текст замітки"
+                <textarea id="text" name="text" class="form-control create-note-text-edit" placeholder="Текст замітки"
                           required>${note.text}</textarea>
 
                 <select id="categories" name="category" class="form-control">

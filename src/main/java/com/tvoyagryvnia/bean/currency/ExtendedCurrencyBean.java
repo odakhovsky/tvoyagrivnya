@@ -5,6 +5,7 @@ import com.tvoyagryvnia.model.UserCurrencyEntity;
 import com.tvoyagryvnia.util.DateUtil;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class ExtendedCurrencyBean extends CurrencyBean {
     private boolean def;
     private Date date;
     private String stringDate;
+    private int rateId;
 
     public ExtendedCurrencyBean(UserCurrencyEntity currencyEntity) {
         super(currencyEntity.getCurrency());
@@ -27,6 +29,9 @@ public class ExtendedCurrencyBean extends CurrencyBean {
         this.def = currencyEntity.isDef();
         this.date = DateUtil.getDateWithoutTime(getLastDate(currencyEntity.getCrossRates().stream().map(RateEntity::getDate).collect(Collectors.toList())));
         this.stringDate = DateUtil.DF_POINT.format(this.date);
+        this.rateId = currencyEntity.getCrossRates().stream()
+                .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
+                .map(RateEntity::getId).collect(Collectors.toList()).get(0);
     }
 
     private Date getLastDate(List<Date> dates){
@@ -80,5 +85,13 @@ public class ExtendedCurrencyBean extends CurrencyBean {
 
     public void setStringDate(String stringDate) {
         this.stringDate = stringDate;
+    }
+
+    public int getRateId() {
+        return rateId;
+    }
+
+    public void setRateId(int rateId) {
+        this.rateId = rateId;
     }
 }

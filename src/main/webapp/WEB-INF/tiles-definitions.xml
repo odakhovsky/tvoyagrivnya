@@ -9,6 +9,8 @@
         <put-attribute name="sidebar" value="/WEB-INF/jsp/layout/common/sidebar.jsp"/>
     </definition>
 
+    <definition name="viewLayout" template="/WEB-INF/jsp/layout/viewLoyout.jsp"></definition>
+
     <definition name="mainLayout" template="/WEB-INF/jsp/layout/mainLayout.jsp">
         <put-attribute name="header" value="/WEB-INF/jsp/layout/common/header.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/jsp/layout/common/footer.jsp"/>
@@ -42,6 +44,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/control/currencies.jsp"></put-attribute>
     </definition>
 
+    <!-- ACCOUNT VIEW -->
+    <definition name="cabinet/accounts/view" extends="viewLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/view/accounts-sidebar.jsp"></put-attribute>
+    </definition>
 
     <definition name="cabinet/accounts/manage" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/accounts/manage.jsp"></put-attribute>
@@ -61,6 +67,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/organizer.jsp"></put-attribute>
     </definition>
 
+    <!-- NOTE  VIEW -->
+    <definition name="cabinet/organizer/note/view" extends="viewLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/view/note-sidebar.jsp"></put-attribute>
+    </definition>
+
     <definition name="cabinet/organizer/note/info" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/noteinfo.jsp"></put-attribute>
     </definition>
@@ -70,6 +81,18 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>
     </definition>
 
+    <!-- OPERATIONS PAGES -->
+    <definition name="cabinet/operations/new" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/newOperation.jsp"></put-attribute>
+    </definition>
+    <definition name="cabinet/operations/edit/view" extends="viewLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/edit-operation.jsp"></put-attribute>
+    </definition>
+
+    <!-- OPERATIONS EXCHANGE -->
+    <definition name="cabinet/accounts/exchange/main" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/exchange/exchange.jsp"></put-attribute>
+    </definition>
 
     <!--ADMIN PANEL PAGES-->
     <definition name="admin/index" extends="adminLayout">

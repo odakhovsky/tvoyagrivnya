@@ -148,4 +148,9 @@ public class UserCurrencyServiceImpl implements IUserCurrencyService {
             rateDao.save(r);
         }
     }
+
+    @Override
+    public ExtendedCurrencyBean getDefaultCurrencyOfUser(int user) {
+        return new ExtendedCurrencyBean(userCurrencyDao.getDefaultCurrencyOfUser(user));
+    }
 }

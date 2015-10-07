@@ -1,12 +1,17 @@
 package com.tvoyagryvnia.controller;
 
+import com.tvoyagryvnia.bean.operation.OperationBean;
 import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.bean.account.AccountBean;
 import com.tvoyagryvnia.bean.account.SideBarAccountBean;
 import com.tvoyagryvnia.bean.currency.CurrencyBean;
 import com.tvoyagryvnia.bean.response.ResultBean;
 import com.tvoyagryvnia.bean.user.UserBean;
+import com.tvoyagryvnia.dao.IExchangeDao;
+import com.tvoyagryvnia.model.OperationEntity;
 import com.tvoyagryvnia.service.IAccountService;
+import com.tvoyagryvnia.service.IExchangeService;
+import com.tvoyagryvnia.service.IOperationService;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -30,6 +36,8 @@ public class AccountsController {
 
     @Autowired
     private IAccountService accountService;
+    @Autowired private IOperationService operationService;
+    @Autowired private IExchangeService exchangeService;
 
     @RequestMapping(value = {"", "/"})
     public String index() {
@@ -39,6 +47,7 @@ public class AccountsController {
     @RequestMapping(value = "/accmanage/", method = RequestMethod.GET)
     public String accManage(ModelMap map, @ModelAttribute("userBean") UserBean user) {
         map.addAttribute("accounts", accountService.getAllOfUserActive(user.getId(), true));
+        map.addAttribute("exchanges", exchangeService.getAllByUser(user.getId()));
         return "cabinet/accounts/manage";
     }
 
@@ -50,10 +59,24 @@ public class AccountsController {
         boolean canDisplay = (accountBean.getOwner() == user.getId() && accountBean.isActive());
         if (canDisplay) {
             map.addAttribute("account", accountBean);
+            List<Object> operations = shakeOperationsWithExchanges(accId);
+            map.addAttribute("operations", operations);
             return "cabinet/accounts/account";
         } else {
             return "redirect:/cabinet/accounts/accmanage/";
         }
+    }
+
+    private List<Object> shakeOperationsWithExchanges(@PathVariable("accId") Integer accId) {
+        List<Object> operations = new ArrayList<>();
+        for (OperationBean op: operationService.getLast30Operation(accId)) {
+            if (op.getType().equals("transfer")) {
+                operations.add(exchangeService.getById(op.getId()));
+            }else {
+                operations.add(op);
+            }
+        }
+        return operations;
     }
 
     @RequestMapping(value = "/createAccount/", method = RequestMethod.GET)
@@ -151,5 +174,11 @@ public class AccountsController {
         }else {
             return new ResponseEntity<>(new ResultBean(false),HttpStatus.OK);
         }
+    }
+
+    @RequestMapping(value = "/view/", method = RequestMethod.GET)
+    public String view(ModelMap map, @ModelAttribute("userBean")UserBean user) {
+        map.addAttribute("accounts", accountService.getAllOfUserEnabled(user.getId(), true, true));
+        return "cabinet/accounts/view";
     }
 }

@@ -175,3 +175,64 @@
 .padding-25{
     padding: 25px;
 }
+
+.create-note-text-edit{
+    resize: vertical;
+    max-height: 200px;
+}
+
+.operation-form #date{
+    width: 130px
+}
+
+.account-operation-line {
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.truncate-note {
+    width:33%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.truncate-note-transfer{
+    width:16%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.main-chart{
+    width: 250px;
+    height: 250px;
+}
+
+
+.paging-nav {
+    text-align: center;
+    padding-top: 5px;
+}
+
+
+.paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #428bca;
+    color: white;
+    border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+    background: #187ed5;
+    font-weight: bold;
+}
+
+.category-list-style {
+    width: 340px;
+}

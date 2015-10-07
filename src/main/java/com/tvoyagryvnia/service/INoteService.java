@@ -16,5 +16,6 @@ public interface INoteService {
     List<NoteBean> getAllOfUserByCategory(int user, int category);
     public void updateSingleField(int noteId, String fieldName, String fielValue)
             throws IntrospectionException, InvocationTargetException, IllegalAccessException;
+    List<NoteBean> getLastFiveOfUser(int user);
 
 }

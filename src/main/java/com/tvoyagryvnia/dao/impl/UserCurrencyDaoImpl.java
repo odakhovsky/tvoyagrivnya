@@ -62,4 +62,13 @@ public class UserCurrencyDaoImpl implements IUserCurrencyDao {
                 .add(Restrictions.eq("def", true))
                 .uniqueResult();
     }
+
+    @Override
+    public UserCurrencyEntity getDefaultCurrencyOfUser(int user) {
+        return (UserCurrencyEntity) session().createCriteria(UserCurrencyEntity.class,"uc")
+                .createAlias("uc.owner","o")
+                .add(Restrictions.eq("o.id", user))
+                .add(Restrictions.eq("def", true))
+                .uniqueResult();
+    }
 }
