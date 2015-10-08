@@ -7,6 +7,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,5 +41,20 @@ public class DateUtil {
     public static Date convertToPatternDate(Date date, SimpleDateFormat to) {
         SimpleDateFormat sdf = new SimpleDateFormat(to.toPattern());
         return parseDate(sdf.format(date), to.toPattern());
+    }
+
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+
+        @Override
+        public String[] getMonths() {
+            return new String[]{"січня", "лютого", "березня", "квітня", "травня", "червня",
+                    "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"};
+        }
+
+    };
+
+    public static String getFormattedDate(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", myDateFormatSymbols );
+        return dateFormat.format(date);
     }
 }

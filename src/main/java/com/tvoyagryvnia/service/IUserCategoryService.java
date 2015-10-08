@@ -6,6 +6,7 @@ import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IUserCategoryService {
@@ -26,4 +27,5 @@ public interface IUserCategoryService {
 
     int isCategoryPresent(int user,String name, Integer parent, OperationType operationType);
 
+    Float getSumOfCategoryAndSubCategoriesIfPresent(int userCategoryId,Date from, Date to);
 }

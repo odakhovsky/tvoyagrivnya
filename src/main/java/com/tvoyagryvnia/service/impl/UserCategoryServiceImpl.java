@@ -1,6 +1,7 @@
 package com.tvoyagryvnia.service.impl;
 
 import com.tvoyagryvnia.bean.category.CategoryBean;
+import com.tvoyagryvnia.bean.operation.OperationBean;
 import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.dao.ICategoryDao;
 import com.tvoyagryvnia.dao.IUserCategoryDao;
@@ -8,13 +9,16 @@ import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.CategoryEntity;
 import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
+import com.tvoyagryvnia.service.IOperationService;
 import com.tvoyagryvnia.service.IUserCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +31,8 @@ public class UserCategoryServiceImpl implements IUserCategoryService {
     private ICategoryDao baseCategoryDao;
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private IOperationService operationService;
 
     @Override
     public List<CategoryBean> getAll() {
@@ -98,5 +104,40 @@ public class UserCategoryServiceImpl implements IUserCategoryService {
     @Override
     public int isCategoryPresent(int user, String name, Integer parent, OperationType type) {
         return categoryDao.isCategoryPresent(user, name, parent, type);
+    }
+
+    @Override
+    public Float getSumOfCategoryAndSubCategoriesIfPresent(int userCategoryId,Date from, Date to) {
+        UserCategoryEntity category = categoryDao.getById(userCategoryId);
+        float sum = 0.0f;
+        if (null == category) return sum;
+        List<OperationBean> operations = getOperations(category,from,to);
+        sum = calcSum(operations);
+        if(category.getChildrens().size() > 0) {
+            sum = getSummOffChildrens(category.getChildrens(), sum,from, to);
+        }
+        return sum;
+    }
+
+    private List<OperationBean> getOperations(UserCategoryEntity category,Date from, Date to) {
+        return operationService.getAllOfUserByCategory(category.getOwner().getId(), category.getId(), true,from,to);
+    }
+
+    private float getSummOffChildrens(Set<UserCategoryEntity> childrens, float sum,Date from,Date to) {
+        for (UserCategoryEntity cat : childrens) {
+            sum += calcSum(getOperations(cat,from,to));
+            if(cat.getChildrens().size() > 0) {
+                sum = getSummOffChildrens(cat.getChildrens(), sum,from,to);
+            }
+        }
+        return sum;
+    }
+
+    private float calcSum(List<OperationBean> operations) {
+        float sum = 0.0f;
+        for (OperationBean op : operations) {
+            sum += op.getMoney() * op.getCurrency().getCrossRate();
+        }
+        return sum;
     }
 }

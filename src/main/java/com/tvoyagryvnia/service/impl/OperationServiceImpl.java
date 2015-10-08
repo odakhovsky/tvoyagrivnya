@@ -64,6 +64,25 @@ public class OperationServiceImpl implements IOperationService {
     }
 
     @Override
+    public List<OperationBean> getAllOfUserByCategory(int user, int userCategory, boolean active, Date from, Date to) {
+        List<OperationBean> operations = getAllOfUserByCategory(user, userCategory, active);
+        operations = operations.stream()
+                .filter(op -> isBetween(op, from, to))
+                .collect(Collectors.toList());
+        return operations;
+    }
+
+    private boolean isBetween(OperationBean op, Date from, Date to) {
+        if (from.before(to)) {
+            Date d = from;
+            from = to;
+            to = d;
+        }
+        if (from.equals(to)) return op.getDate().equals(from);
+        return op.getDate().after(from) && op.getDate().before(to) ;
+    }
+
+    @Override
     public List<OperationBean> getAllOfUserByCategoryWithSubCats(int user, int mainUserCategory, boolean active) {
         return operationDao.getAllOfUserByCategoryWithSubCats(user, mainUserCategory, active)
                 .stream().map(OperationBean::new).collect(Collectors.toList());

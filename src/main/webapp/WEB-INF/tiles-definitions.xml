@@ -76,6 +76,15 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/organizer/noteinfo.jsp"></put-attribute>
     </definition>
 
+    <definition name="cabinet/budget/list" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/budget/list.jsp"></put-attribute>
+    </definition>
+
+
+    <definition name="cabinet/budget/edit" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/budget/edit.jsp"></put-attribute>
+    </definition>
+
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>

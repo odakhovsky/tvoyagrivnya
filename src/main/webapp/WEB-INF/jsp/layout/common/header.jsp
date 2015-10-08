@@ -54,6 +54,7 @@
 
 <link href="<c:url value="/resources/css/calculator/jquery.calculator.alt.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/calculator/jquery.calculator.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/daterangepicker.css" />" rel="stylesheet">
 
 
 <!-- CHARTS -->
@@ -68,3 +69,4 @@
 <script src="<c:url value="/resources/js/libs/paging.js" />"></script>
 
 <script src="<c:url value="/resources/js/libs/jquery-ui.js" />"></script>
+<script src="<c:url value="/resources/js/libs/daterangepicker.js" />"></script>
