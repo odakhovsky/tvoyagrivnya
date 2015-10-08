@@ -56,16 +56,23 @@
             <div class="row margin-top-15">
                 <div class="result-list col-lg-12 text-center">
                     <div class="col-lg-4">
-                        <span> Підсумок залишок</span>
+                        <span> <i class="text-bold">Підсумок залишок</i></span>
                     </div>
-                    <div class="col-lg-2" style="background-color: #00a1cb">
+                    <div class="col-lg-2">
                         <span> ${budget.grandTotal.fact}</span>
                     </div>
-                    <div class="col-lg-2" style="background-color: #00a1cb">
+                    <div class="col-lg-2" >
                         <span> ${budget.grandTotal.budget}</span>
                     </div>
-                    <div class="col-lg-2" style="background-color: #00a1cb">
-                        <span> ${budget.grandTotal.diff}</span>
+                    <div class="col-lg-2">
+                        <c:choose>
+                            <c:when test="${(budget.grandTotal.diff eq 0) or (budget.grandTotal.diff gt 0)}">
+                                <span style="color:green" >${budget.grandTotal.diff}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span style="color: red" >${budget.grandTotal.diff}</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
