@@ -9,6 +9,7 @@ import com.tvoyagryvnia.dao.IUserCategoryDao;
 import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.BudgetEntity;
 import com.tvoyagryvnia.model.BudgetLineEntity;
+import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.IBudgetService;
 import com.tvoyagryvnia.service.IUserCategoryService;
@@ -27,9 +28,12 @@ public class BudgetServiceImpl implements IBudgetService {
 
     @Autowired
     private IBudgetDao budgetDao;
-    @Autowired private IUserDao userDao;
-    @Autowired private IUserCategoryDao userCategoryDao;
-    @Autowired private IUserCategoryService userCategoryService;
+    @Autowired
+    private IUserDao userDao;
+    @Autowired
+    private IUserCategoryDao userCategoryDao;
+    @Autowired
+    private IUserCategoryService userCategoryService;
 
     @Override
     public int create(String date, Integer ownerid) {
@@ -89,7 +93,7 @@ public class BudgetServiceImpl implements IBudgetService {
         if (null != bl) {
             bl.setMoney(line.getMoney());
             budgetDao.addLineToBudget(bl);
-        }else {
+        } else {
             bl = new BudgetLineEntity();
             bl.setMoney(line.getMoney());
             bl.setActive(true);
@@ -119,15 +123,22 @@ public class BudgetServiceImpl implements IBudgetService {
         fullBudgetBean.setOwner(bud.getOwner().getId());
         fullBudgetBean.setId(bud.getId());
         fullBudgetBean.setName(bud.getName());
+        fullBudgetBean.setActive(bud.isActive());
         for (BudgetLineEntity line : bud.getCategories()) {
             FullBudgetLineBean bean = new FullBudgetLineBean();
-            bean.setFactMoney(userCategoryService.getSumOfCategoryAndSubCategoriesIfPresent(line.getCategory().getId(), from, to));
+            UserCategoryEntity category = userCategoryDao.getById(line.getCategory().getId());
+            bean.setFactMoney(userCategoryService
+                    .getSumOfCategoryAndSubCategoriesIfPresent(category.getId(), from, to));
             bean.setLine(new BudgetLineBean(line));
-            bean.setDiff(bean.getFactMoney() - bean.getLine().getMoney());
+            if (category.getOperation().equals(OperationType.plus)) {
+                bean.setDiff(bean.getFactMoney() - bean.getLine().getMoney());
+            } else {
+                bean.setDiff(bean.getLine().getMoney() - bean.getFactMoney());
+            }
             bean.setCategory(line.getCategory().getName());
             if (line.getCategory().getOperation().equals(OperationType.plus)) {
                 fullBudgetBean.getIncomes().add(bean);
-            }else if(line.getCategory().getOperation().equals(OperationType.minus)) {
+            } else if (line.getCategory().getOperation().equals(OperationType.minus)) {
                 fullBudgetBean.getSpending().add(bean);
             }
         }
@@ -146,7 +157,7 @@ public class BudgetServiceImpl implements IBudgetService {
             bl.setMoney(money);
             bl.setActive(true);
             budgetDao.addLineToBudget(bl);
-        }else {
+        } else {
             bl = new BudgetLineEntity();
             bl.setMoney(money);
             bl.setActive(true);

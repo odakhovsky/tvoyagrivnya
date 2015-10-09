@@ -26,6 +26,7 @@
                 </div>
                 <div class="col-lg-3">
                     <a href="/cabinet/budget/${bu.id}/edit/"><i class="fa fa-edit"></i></a>
+                    <i class="btn-cursor fa fa-remove" onclick="remove(${bu.id})"></i>
                 </div>
             </div>
         </c:forEach>
@@ -83,6 +84,29 @@
 <script>
     function showBudget(id) {
         window.location.replace('/cabinet/budget/?budgetId=' + id);
+    }
+    function remove(id){
+            $.confirm({
+                text: "Впевнені що бажаете видалити бюджет?",
+                title: "Підтвердження видалення",
+                confirm: function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/cabinet/budget/" + id + "/remove/",
+                        success: function () {
+                            location.reload();
+                        }
+                    });
+                },
+                cancel: function (button) {
+                },
+                confirmButton: "Так, видалити",
+                cancelButton: "Ні, відмовляюсь",
+                post: true,
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-hide",
+                dialogClass: "modal-dialog modal-lg"
+            });
     }
     initDateRange("#date-from");
 </script>

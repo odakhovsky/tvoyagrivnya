@@ -13,33 +13,35 @@ public class FullBudgetBean {
     private List<FullBudgetLineBean> incomes;
     private List<FullBudgetLineBean> spending;
     private String name;
+    private boolean active;
 
     public FullBudgetResultLine getGrandTotal() {
         FullBudgetResultLine result = new FullBudgetResultLine();
-        result.setFact(getIncomesTotal().getFact() + getSpendingTotal().getFact());
-        result.setBudget(getIncomesTotal().getBudget() + getSpendingTotal().getBudget());
-        result.setDiff(getIncomesTotal().getDiff() + getSpendingTotal().getDiff());
+        result.setFact(getIncomesTotal().getFact() - getSpendingTotal().getFact());
+        result.setBudget(getIncomesTotal().getBudget() - getSpendingTotal().getBudget());
+        result.setDiff(getIncomesTotal().getDiff() - getSpendingTotal().getDiff());
         return result;
     }
 
     public FullBudgetResultLine getIncomesTotal() {
         FullBudgetResultLine result = new FullBudgetResultLine();
-        calcSum(result,incomes);
+        for (FullBudgetLineBean line : incomes) {
+            result.setBudget(result.getBudget() + line.getLine().getMoney());
+            result.setFact(result.getFact() + line.getFactMoney());
+            result.setDiff( result.getFact() - result.getBudget());
+        }
         return result;
     }
     public FullBudgetResultLine getSpendingTotal() {
         FullBudgetResultLine result = new FullBudgetResultLine();
-        calcSum(result,spending);
-        return result;
-    }
-
-    private void calcSum(FullBudgetResultLine result, List<FullBudgetLineBean> list) {
-        for (FullBudgetLineBean line : list) {
+        for (FullBudgetLineBean line : spending) {
             result.setBudget(result.getBudget() + line.getLine().getMoney());
             result.setFact(result.getFact() + line.getFactMoney());
             result.setDiff(result.getBudget() - result.getFact());
         }
+        return result;
     }
+
 
     public FullBudgetBean() {
         incomes = new ArrayList<>();
@@ -84,5 +86,13 @@ public class FullBudgetBean {
 
     public void setSpending(List<FullBudgetLineBean> spending) {
         this.spending = spending;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

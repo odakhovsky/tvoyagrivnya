@@ -31,28 +31,24 @@ public class BudgetController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String index(ModelMap map, @RequestParam(value = "budgetId", required = false) Integer budgetId,
                         @ModelAttribute("userBean") UserBean user) {
-        addBudgetToView(map, budgetId, user.getId());
         List<SimpleBudgetBean> budgets = budgetService.getAllOfUser(user.getId(), true);
         map.addAttribute("budgets", budgets);
         if (null != budgetId) {
-            FullBudgetBean budget = budgetService.getFullBudget(budgetId);
-            if (budget.getOwner() == user.getId()) {
-                map.addAttribute("budget", budget);
-            }else {
+            try {
+                FullBudgetBean budget = budgetService.getFullBudget(budgetId);
+                if (budget.getOwner() == user.getId() && budget.isActive()) {
+                    map.addAttribute("budget", budget);
+                } else {
+                    return "redirect:/cabinet/budget/";
+                }
+            }catch (NullPointerException ex){
                 return "redirect:/cabinet/budget/";
             }
         }
         return "cabinet/budget/list";
     }
 
-    private void addBudgetToView(ModelMap map, Integer budgetId, int userId) {
-        if (!Objects.isNull(budgetId)) {
-            FullBudgetBean budgetBean = budgetService.getFullBudget(budgetId);
-            if (budgetBean.getOwner() == userId) {
-                map.addAttribute("budget", budgetService.getById(budgetId));
-            }
-        }
-    }
+
 
     @RequestMapping(value = "/create/", method = RequestMethod.POST)
     public String create(@RequestParam("date-range") String date, ModelMap map, @ModelAttribute("userBean") UserBean user) {
@@ -87,11 +83,17 @@ public class BudgetController {
         budgetService.addLineToBudget(budgetId, category, money);
         return "redirect:/cabinet/budget/" + budgetId + "/edit/";
     }
-    
+
     @RequestMapping(value = "/line/{lineId}/remove/", method = RequestMethod.POST)
     public ResponseEntity removeLine(@PathVariable("lineId")Integer lineId) {
         budgetService.removeLine(lineId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/{budgetId}/remove/", method = RequestMethod.POST)
+    public String addLine(@PathVariable("budgetId")Integer budgetId) {
+        budgetService.deactivate(budgetId);
+        return "redirect:/cabinet/budget/" + budgetId + "/edit/";
+    }
 }

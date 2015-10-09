@@ -15,7 +15,7 @@
             <div class="col-lg-2" >
                 <c:choose>
                     <c:when test="${(line.diff eq 0) or (line.diff gt 0)}">
-                        <span >${line.diff}</span>
+                        <span style="color: green">${line.diff}</span>
                     </c:when>
                     <c:otherwise>
                         <span style="color:red">${line.diff}</span>
