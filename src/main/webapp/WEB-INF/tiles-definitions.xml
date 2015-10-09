@@ -103,6 +103,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/operations/exchange/exchange.jsp"></put-attribute>
     </definition>
 
+    <!-- OPERATIONS EXCHANGE -->
+    <definition name="cabinet/reports" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/reports/reports.jsp"></put-attribute>
+    </definition>
+
     <!--ADMIN PANEL PAGES-->
     <definition name="admin/index" extends="adminLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/admin/index.jsp"></put-attribute>

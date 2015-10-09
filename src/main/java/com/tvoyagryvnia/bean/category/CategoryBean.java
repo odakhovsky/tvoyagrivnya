@@ -41,6 +41,8 @@ public class CategoryBean {
         this.parent = (null == entity.getParent()) ? 0 : entity.getParent().getId();
         if (parent != 0) {
             parentName = entity.getParent().getName();
+        }else {
+            parentName = "";
         }
         if (null == entity.getChildrens()) {
             this.childrens = new HashSet<>();
@@ -118,7 +120,8 @@ public class CategoryBean {
     }
 
     public void setParentName(String parentName) {
-        this.parentName = parentName;
+
+        this.parentName = (null == parentName)?"" : parentName;
     }
 
     public int getMainCategory() {
