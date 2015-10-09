@@ -4,6 +4,7 @@ package com.tvoyagryvnia.dao;
 import com.tvoyagryvnia.model.OperationEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IOperationDao {
@@ -22,5 +23,8 @@ public interface IOperationDao {
     void save(OperationEntity operation);
     void update(OperationEntity operation);
     void delete(OperationEntity operation);
+
+    List<OperationEntity> getAllOfUserByCategory(int user, int userCategory, boolean active, Date from, Date to );
+
 
 }

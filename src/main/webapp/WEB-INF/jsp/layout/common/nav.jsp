@@ -27,7 +27,7 @@
                     <a href="/cabinet/organizer/">Органайзер</a>
                 </li>
                 <li>
-                    <a href="#">Бюджет</a>
+                    <a href="/cabinet/budget/">Бюджет</a>
                 </li>
                 <li>
                     <a href="/cabinet/settings/">Налаштування</a>

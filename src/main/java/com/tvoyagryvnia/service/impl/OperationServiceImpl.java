@@ -64,6 +64,14 @@ public class OperationServiceImpl implements IOperationService {
     }
 
     @Override
+    public List<OperationBean> getAllOfUserByCategory(int user, int userCategory, boolean active, Date from, Date to) {
+        List<OperationBean> operations = operationDao.getAllOfUserByCategory(
+                user, userCategory, active, from, to
+        ).stream().map(OperationBean::new).collect(Collectors.toList());
+        return operations;
+    }
+
+    @Override
     public List<OperationBean> getAllOfUserByCategoryWithSubCats(int user, int mainUserCategory, boolean active) {
         return operationDao.getAllOfUserByCategoryWithSubCats(user, mainUserCategory, active)
                 .stream().map(OperationBean::new).collect(Collectors.toList());

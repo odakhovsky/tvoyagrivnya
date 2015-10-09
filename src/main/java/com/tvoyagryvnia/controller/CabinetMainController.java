@@ -35,8 +35,9 @@ public class CabinetMainController {
                 .stream()
                 .filter(ob -> ob.getType()
                         .equals(OperationType.plus.name()) || ob.getType().equals(OperationType.minus.name()))
+                .sorted((o1, o2) -> Integer.compare(o2.getId(), o1.getId()))
                 .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
-                .sorted((o1, o2) -> Integer.compare(o2.getId(), o1.getId())).collect(Collectors.toList());
+                .collect(Collectors.toList());
 
         map.addAttribute("operations", operations);
         return "cabinet/main";

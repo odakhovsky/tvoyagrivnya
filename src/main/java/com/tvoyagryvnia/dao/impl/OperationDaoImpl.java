@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -133,5 +134,19 @@ public class OperationDaoImpl implements IOperationDao {
     @Override
     public void delete(OperationEntity operation) {
 
+    }
+
+    @Override
+    public List<OperationEntity> getAllOfUserByCategory(int user, int userCategory, boolean active, Date from, Date to) {
+        return session().createCriteria(OperationEntity.class, "op")
+                .createAlias("op.owner", "o")
+                .createAlias("op.category", "cat")
+                .add(Restrictions.and(
+                                Restrictions.eq("o.id", user),
+                                Restrictions.eq("op.active", active),
+                                Restrictions.eq("cat.id", userCategory),
+                                Restrictions.between("date", from, to)
+                        )
+                ).list();
     }
 }
