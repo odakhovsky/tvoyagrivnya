@@ -30,6 +30,9 @@
                     <a href="/cabinet/budget/">Бюджет</a>
                 </li>
                 <li>
+                    <a href="/cabinet/reports/">Звітність</a>
+                </li>
+                <li>
                     <a href="/cabinet/settings/">Налаштування</a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">

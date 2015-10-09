@@ -2,8 +2,23 @@ var logout = function(){
     window.location.replace('/logout');
 };
 
-function initDateRange(div){
 
+
+
+
+function initDateRange(div,isFilther){
+    var budgets = {
+        'Сьогодні': [moment(), moment()],
+        'Наступні 7 днів': [moment(), moment().add(7, 'days')],
+        'Наступні 30 днів': [moment(), moment().add(29, 'days')],
+        'Цей місяць': [moment().startOf('month'), moment().endOf('month')],
+    };
+    var filters =  {
+        'Сьогодні': [moment(), moment()],
+        'Попередні 7 днів': [ moment().subtract(7, 'days'),moment()],
+        'Попередні 30 днів': [moment().subtract(29, 'days'),moment()],
+        'Цей місяць': [moment().startOf('month'), moment().endOf('month')],
+    };
     $(div).daterangepicker(
         {
             locale: {
@@ -39,11 +54,7 @@ function initDateRange(div){
                 ],
                 "firstDay": 1
             },
-            ranges: {
-                'Сьогодні': [moment(), moment()],
-                'Наступні 7 днів': [moment(),moment().add(7, 'days')],
-                'Наступні 30 днів': [moment(),moment().add(29, 'days')],
-                'Цей місяць': [moment().startOf('month'), moment().endOf('month')],
-            },"opens": "center"
+            ranges: (isFilther)? filters : budgets
+            ,"opens": "center"
         });
 }
