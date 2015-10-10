@@ -11,6 +11,7 @@ public class ReportBean {
     private List<ReportLineBean> incomings;
     private List<ReportLineBean> spendings;
     private List<OperationBean> operations;
+    private String currency;
 
     public ReportBean() {
         this.incomings = new ArrayList<>();
@@ -42,5 +43,11 @@ public class ReportBean {
         this.operations = operations;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
 
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

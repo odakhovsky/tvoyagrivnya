@@ -57,4 +57,9 @@ public class DateUtil {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", myDateFormatSymbols );
         return dateFormat.format(date);
     }
+
+    public static String getFormattedDate(Date date, SimpleDateFormat pattern) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern.toPattern());
+        return dateFormat.format(date);
+    }
 }
