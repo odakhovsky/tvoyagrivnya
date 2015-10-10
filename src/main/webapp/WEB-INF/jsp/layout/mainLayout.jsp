@@ -143,17 +143,17 @@
         <div class="col-lg-8 col-lg-offset-2 margin-bottom-105" >
             <h2 class="text-border">Зворотній зв'язок</h2>
 
-            <form  action="/feedback" method="POST" class="form-inline">
+            <form id="feedback-form" action="/feedback" method="POST" class="form-inline">
                 <div class="col-xs-3">
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Ваша пошта" required>
-                        <input type="text" class="form-control margin-top-5" placeholder="Ваше ім`я" required>
+                        <input type="email" name="email"  class="form-control" placeholder="Ваша пошта" required>
+                        <input type="text" name="name" class="form-control margin-top-5" placeholder="Ваше ім`я" required>
                         <button type="submit" class="btn-reg btn btn-default  btn-block margin-top-5">Відправити</button>
                     </div>
                 </div>
                 <div class="col-xs-3">
                     <div class="col-lg-3">
-                        <textarea placeholder="Ваше повідомлення" class="registration-input feed-back-area" style="height: 200px!important;"></textarea></div>
+                        <textarea name="text" placeholder="Ваше повідомлення" class="registration-input feed-back-area" style="height: 200px!important;"></textarea></div>
                 </div>
             </form>
         </div>
@@ -172,3 +172,14 @@
 </body>
 </html>
 <script src="/resources/js/main/registration.js"></script>
+<script>
+    $("#feedback-form").ajaxForm(function() {
+        $.alert({
+            title: "Зворотній звязок",
+            text: "Повідомлення успішно надіслано!"
+        });
+        $("#feedback-form").find('input').val('');
+        $("#feedback-form").find('textarea').val('');
+    });
+
+</script>

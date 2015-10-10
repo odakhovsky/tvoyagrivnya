@@ -58,12 +58,8 @@ public class MailUtil {
             emailFolder.close(true);
             store.close();
 
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (MessagingException | IOException e) {
+            return new ArrayList<>();
         }
 
         return emails;
