@@ -171,7 +171,7 @@
 <jsp:include page="../main/signIn.jsp"/>
 </body>
 </html>
-<script src="/resources/js/main/registration.js"></script>
+<script src="<c:url value="/resources/js/main/registration.js" />"></script>
 <script>
     $("#feedback-form").ajaxForm(function() {
         $.alert({
