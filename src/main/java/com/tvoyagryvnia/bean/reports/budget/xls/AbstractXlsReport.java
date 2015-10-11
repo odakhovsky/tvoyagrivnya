@@ -1,5 +1,7 @@
 package com.tvoyagryvnia.bean.reports.budget.xls;
 
+import com.tvoyagryvnia.bean.budget.FullBudgetBean;
+import com.tvoyagryvnia.util.Transliterator;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -24,8 +26,10 @@ public abstract class AbstractXlsReport extends AbstractExcelView {
 
         this.model = model;
         this.xlsStyle = new XlsStyle(workbook);
+        String name = ((FullBudgetBean) model.get("budget")).getName() + " " + getWorkbookName();
+        name = Transliterator.transliterate(name).replaceAll(" ", "_");
         this.rowIndex = 0;
-        response.setHeader("Content-disposition", String.format("attachment; filename=%s.xls", getWorkbookName()));
+        response.setHeader("Content-disposition", String.format("attachment; filename=%s.xls", name));
 
         HSSFSheet sheet = workbook.createSheet(getSheetName());
         setHeader(sheet);
@@ -65,7 +69,7 @@ public abstract class AbstractXlsReport extends AbstractExcelView {
     /**
      * Created an empty row with body style
      *
-     * @param sheet    - current list
+     * @param sheet - current list
      */
     protected void createEmptyRow(HSSFSheet sheet, int columnNumber) {
         HSSFRow row = sheet.createRow(rowIndex++);
