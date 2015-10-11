@@ -24,7 +24,7 @@ public class FeedbackController {
                                                      @RequestParam("text")String text) {
 
         feedbackService.create(name, email, text);
-        return new ResponseEntity<ResultBean>(new ResultBean(true, ""), HttpStatus.OK);
+        return new ResponseEntity<>(new ResultBean(true, ""), HttpStatus.OK);
     }
 
 }

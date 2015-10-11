@@ -10,7 +10,9 @@ import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.OperationEntity;
 import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
+import com.tvoyagryvnia.service.IUserCurrencyService;
 import com.tvoyagryvnia.util.DateUtil;
+import com.tvoyagryvnia.commands.help.DateRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,8 @@ public class ReportService {
     private IUserDao userDao;
     @Autowired
     private IOperationDao userOperation;
+    @Autowired private IUserCurrencyService userCurrencyService;
+
 
     private final static int allCategories = -1;
     private final static String allTypes = "1";
@@ -38,6 +42,7 @@ public class ReportService {
     public ReportBean getReport(ReportFilter filter) {
         List<UserCategoryEntity> cats = new ArrayList<>();
         ReportBean reportBean = new ReportBean();
+        reportBean.setCurrency(userCurrencyService.getDefaultCurrencyOfUser(filter.getUser()).getShortName());
         Date from = DateUtil.parseDate(filter.getPeriod().split(" - ")[0], DateUtil.DF_POINT.toPattern());
         Date to = DateUtil.parseDate(filter.getPeriod().split(" - ")[1], DateUtil.DF_POINT.toPattern());
 
@@ -116,4 +121,5 @@ public class ReportService {
     private List<OperationEntity> getOperations(UserCategoryEntity category, Date from, Date to) {
         return userOperation.getAllOfUserByCategory(category.getOwner().getId(), category.getId(), true, from, to);
     }
+
 }
