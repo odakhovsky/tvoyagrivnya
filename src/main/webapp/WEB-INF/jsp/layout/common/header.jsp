@@ -70,3 +70,6 @@
 
 <script src="<c:url value="/resources/js/libs/jquery-ui.js" />"></script>
 <script src="<c:url value="/resources/js/libs/daterangepicker.js" />"></script>
+
+
+<script src="<c:url value="/resources/js/libs/file-download.js" />"></script>
