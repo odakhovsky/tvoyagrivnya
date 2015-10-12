@@ -56,6 +56,7 @@
                         $("#income-report").empty();
                         $("#spending-report").empty();
 
+
                         Morris.Donut({
                             element: 'income-report',
                             data: result.incomings
@@ -67,9 +68,9 @@
                         });
                         self.operations(result.operations);
                         console.log(result.operations)
-                        $("#operation-list").paging({
+                        $("#operation-list-q").paging({
 
-                            limit: 10,
+                            limit: 20,
                             rowDisplayStyle: 'block',
                             activePage: 0,
                             rows: []

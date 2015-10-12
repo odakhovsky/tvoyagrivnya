@@ -52,7 +52,7 @@
         </div>
         <div class="operations">
             <div >
-                <table id="operation-list" class="table">
+                <table id="operation-list-q" class="table">
                     <thead>
                     <tr>
                         <th>Дата</th>
