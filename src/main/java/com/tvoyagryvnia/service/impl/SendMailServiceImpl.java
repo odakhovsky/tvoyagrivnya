@@ -49,9 +49,23 @@ public class SendMailServiceImpl implements ISendMailService {
     }
 
     @Override
-    public void sendHelpCommandMessage(String message, String email) {
-        MessageBuilder subject = () -> "Допомога з використання команд!";
-        MessageBuilder text = () -> message;
+    public void sendHelpCommandMessage(String email) {
+        MessageBuilder subject = () -> Messages.HELP_COMMANDS_SUBJECT;
+        MessageBuilder text = () -> Messages.HELP_COMMANDS_BODY;
+        emailSender.sendMessage(email, subject, text);
+    }
+
+    @Override
+    public void sendBalanceReportMessage(String email, String body) {
+        MessageBuilder subject = () -> "Інформація про рахунки";
+        MessageBuilder text = () -> body;
+        emailSender.sendMessage(email, subject, text);
+    }
+
+    @Override
+    public void sendWrongIdOrPammetersOfBalance(String email) {
+        MessageBuilder subject = () -> "Помилкове введення команди";
+        MessageBuilder text = () -> "Будь ласка перевірте правильність введення команди!";
         emailSender.sendMessage(email, subject, text);
     }
 
