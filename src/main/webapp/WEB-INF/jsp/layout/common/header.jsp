@@ -40,8 +40,8 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<script src="/resources/js/libs/jquery-form.js"></script>
-<script src="/resources/js/main/main.js"></script>
+<script src="<c:url value="/resources/js/libs/jquery-form.js" />"></script>
+<script src="<c:url value="/resources/js/main/main.js" />"></script>
 <script src="<c:url value="/resources/js/libs/moment.js" />"></script>
 <script src="<c:url value="/resources/js/libs/bootstrap-treeview.js" />"></script>
 <script src="<c:url value="/resources/js/libs/bootstra-datetime.js" />"></script>
