@@ -62,51 +62,58 @@
                     <div class="col-lg-2">
                         <span> ${budget.grandTotal.fact}</span>
                     </div>
-                    <div class="col-lg-2" >
+                    <div class="col-lg-2">
                         <span> ${budget.grandTotal.budget}</span>
                     </div>
                     <div class="col-lg-2">
                         <c:choose>
                             <c:when test="${(budget.grandTotal.diff eq 0) or (budget.grandTotal.diff gt 0)}">
-                                <span style="color:green" >${budget.grandTotal.diff}</span>
+                                <span style="color:green">${budget.grandTotal.diff}</span>
                             </c:when>
                             <c:otherwise>
-                                <span style="color: red" >${budget.grandTotal.diff}</span>
+                                <span style="color: red">${budget.grandTotal.diff}</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
                 </div>
             </div>
         </div>
+        <button class="btn" onclick="exportXLS(${budget.id})">Експортувати у форматі XLS</button>
     </c:if>
 </div>
 
 <script>
+    function exportXLS(id) {
+
+        $.fileDownload("/cabinet/budget/getBudgetReportAsXls/" + id + "/", {
+            httpMethod : 'POST',
+        });
+    }
     function showBudget(id) {
         window.location.replace('/cabinet/budget/?budgetId=' + id);
     }
-    function remove(id){
-            $.confirm({
-                text: "Впевнені що бажаете видалити бюджет?",
-                title: "Підтвердження видалення",
-                confirm: function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "/cabinet/budget/" + id + "/remove/",
-                        success: function () {
-                            location.reload();
-                        }
-                    });
-                },
-                cancel: function (button) {
-                },
-                confirmButton: "Так, видалити",
-                cancelButton: "Ні, відмовляюсь",
-                post: true,
-                confirmButtonClass: "btn-danger",
-                cancelButtonClass: "btn-hide",
-                dialogClass: "modal-dialog modal-lg"
-            });
+    function remove(id) {
+        $.confirm({
+            text: "Впевнені що бажаете видалити бюджет?",
+            title: "Підтвердження видалення",
+            confirm: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/cabinet/budget/" + id + "/remove/",
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            },
+            cancel: function (button) {
+            },
+            confirmButton: "Так, видалити",
+            cancelButton: "Ні, відмовляюсь",
+            post: true,
+            confirmButtonClass: "btn-danger",
+            cancelButtonClass: "btn-hide",
+            dialogClass: "modal-dialog modal-lg"
+        });
     }
     initDateRange("#date-from");
 </script>
