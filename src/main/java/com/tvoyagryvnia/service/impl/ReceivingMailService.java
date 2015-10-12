@@ -15,7 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -26,11 +25,21 @@ import java.util.Map;
 @PropertySource({"classpath:email.properties"})
 public class ReceivingMailService {
 
-    @Autowired private IUserService userService;
-    @Autowired private ISendMailService sendMailService;
-    @Qualifier(value = "help") @Autowired private Command help;
-    @Qualifier(value = "report") @Autowired private Command report;
-    @Autowired private Environment env;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private ISendMailService sendMailService;
+    @Qualifier(value = "help")
+    @Autowired
+    private Command help;
+    @Qualifier(value = "report")
+    @Autowired
+    private Command report;
+    @Qualifier(value = "account")
+    @Autowired
+    private Command account;
+    @Autowired
+    private Environment env;
 
     private Map<String, Command> commands;
 
@@ -55,18 +64,14 @@ public class ReceivingMailService {
             String name = jc.getParsedCommand();
             commands.get(name).execute(email.getFrom());
         } catch (ParameterException | IllegalArgumentException ex) {
-            //if wrong parameters, send message with help
-            StringBuilder sb = new StringBuilder();
-            for (String cmd : commands.keySet()){
-                jc.usage(cmd, sb,"<br>");
-            }
-            sendMailService.sendHelpCommandMessage(sb.toString(), email.getFrom());
+            sendMailService.sendHelpCommandMessage(email.getFrom());
         }
     }
 
     private void fillCommander(JCommander js) {
         commands.put("help", help);
         commands.put("report", report);
+        commands.put("account", account);
         for (Map.Entry<String, Command> entry : commands.entrySet()) {
             js.addCommand(entry.getKey(), entry.getValue());
         }

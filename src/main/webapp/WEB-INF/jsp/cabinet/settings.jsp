@@ -88,5 +88,11 @@
             <input class="btn btn-block btn-sm  margin-top-15" type="submit" value="Змінити пароль">
         </div>
     </form:form>
+
+    <p align="center">
+        Для управління деякими функціями системи через пошту, надішлість повідомлення з текстом <b>help</b><br>
+        на пошту <b><i>tvoyagrivnya@gmail.com</i></b>
+        
+    </p>
 </div>
 <script src="/resources/js/settings.js"></script>
