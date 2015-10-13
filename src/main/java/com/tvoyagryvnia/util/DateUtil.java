@@ -17,6 +17,7 @@ public class DateUtil {
     public static final SimpleDateFormat DF_POINT = new SimpleDateFormat("dd.MM.yyyy");
     public static final SimpleDateFormat DF_POINT_REVERSE = new SimpleDateFormat("yyyy.MM.dd");
     public static final SimpleDateFormat DF_HYPHEN_REVERSE = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat DF_POINT_WITHOUT_DAY = new SimpleDateFormat("MM.yyyy");
 
 
     private static Logger log = LoggerFactory.getLogger(DateUtil.class);

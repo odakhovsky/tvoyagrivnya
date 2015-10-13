@@ -4,7 +4,46 @@ var logout = function(){
 
 
 
-
+function initMonthRange(div){
+    $(div).daterangepicker(
+        {
+            locale: {
+                format: "DD.MM.YYYY",
+                startView: "year",
+                minViewMode: "months",
+                "separator": " - ",
+                "applyLabel": "Приняти",
+                "cancelLabel": "Відміна",
+                "fromLabel": "Від",
+                "toLabel": "До",
+                "customRangeLabel": "Свій діапазон",
+                "daysOfWeek": [
+                    "Нд",
+                    "Пн",
+                    "Вт",
+                    "Ср",
+                    "Чт",
+                    "Пт",
+                    "Сб"
+                ],
+                "monthNames": [
+                    "Січень",
+                    "Лютий",
+                    "Березень",
+                    "Квітень",
+                    "Травень",
+                    "Червень",
+                    "Липень",
+                    "Серпень",
+                    "Вересень",
+                    "Жовтень",
+                    "Листопад",
+                    "Грудень"
+                ],
+                "firstDay": 1
+            }
+        });
+}
 
 function initDateRange(div,isFilther){
     var budgets = {
@@ -58,3 +97,4 @@ function initDateRange(div,isFilther){
             ,"opens": "center"
         });
 }
+

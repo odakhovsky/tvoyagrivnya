@@ -41,8 +41,10 @@
             $.ajax({
                 url: '/cabinet/control/categories/user/${userBean.id}/type/' + type + '/list',
                 async: false,
+                type:'GET',
                 dataType: 'json',
                 success: function (data) {
+                    console.log(data);
                     result = data;
                 }
             });
