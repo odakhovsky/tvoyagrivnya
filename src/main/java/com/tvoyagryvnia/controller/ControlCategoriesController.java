@@ -47,7 +47,7 @@ public class ControlCategoriesController {
         if (EnumUtils.isValidEnum(OperationType.class, type)) {
             OperationType t = OperationType.valueOf(type);
             List<CategoryBean> list = userCategoryService.getAllByType(userId, t).stream()
-                    .filter(c -> Objects.isNull(c.getParentName())).collect(Collectors.toList());
+                    .filter(c -> c.getParent() == 0 && c.getActive()).collect(Collectors.toList());
 
             return list.stream().map(CategoryNode::new).collect(Collectors.toList());
         }

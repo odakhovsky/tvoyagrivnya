@@ -33,6 +33,9 @@
                     <a href="/cabinet/reports/">Звітність</a>
                 </li>
                 <li>
+                    <a href="/cabinet/analysis/">Аналіз витрат</a>
+                </li>
+                <li>
                     <a href="/cabinet/settings/">Налаштування</a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -40,7 +43,7 @@
                         <a href="/admin/">Адмін панель</a>
                     </li>
                 </sec:authorize>
-                <li class="pull-right">
+                <li title="${userBean.email}" class="pull-right">
                     <a class="btn-cursor" onclick="logout()">Вихід</a>
                 </li>
             </ul>
