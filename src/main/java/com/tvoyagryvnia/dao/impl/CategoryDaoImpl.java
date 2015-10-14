@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class CategoryDaoImpl implements ICategoryDao {
@@ -40,6 +41,13 @@ public class CategoryDaoImpl implements ICategoryDao {
     @Override
     public CategoryEntity getById(int id) {
         return (CategoryEntity) getSession().get(CategoryEntity.class, id);
+    }
+
+    @Override
+    public List<CategoryEntity> getAllBySet(Set<Integer> ids) {
+        return getSession().createCriteria(CategoryEntity.class)
+                .add(Restrictions.in("id", ids))
+                .list();
     }
 
     @Override

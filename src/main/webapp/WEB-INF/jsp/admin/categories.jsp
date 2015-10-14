@@ -16,3 +16,6 @@
     <li><a tabindex="-1" href="#">Перейменувати</a></li>
     <li><a tabindex="-1" href="#">Змінити категорію</a></li>
 </ul>
+<form action="/admin/update-user-categories" method="post">
+    <button class="btn">Оновити категорію у юзерів</button>
+</form>

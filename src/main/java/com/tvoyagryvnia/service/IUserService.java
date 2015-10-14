@@ -50,5 +50,7 @@ public interface IUserService {
 
     public void updateUser(EditUserPass user);
 
+    void updateUsersCategories();
+
 
 }

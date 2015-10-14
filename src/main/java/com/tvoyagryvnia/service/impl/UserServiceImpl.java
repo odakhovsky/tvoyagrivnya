@@ -102,6 +102,27 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+
+
+    private void updateUserCategories(int userId) {
+        Set<CategoryEntity> categoryEntities = baseCategoriesDao.getAll(true).stream()
+                .collect(Collectors.toSet());
+        Set<Integer> ucats = userCategoryDao.getAll(userId, true)
+                .stream()
+                .map(c -> c.getMain().getId()).collect(Collectors.toSet());
+        Set<Integer> allIds = categoryEntities.stream().map(CategoryEntity::getId).collect(Collectors.toSet());
+        allIds.removeAll(ucats);
+
+        for (CategoryEntity cat : baseCategoriesDao.getAllBySet(allIds).stream().filter(c->Objects.isNull(c.getParent())).collect(Collectors.toSet())) {
+            UserCategoryEntity entity = fillUserCategory(userDao.getUserById(userId), cat);
+            entity.setOwner(userDao.getUserById(userId));
+            userCategoryDao.save(entity);
+            if (cat.getChildrens().size() > 0) {
+                fillCategory(cat.getChildrens(), entity);
+            }
+        }
+    }
+
     private void fillCategory(Set<CategoryEntity> childrens, UserCategoryEntity parent) {
         for (CategoryEntity c : childrens) {
             UserCategoryEntity entity = fillUserCategory(parent.getOwner(), c);
@@ -309,6 +330,12 @@ public class UserServiceImpl implements IUserService {
     public void updateUser(EditUserPass user) {
         userDao.updateUser(toUserEntity(user));
         sendMailService.sendPasswordUpdateNotification(user.getEmail(), user.getPassword());
+    }
+
+    @Override
+    public void updateUsersCategories() {
+        Set<Integer> users = userDao.getAllUsers(true).stream().map(UserEntity::getId).collect(Collectors.toSet());
+        users.forEach(this::updateUserCategories);
     }
 
 
