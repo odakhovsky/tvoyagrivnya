@@ -2,45 +2,23 @@
     var app = app || {};
 
 
-    var line = function(id,name) {
+    app.analysisViewModel = function () {
         var self = this;
-        self.id = ko.observable(id);
-        self.name = ko.observable(name);
-        self.value = ko.observable(100);
-    };
 
-    app.analysisViewModel = function (cats) {
-        var self = this;
-        function fillCats(cats) {
-            var res = [];
-            $.each(cats, function (i, x) {
-                var c = new line(x.id, x.name);
-                res.push(c);
-            });
-            return res;
-        }
 
-        this.categories = ko.observableArray(fillCats(cats));
         self.selectedRange = ko.observable(moment().startOf('month').format('DD.MM.YYYY')+" - "+moment().endOf('month').format('DD.MM.YYYY'));
+
 
         function analysisBean(){
             var object ={
                 range:self.selectedRange()
             }
-            var list = [];
-            $.each(self.categories(), function(i,val){
-                var line = {
-                    id:val.id(),
-                    name:val.name(),
-                    value:val.value()
-                }
-                list.push(line);
-            });
-            object.categories = list;
+
             return object;
         }
 
         self.sendRequest = function () {
+            console.log(JSON.stringify(analysisBean()));
             $.ajax({
                 url: "/cabinet/analysis/",
                 type: 'POST',
@@ -50,17 +28,16 @@
                 async: false,
                 data: JSON.stringify(analysisBean()),
                 success: function (result) {
-
+                    $("#analysis-result").empty();
+                    $("#analysis-result").append(result.responseText);
                 }, error: function (result) {
-                    $.alert({
-                        title: "Результат",
-                        text: result.responseText
-                    });
+                    console.log(result);
+                    $("#analysis-result").empty();
+                    $("#analysis-result").append(result.responseText);
                 }
             });
         }
 
     }
     return app;
-})
-;
+});

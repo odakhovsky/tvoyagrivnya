@@ -7,9 +7,27 @@ public class AnalysisBean {
 
     private String range;
     private List<Line> categories;
+    private float total;
+    private String curr;
 
-    public AnalysisBean(){
+    public AnalysisBean() {
 
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public String getCurr() {
+        return curr;
+    }
+
+    public void setCurr(String curr) {
+        this.curr = curr;
     }
 
     public String getRange() {
