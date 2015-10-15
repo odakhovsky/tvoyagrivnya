@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<link href="<c:url value="/resources/css/tree.css" />" rel="stylesheet">
 <div class="well">
     <div class="row">
         <c:choose>
@@ -11,17 +12,17 @@
             </c:when>
             <c:otherwise>
                 <h3 align="center">Витрати за період ${res.range}</h3>
-                <c:forEach items="${res.categories}" var="c">
-                    <h5 align="center">${c.name} (${c.money} ${c.curr}) Пріорітет ${c.value}</h5>
-                    <div class="progress" style="color:black">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="${c.percent}" aria-valuemin="0" aria-valuemax="100" style="width: ${c.percent}%; color: black; font-weight: bold">
-                                ${c.percent}%
-                        </div>
-                    </div>
-                </c:forEach>
+
+                <h2 align="center"> Загалом на <span style="color:green">${res.total}</span> ${res.curr}</h2>
+
+                <div class="center-block">
+                    <c:forEach items="${res.categories}" var="line">
+                        <c:set var="line" value="${line}" scope="request"/>
+                        <jsp:include page="../analysis-sub.jsp"></jsp:include>
+                    </c:forEach>
+                </div>
             </c:otherwise>
         </c:choose>
     </div>
-
 </div>
+<script type="text/javascript" src="/resources/js/tree.js"></script>

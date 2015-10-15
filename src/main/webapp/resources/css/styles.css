@@ -244,3 +244,18 @@
 .margin-bottom-10{
     margin-bottom: 10px;
 }
+
+.analysis-money {
+    color: green;
+    font-weight: bold;
+}
+
+.analysis-curr {
+    color: #187ed5;
+    font-weight: bold;
+}
+
+.analysis-percent{
+    color:red;
+    margin-left: 5px;
+}

@@ -1,5 +1,8 @@
 package com.tvoyagryvnia.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Line {
     private int id;
     private String name;
@@ -7,8 +10,10 @@ public class Line {
     private float percent;
     private float money;
     private String curr;
+    private List<Line> sublines;
 
     public Line() {
+        sublines = new ArrayList<>();
     }
 
     public int getId() {
@@ -57,5 +62,13 @@ public class Line {
 
     public void setCurr(String curr) {
         this.curr = curr;
+    }
+
+    public List<Line> getSublines() {
+        return sublines;
+    }
+
+    public void setSublines(List<Line> sublines) {
+        this.sublines = sublines;
     }
 }

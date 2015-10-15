@@ -13,30 +13,9 @@
                     <input data-bind="value:$root.selectedRange" id="date-from" name="date-range" class="form-control" type="text">
                 </div>
             </div>
-            <div class=" margin-top-15">
-                <div class="row col-lg-offset-3 " style="margin-top:3px">
-                    <div class="col-lg-4">
-                        <h5 align="center">Категорія</h5>
-                    </div>
-                    <div class="col-lg-5">
-                        <h5 >Значимость(1-100)</h5>
-                    </div>
-                </div>
-                <div class="col-lg-offset-3 " data-bind="foreach:categories">
-                    <div class="row " style="margin-top:3px">
-                        <div class="col-lg-5">
-                            <input data-bind="value:name" readonly="readonly" class="form-control">
-                        </div>
-                        <div class="col-lg-2">
-                            <input data-bind="value:value, valueUpdate:'afterkeydown'" class="form-control" type="number" value="100" min="1" max="100"
-                                   placeholder="Вага категорії">
-                        </div>
-                    </div>
-                </div>
-
                 <button data-bind="event{click:sendRequest}" class="btn btn-block margin-top-15">Провести аналіз</button>
-            </div>
         </div>
+        <div id="analysis-result"></div>
     </div>
 </div>
 <script>
