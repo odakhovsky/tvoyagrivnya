@@ -29,6 +29,7 @@ public interface IOperationService {
     List<OperationBean> getLast30Operation(int account);
 
     void update(OperationBean operation);
+    List<OperationBean> getAllAciveOfUserByCurrentMonth(int user);
 
 
 }

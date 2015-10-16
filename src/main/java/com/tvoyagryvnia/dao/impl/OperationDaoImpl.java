@@ -10,6 +10,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -148,5 +151,32 @@ public class OperationDaoImpl implements IOperationDao {
                                 Restrictions.between("date", from, to)
                         )
                 ).list();
+    }
+
+    public static Date getCurrentMonthFirstDate() {
+        LocalDate ld = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000)).withDayOfMonth(1);
+        Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date fd = Date.from(instant);
+        return fd;
+    }
+
+    public static Date getCurrentMonthLastDate() {
+        LocalDate ld =LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000)).plusMonths(1).withDayOfMonth(1).minusDays(1);
+        Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date fd = Date.from(instant);
+        return fd;
+    }
+    @Override
+    public List<OperationEntity> getAllAciveOfUserByCurrentMonth(int user) {
+        Date from = getCurrentMonthFirstDate();
+        Date to = getCurrentMonthLastDate();
+
+        return sessionFactory.getCurrentSession().createCriteria(OperationEntity.class, "op")
+                .createAlias("op.owner", "o")
+                .add(Restrictions.and(
+                        Restrictions.eq("o.id", user),
+                        Restrictions.eq("op.active", true),
+                        Restrictions.between("date", from, to)
+                )).list();
     }
 }

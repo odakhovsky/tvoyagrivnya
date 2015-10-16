@@ -27,7 +27,7 @@ public class StatisticController {
     @RequestMapping(value = "/simple/", method = RequestMethod.GET)
     @ResponseBody
     public SimpleStatisticBean simpleStatistic(@ModelAttribute("userBean")UserBean user) {
-        List<OperationBean> operations = operationService.getAllOfUser(user.getId(), true);
+        List<OperationBean> operations = operationService.getAllAciveOfUserByCurrentMonth(user.getId());
         String currency = userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getName();
         SimpleStatisticBean statistic = new SimpleStatisticBean(operations, currency);
         return statistic;

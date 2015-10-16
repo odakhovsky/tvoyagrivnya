@@ -232,4 +232,11 @@ public class OperationServiceImpl implements IOperationService {
         old.setCurrency(userCurrencyDao.getById(operation.getCurrency().getId()));
         operationDao.update(old);
     }
+
+    @Override
+    public List<OperationBean> getAllAciveOfUserByCurrentMonth(int user) {
+        return operationDao.getAllAciveOfUserByCurrentMonth(user)
+                .stream().map(OperationBean::new)
+                .collect(Collectors.toList());
+    }
 }

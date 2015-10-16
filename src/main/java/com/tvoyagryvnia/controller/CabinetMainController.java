@@ -31,7 +31,7 @@ public class CabinetMainController {
 
     @RequestMapping(value = "/main/", method = RequestMethod.GET)
     public String main(ModelMap map, @ModelAttribute("userBean") UserBean user) {
-        List<OperationBean> operations = operationService.getAllOfUser(user.getId(), true)
+        List<OperationBean> operations = operationService.getAllAciveOfUserByCurrentMonth(user.getId())
                 .stream()
                 .filter(ob -> ob.getType()
                         .equals(OperationType.plus.name()) || ob.getType().equals(OperationType.minus.name()))
