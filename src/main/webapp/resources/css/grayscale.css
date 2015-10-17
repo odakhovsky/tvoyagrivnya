@@ -12,6 +12,9 @@ body {
     background-color: #101210;
 }
 
+.modal-body {
+    color:black;!important;
+}
 html {
     width: 100%;
     height: 100%;

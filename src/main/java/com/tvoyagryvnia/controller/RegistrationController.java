@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegistrationController {
 
-    @Autowired
-    IUserService userService;
+    @Autowired private IUserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ResultBean> registration(

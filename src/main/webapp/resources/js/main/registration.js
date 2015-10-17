@@ -7,6 +7,8 @@ $(document).ready(function(){
                 $("#registration-title").text(response.errorMessage);
                 var email = $form.find('input[type="email"]').val();
                 $("#registration-message").text('Ваш пароль надіслано на ' + email);
+                $('#reg-email').val('');
+                $('#reg-name').val('');
             }else{
                 $("#registration-title").text(response.errorMessage);
                 $("#registration-message").text('');

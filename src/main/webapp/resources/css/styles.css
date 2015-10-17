@@ -46,7 +46,9 @@
 .margin-top-5{
     margin-top: 5px;
 }
-
+.margin-top-25{
+    margin-top: 25px;
+}
 .feed-back-area{
     height: 200px;!important;
     column-span: 7;
@@ -54,6 +56,7 @@
     background: white;
     color: black;
     resize: none;
+    opacity: 0.9;
 }
 
 .margin-bottom-105{
@@ -62,4 +65,197 @@
 
 .feedback h1, h2, h3, h4, h5, h6{
     color: black;
+}
+
+.invite-form{
+    padding: 25px;
+}
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.invite-members-list{
+    padding: 15px;
+}
+
+.margin-top-15{
+    margin-top: 15px;
+}
+
+.edit-user-form{
+    padding: 45px;
+}
+
+.edit-password-form{
+    padding: 45px;
+}
+
+.categories-block{
+    padding: 25px;
+}
+
+.categories-block-user{
+    padding: 0 25px 0 25px;
+}
+.categories-form-user{
+     padding: 0 25px 0 25px;
+ }
+
+.hide{
+    visibility: hidden;
+}
+
+.currencies-list{
+    padding: 55px;
+}
+.text-bold{
+    font-weight: bold;
+}
+
+.text-border{
+    color:white;
+    text-shadow: 2px 0 black, 0 2px black, 2px 0 black, 0 2px black;
+}
+
+.add-account-description{
+    resize: none;
+    min-height: 75px;
+}
+
+.total-acc-balance{
+    background-color: #2a6496;
+    color:white;
+    opacity: 0.7;
+}
+
+.truncate-note-sidebar {
+    width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no-padding{
+    padding:0;
+}
+
+.create-note-text{
+    resize: vertical;
+    max-height: 250px;
+}
+
+.note-text-size{
+    font-size: 14px;!important;
+}
+.truncate-note-organizer {
+    width: 58%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.note-item-border{
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 3px;
+}
+
+.note-list{
+    padding: 25px;
+}
+
+.padding-25{
+    padding: 25px;
+}
+
+.create-note-text-edit{
+    resize: vertical;
+    max-height: 200px;
+}
+
+.operation-form #date{
+    width: 130px
+}
+
+.account-operation-line {
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.truncate-note {
+    width:33%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.truncate-note-transfer{
+    width:16%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+}
+
+.main-chart{
+    width: 250px;
+    height: 250px;
+}
+
+
+.paging-nav {
+    text-align: center;
+    padding-top: 5px;
+}
+
+
+.paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #428bca;
+    color: white;
+    border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+    background: #187ed5;
+    font-weight: bold;
+}
+
+.category-list-style {
+    width: 340px;
+}
+
+.padding-5{
+    padding: 5px;
+}
+
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+
+.analysis-money {
+    color: green;
+    font-weight: bold;
+}
+
+.analysis-curr {
+    color: #187ed5;
+    font-weight: bold;
+}
+
+.analysis-percent{
+    color:red;
+    margin-left: 5px;
 }

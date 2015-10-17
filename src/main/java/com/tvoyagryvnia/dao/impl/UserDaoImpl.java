@@ -4,6 +4,7 @@ import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -12,10 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
-/**
- * Created by root on 02.09.2015.
- */
+
 @Repository
 public class UserDaoImpl implements IUserDao {
 
@@ -36,6 +36,13 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public List<UserEntity> getUserMembers(int user) {
+        return getSession().createQuery("from UserEntity as u  where u.inviter.id = :id")
+                .setParameter("id", user)
+                .list();
+    }
+
+    @Override
     public int saveUser(UserEntity user) {
         return (int) getSession().save(user);
     }
@@ -43,6 +50,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public void updateUser(UserEntity user) {
+
         getSession().update(user);
     }
 
@@ -114,5 +122,14 @@ public class UserDaoImpl implements IUserDao {
 
         user.getRoles().remove(roleEntity);
         updateUser(user);
+    }
+
+    @Override
+    public List<UserEntity> getUsersByIds(Set<Integer> usersId) {
+        String hql = "FROM UserEntity where id IN (:ids)";
+        Query query = getSession().createQuery(hql);
+        query.setParameterList("ids", usersId);
+
+        return query.list();
     }
 }

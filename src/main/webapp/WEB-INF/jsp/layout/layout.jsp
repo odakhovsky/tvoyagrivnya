@@ -12,30 +12,33 @@
 <head>
     <title><tiles:insertAttribute name="title" ignore="true"/></title>
     <tiles:insertAttribute name="header"/>
+    <link href="/resources/css/shop-homepage.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <div class="container">
     <div id="nav">
         <tiles:insertAttribute name="nav"/>
     </div>
-    <input type="hidden" value="${userBean.id}" id="userId"/>
-    <input type="hidden" value="${userBean.groupBean.id}" id="groupId"/>
-    <input type="hidden" value="${userBean.name} ${userBean.lastName}" id="userFio"/>
     <div id="body">
-        <div class="col-xs-4">
-            <tiles:insertAttribute name="sidebar"/>
-        </div>
-        <div class="col-xs-8">
-            <tiles:insertAttribute name="body"/>
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <tiles:insertAttribute name="sidebar"/>
+                </div>
+                <div class="col-md-9">
+                    <tiles:insertAttribute name="body"/>
+                </div>
+            </div>
         </div>
     </div>
-
     <div id="footer">
-        <tiles:insertAttribute name="footer"/>
+        <div class="container">
+            <tiles:insertAttribute name="footer"/>
+        </div>
     </div>
 
 </div>
 </body>
-<script type="text/javascript" data-main="/resources/js/groupView.js" src="/resources/js/libs/require.js" ></script>
-
 </html>

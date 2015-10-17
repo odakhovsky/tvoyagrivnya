@@ -4,6 +4,7 @@ import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by root on 02.09.2015.
@@ -11,6 +12,8 @@ import java.util.List;
 public interface IUserDao {
 
    UserEntity findUserByEmail(String email);
+
+   List<UserEntity> getUserMembers(int user);
 
    public int saveUser(UserEntity user);
 
@@ -33,4 +36,6 @@ public interface IUserDao {
    public void addRole(UserEntity user, RoleEntity.Name roleName);
 
    public void removeRole(UserEntity user, RoleEntity.Name roleName);
+
+   public List<UserEntity> getUsersByIds(Set<Integer> usersId);
 }
