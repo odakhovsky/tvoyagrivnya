@@ -1,11 +1,13 @@
 package com.tvoyagryvnia.controller;
 
+import com.tvoyagryvnia.bean.AdminMainStatisticBean;
 import com.tvoyagryvnia.bean.category.CategoryBean;
 import com.tvoyagryvnia.bean.category.CategoryNode;
 import com.tvoyagryvnia.model.CategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.ICategoryService;
 import com.tvoyagryvnia.service.IUserService;
+import com.tvoyagryvnia.service.impl.AdminStatisticService;
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +30,13 @@ public class AdminController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private AdminStatisticService adminStatisticService;
+
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String index(ModelMap map) {
+        AdminMainStatisticBean bean = adminStatisticService.getMainStatistic();
+        map.addAttribute("stat", bean);
         return "admin/index";
     }
 

@@ -38,5 +38,6 @@ public interface IOperationDao {
 
     List<OperationEntity> getAllAciveOfUserByCurrentMonth(int user);
 
-
+    List<OperationEntity> getAllAciveByCurrentMonth();
+    List<OperationEntity> getAll();
 }

@@ -1,5 +1,7 @@
 package com.tvoyagryvnia.conf;
 
+import com.tvoyagryvnia.bean.AdminMainStatisticBean;
+import com.tvoyagryvnia.service.impl.AdminStatisticService;
 import com.tvoyagryvnia.service.impl.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,6 +56,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public UserDetailsService getUserDetailsService() {
        return new UserDetailServiceImpl();
     }
+
+    @Bean
+    public AdminStatisticService getAdminMainStatisticService(){ return new AdminStatisticService();}
 
     @Bean
     public MultipartResolver multipartResolver() {
