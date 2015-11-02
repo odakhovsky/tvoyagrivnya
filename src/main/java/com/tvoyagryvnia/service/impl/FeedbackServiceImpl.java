@@ -1,9 +1,11 @@
 package com.tvoyagryvnia.service.impl;
 
 import com.tvoyagryvnia.bean.FeedbackBean;
+import com.tvoyagryvnia.bean.FeedbackFilter;
 import com.tvoyagryvnia.dao.IFeedbackDao;
 import com.tvoyagryvnia.model.FeedBackEntity;
 import com.tvoyagryvnia.service.IFeedbackService;
+import com.tvoyagryvnia.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,21 @@ public class FeedbackServiceImpl implements IFeedbackService{
         entity.setText(text);
         feedbackDao.save(entity);
         //todo send notification to user about receiving feedback
+    }
+
+    @Override
+    public List<FeedbackBean> getAll() {
+        return feedbackDao.getAll().stream().map(FeedbackBean::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FeedbackBean> getByFilter(FeedbackFilter filter) {
+        Date from = DateUtil.parseDate(filter.getDate().split(" - ")[0], DateUtil.DF_POINT.toPattern());
+        Date to = DateUtil.parseDate(filter.getDate().split(" - ")[1], DateUtil.DF_POINT.toPattern());
+        String email = filter.getEmail();
+        return feedbackDao.getByFilter(from, to, email)
+                .stream().map(FeedbackBean::new)
+                .collect(Collectors.toList());
     }
 
     private FeedbackBean toBean(FeedBackEntity entity) {

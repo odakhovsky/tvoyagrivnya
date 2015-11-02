@@ -11,6 +11,7 @@ public class FeedbackBean {
     private String name;
     private String email;
     private String text;
+    private String answer;
 
     public FeedbackBean(FeedBackEntity feedBack) {
         id = feedBack.getId();
@@ -18,6 +19,7 @@ public class FeedbackBean {
         email = feedBack.getEmail();
         text = feedBack.getText();
         name = feedBack.getName();
+        answer = feedBack.getAnswer();
     }
 
     public FeedbackBean(){}
@@ -56,6 +58,14 @@ public class FeedbackBean {
 
     public String getText() {
         return text;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public void setText(String text) {

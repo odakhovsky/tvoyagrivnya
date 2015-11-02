@@ -1,11 +1,14 @@
 package com.tvoyagryvnia.controller;
 
 import com.tvoyagryvnia.bean.AdminMainStatisticBean;
+import com.tvoyagryvnia.bean.FeedbackBean;
+import com.tvoyagryvnia.bean.FeedbackFilter;
 import com.tvoyagryvnia.bean.category.CategoryBean;
 import com.tvoyagryvnia.bean.category.CategoryNode;
 import com.tvoyagryvnia.model.CategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.ICategoryService;
+import com.tvoyagryvnia.service.IFeedbackService;
 import com.tvoyagryvnia.service.IUserService;
 import com.tvoyagryvnia.service.impl.AdminStatisticService;
 import org.apache.commons.lang3.EnumUtils;
@@ -29,6 +32,7 @@ public class AdminController {
     private ICategoryService categoryService;
     @Autowired
     private IUserService userService;
+    @Autowired private IFeedbackService feedbackService;
 
     @Autowired
     private AdminStatisticService adminStatisticService;
@@ -109,6 +113,21 @@ public class AdminController {
         userService.updateUsersCategories();
         return "redirect:/admin/categories/";
 
+    }
+
+    @RequestMapping(value = "/feedback/", method = RequestMethod.GET)
+    public String feedback(ModelMap map) {
+        List<FeedbackBean> feeds = feedbackService.getAll();
+        feeds.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        map.addAttribute("feeds", feeds);
+        return "admin/feedback";
+    }
+
+    @RequestMapping(value = "/feedback/", method = RequestMethod.POST)
+    @ResponseBody
+    public List<FeedbackBean> feedbackSearch(@RequestParam(value = "email", required = false)String email,
+                                             @RequestParam("date")String date) {
+        return feedbackService.getByFilter(new FeedbackFilter(email, date));
     }
 }
 
