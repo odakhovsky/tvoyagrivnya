@@ -129,4 +129,8 @@
     <definition name="admin/currencies" extends="adminLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/admin/currencies.jsp"></put-attribute>
     </definition>
+
+    <definition name="admin/feedback" extends="adminLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/feedback.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -14,4 +14,5 @@ public interface IAccountDao {
     List<AccountEntity> getAllOfUserActive(int user, boolean active);
     List<AccountEntity> getAllOfUserEnabled(int user, boolean active, boolean enabled);
     AccountEntity findAccountByUserAndName(int user, String name);
+    Long getTotalCount();
 }

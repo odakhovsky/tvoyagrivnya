@@ -63,4 +63,10 @@ public class BalanceDaoImpl implements IBalanceDao {
                 ))
                 .uniqueResult();
     }
+
+    @Override
+    public List<BalanceEntity> getAllActive() {
+        return sessionFactory.getCurrentSession().createCriteria(BalanceEntity.class)
+                .list();
+    }
 }

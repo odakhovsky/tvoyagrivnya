@@ -24,6 +24,9 @@ public class FeedBackEntity {
     @Column(name = "TEXT")
     private String text;
 
+    @Column(name = "ANSWER")
+    private String answer;
+
     public FeedBackEntity(){}
 
     public int getId() {
@@ -64,5 +67,13 @@ public class FeedBackEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

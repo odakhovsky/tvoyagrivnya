@@ -259,3 +259,16 @@
     color:red;
     margin-left: 5px;
 }
+
+.fixed-width-nav{
+    width: 90% !important;
+}
+
+.admin-link a {
+    background-color: #25a25a !important;
+    color: #fff !important;
+}
+
+.feedback-area{
+    resize: none;
+}

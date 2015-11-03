@@ -20,6 +20,9 @@
                 <li>
                     <a href="/admin/currency/">Валюти</a>
                 </li>
+                <li>
+                    <a href="/admin/feedback/">Зворотній зв`язок</a>
+                </li>
                 <li class="pull-right">
                     <a onclick="logout()">Вихід</a>
                 </li>

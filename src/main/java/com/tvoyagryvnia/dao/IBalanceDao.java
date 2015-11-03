@@ -13,5 +13,5 @@ public interface IBalanceDao {
     void update(BalanceEntity balanceEntity);
     void save(BalanceEntity balanceEntity);
     BalanceEntity getByAccAndCurrency(int account, int currecy);
-
+    List<BalanceEntity> getAllActive();
 }

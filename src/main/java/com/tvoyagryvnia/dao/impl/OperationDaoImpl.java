@@ -179,4 +179,21 @@ public class OperationDaoImpl implements IOperationDao {
                         Restrictions.between("date", from, to)
                 )).list();
     }
+
+    @Override
+    public List<OperationEntity> getAllAciveByCurrentMonth() {
+        Date from = getCurrentMonthFirstDate();
+        Date to = getCurrentMonthLastDate();
+
+        return sessionFactory.getCurrentSession().createCriteria(OperationEntity.class, "op")
+                .add(Restrictions.and(
+                        Restrictions.eq("op.active", true),
+                        Restrictions.between("date", from, to)
+                )).list();
+    }
+
+    @Override
+    public List<OperationEntity> getAll() {
+        return session().createCriteria(OperationEntity.class).list();
+    }
 }

@@ -12,12 +12,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AccountDaoImpl implements IAccountDao{
+public class AccountDaoImpl implements IAccountDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    private Session getSession(){return  sessionFactory.getCurrentSession();}
+    private Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public void save(AccountEntity account) {
@@ -37,7 +39,7 @@ public class AccountDaoImpl implements IAccountDao{
     @Override
     public List<AccountEntity> getAllOfUserActive(int user, boolean active) {
         return getSession().createCriteria(AccountEntity.class, "acc")
-                .createAlias("acc.owner","o")
+                .createAlias("acc.owner", "o")
                 .add(Restrictions.eq("o.id", user))
                 .add(Restrictions.eq("active", true))
                 .list();
@@ -47,7 +49,7 @@ public class AccountDaoImpl implements IAccountDao{
     @Override
     public List<AccountEntity> getAllOfUserEnabled(int user, boolean active, boolean enabled) {
         return getSession().createCriteria(AccountEntity.class, "acc")
-                .createAlias("acc.owner","o")
+                .createAlias("acc.owner", "o")
                 .add(Restrictions.eq("o.id", user))
                 .add(Restrictions.eq("active", true))
                 .add(Restrictions.eq("enabled", enabled))
@@ -56,10 +58,15 @@ public class AccountDaoImpl implements IAccountDao{
 
     @Override
     public AccountEntity findAccountByUserAndName(int user, String name) {
-        return (AccountEntity) getSession().createCriteria(AccountEntity.class,"acc")
-                .createAlias("acc.owner","o")
-                .add(Restrictions.eq("o.id",user))
+        return (AccountEntity) getSession().createCriteria(AccountEntity.class, "acc")
+                .createAlias("acc.owner", "o")
+                .add(Restrictions.eq("o.id", user))
                 .add(Restrictions.eq("name", name))
                 .uniqueResult();
+    }
+
+    @Override
+    public Long getTotalCount() {
+        return (Long) getSession().createQuery("select count(*) from AccountEntity e where e.active = true").uniqueResult();
     }
 }

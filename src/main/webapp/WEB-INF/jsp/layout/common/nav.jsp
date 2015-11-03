@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container fixed-width-nav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
@@ -27,7 +27,7 @@
                     <a href="/cabinet/organizer/">Органайзер</a>
                 </li>
                 <li>
-                    <a href="/cabinet/budget/">Бюджет</a>
+                    <a  href="/cabinet/budget/">Бюджет</a>
                 </li>
                 <li>
                     <a href="/cabinet/reports/">Звітність</a>
@@ -38,14 +38,14 @@
                 <li>
                     <a href="/cabinet/settings/">Налаштування</a>
                 </li>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li>
-                        <a href="/admin/">Адмін панель</a>
-                    </li>
-                </sec:authorize>
                 <li title="${userBean.email}" class="pull-right">
                     <a class="btn-cursor" onclick="logout()">Вихід</a>
                 </li>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <li class="admin-link">
+                        <a href="/admin/">Адмін панель</a>
+                    </li>
+                </sec:authorize>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
