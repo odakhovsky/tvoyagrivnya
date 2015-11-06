@@ -23,14 +23,6 @@
                 </div>
             </div>
             <div class="row margin-top-15">
-                <div class="col-lg-5">
-                    <input id="description" type="text" name="description" class="form-control " placeholder="Примітка до операції"/>
-                </div>
-                <div class="col-lg-2">
-                    <input data-bind="value:$root.money" id="money" name="money" type="number" class="form-control" min="0" step="0.01" placeholder="Сума"/>
-                </div>
-            </div>
-            <div class="row margin-top-15">
                 <div class="col-lg-4">
                     Рахунок
                     <select name="accounts" id="accounts" class="form-control" required>
@@ -47,13 +39,21 @@
                         </c:forEach>
                     </select>
                 </div>
-                <input type="hidden" name="category" data-bind="value:$root.category">
                 <div class="col-lg-5">
                     Категорія
                     <select  id="cetegories"  class="form-control" data-bind="options: $root.viewCategories,
                        optionsText: function (item) { return item.parentName + ' | ' + item.name },
                        value: $root.selectedCategory"></select>
                 </div>
+            </div>
+            <div class="row margin-top-15">
+                <div class="col-lg-5">
+                    <input id="description" type="text" name="description" class="form-control " placeholder="Примітка до операції"/>
+                </div>
+                <div class="col-lg-2">
+                    <input data-bind="value:$root.money" id="money" name="money" type="number" class="form-control" min="0" step="0.01" placeholder="Сума"/>
+                </div>
+                <input type="hidden" name="category" data-bind="value:$root.category">
             </div>
             <div class="row margin-top-15">
                 <div class="col-lg-12">
