@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-4">
                     <input class="form-control" type="number" min="0" step="0.001" name="money"
-                           placeholder="Сума прибутку"/>
+                           placeholder="Сума прибутку в ${currency}"/>
                 </div>
                 <button class="btn">Додати</button>
             </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-md-4">
                     <input class="form-control" type="number" min="0" step="0.001" name="money"
-                           placeholder="Сума витрат"/>
+                           placeholder="Сума витрат в ${currency}"/>
                 </div>
                 <button class="btn">Додати</button>
             </div>

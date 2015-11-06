@@ -256,7 +256,7 @@
 }
 
 .analysis-percent{
-    color:red;
+    color:#0088cc;
     margin-left: 5px;
 }
 
@@ -271,4 +271,8 @@
 
 .feedback-area{
     resize: none;
+}
+
+.budget-small{
+    color:#1d9b6c;
 }

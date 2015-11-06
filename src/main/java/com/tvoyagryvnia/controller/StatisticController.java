@@ -18,17 +18,15 @@ import java.util.List;
 @SessionAttributes("userBean")
 public class StatisticController {
 
-    @Autowired private IUserService userService;
     @Autowired private IOperationService operationService;
-    @Autowired private IUserCategoryService userCategoryService;
     @Autowired private IUserCurrencyService userCurrencyService;
 
 
     @RequestMapping(value = "/simple/", method = RequestMethod.GET)
     @ResponseBody
-    public SimpleStatisticBean simpleStatistic(@ModelAttribute("userBean")UserBean user) {
+    public SimpleStatisticBean simpleStatistic(@ModelAttribute("userBean") UserBean user) {
         List<OperationBean> operations = operationService.getAllAciveOfUserByCurrentMonth(user.getId());
-        String currency = userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getName();
+        String currency = userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getShortName();
         SimpleStatisticBean statistic = new SimpleStatisticBean(operations, currency);
         return statistic;
     }

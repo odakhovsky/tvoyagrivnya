@@ -5,9 +5,8 @@
 
 <div class="list-group-item  total-acc-balance " style="margin-bottom: 5px; border-radius: 15px">
     <span>Загалом</span>
-    <span class="pull-right text-bold ">${func:totalMoneyByAccounts(accounts)}</span>
+    <span class="pull-right text-bold ">${func:totalMoneyByAccounts(accounts)} ${currency}</span>
 </div>
-
 
 <table id="sidebar-accounts-list" class="">
     <c:forEach var="a" items="${accounts}">

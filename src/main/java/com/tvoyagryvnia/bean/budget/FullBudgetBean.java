@@ -14,6 +14,7 @@ public class FullBudgetBean {
     private List<FullBudgetLineBean> spending;
     private String name;
     private boolean active;
+    private String currency;
 
     public FullBudgetResultLine getGrandTotal() {
         FullBudgetResultLine result = new FullBudgetResultLine();
@@ -94,5 +95,13 @@ public class FullBudgetBean {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

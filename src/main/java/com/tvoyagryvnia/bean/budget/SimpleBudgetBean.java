@@ -18,7 +18,6 @@ public class SimpleBudgetBean {
     private List<BudgetLineBean> spending;
     private boolean active;
 
-
     public SimpleBudgetBean(BudgetEntity budgetEntity) {
         this.id = budgetEntity.getId();
         this.from = budgetEntity.getFrom();

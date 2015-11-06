@@ -34,7 +34,7 @@
 
     <c:if test="${not empty budget}">
         <div class="list-group-item text-center">
-            <span>Виконання бюджета <b>${budget.name}</b></span>
+            <span>Виконання бюджета <b>${budget.name} <small class="budget-small">(Суми вказані в ${budget.currency})</small></b></span>
         </div>
         <div class="list-group-item">
             <div class="result-list col-lg-12 text-center text-bold margin-bottom-10">
