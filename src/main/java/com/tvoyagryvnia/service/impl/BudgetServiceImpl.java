@@ -13,6 +13,7 @@ import com.tvoyagryvnia.model.UserCategoryEntity;
 import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.IBudgetService;
 import com.tvoyagryvnia.service.IUserCategoryService;
+import com.tvoyagryvnia.service.IUserCurrencyService;
 import com.tvoyagryvnia.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class BudgetServiceImpl implements IBudgetService {
     private IUserCategoryDao userCategoryDao;
     @Autowired
     private IUserCategoryService userCategoryService;
+    @Autowired
+    private IUserCurrencyService userCurrencyService;
 
     @Override
     public int create(String date, Integer ownerid) {
@@ -142,6 +145,8 @@ public class BudgetServiceImpl implements IBudgetService {
                 fullBudgetBean.getSpending().add(bean);
             }
         }
+        String currency = userCurrencyService.getDefaultCurrencyOfUser(bud.getOwner().getId()).getShortName();
+        fullBudgetBean.setCurrency(currency);
         return fullBudgetBean;
     }
 

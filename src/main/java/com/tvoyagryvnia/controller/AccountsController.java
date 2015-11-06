@@ -7,13 +7,7 @@ import com.tvoyagryvnia.bean.account.SideBarAccountBean;
 import com.tvoyagryvnia.bean.currency.CurrencyBean;
 import com.tvoyagryvnia.bean.response.ResultBean;
 import com.tvoyagryvnia.bean.user.UserBean;
-import com.tvoyagryvnia.dao.IExchangeDao;
-import com.tvoyagryvnia.dao.IUserCategoryDao;
-import com.tvoyagryvnia.model.OperationEntity;
-import com.tvoyagryvnia.service.IAccountService;
-import com.tvoyagryvnia.service.IExchangeService;
-import com.tvoyagryvnia.service.IOperationService;
-import com.tvoyagryvnia.service.IUserCategoryService;
+import com.tvoyagryvnia.service.*;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +34,7 @@ public class AccountsController {
     private IAccountService accountService;
     @Autowired private IOperationService operationService;
     @Autowired private IExchangeService exchangeService;
+    @Autowired private IUserCurrencyService userCurrencyService;
 
     @RequestMapping(value = {"", "/"})
     public String index() {
@@ -180,6 +175,7 @@ public class AccountsController {
 
     @RequestMapping(value = "/view/", method = RequestMethod.GET)
     public String view(ModelMap map, @ModelAttribute("userBean")UserBean user) {
+        map.addAttribute("currency", userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getShortName());
         map.addAttribute("accounts", accountService.getAllOfUserEnabled(user.getId(), true, true));
         return "cabinet/accounts/view";
     }

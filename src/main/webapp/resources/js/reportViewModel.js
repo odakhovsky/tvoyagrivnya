@@ -1,4 +1,4 @@
-﻿define(["knockout", "raphael", "morris","paging"], function (ko) {
+﻿define(["knockout", "raphael", "morris", "paging"], function (ko) {
     var app = app || {};
 
     app.reportViewModel = function (cats) {
@@ -15,6 +15,7 @@
         this.operations = ko.observableArray([]);
 
         this.reporting = ko.observable();
+        this.currency = ko.observable();
 
         self.selectedType = ko.observable();
         self.selectedRange = ko.observable(moment().format('DD.MM.YYYY - DD.MM.YYYY'));
@@ -45,9 +46,9 @@
                 async: false,
                 data: JSON.stringify(filterBean()),
                 success: function (result) {
-                    if (result.incomings.length == 0 && result.spendings == 0){
+                    if (result.incomings.length == 0 && result.spendings == 0) {
                         self.visibleblock(false);
-                    }else{
+                    } else {
                         self.visibleblock(true);
 
                         self.reporting(result);
@@ -67,7 +68,7 @@
                             data: result.spendings
                         });
                         self.operations(result.operations);
-                        console.log(result.operations)
+                        self.currency(self.reporting().currency);
                         $("#operation-list-q").paging({
 
                             limit: 20,
@@ -96,9 +97,9 @@
                     return a.operation == operationType;
                 }));
             }
-            Array.prototype.contains = function(k) {
-                for(var i=0; i < this.length; i++){
-                    if(this[i].id == k.id){
+            Array.prototype.contains = function (k) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i].id == k.id) {
                         return true;
                     }
                 }
@@ -107,27 +108,27 @@
 
             var addAll = {id: -1, name: "Всі", parentName: ""}
             var a = self.viewCategories().contains(addAll);
-            if (!a){
+            if (!a) {
                 self.viewCategories.unshift(addAll);
             }
         });
 
-        self.incomings = ko.computed(function() {
+        self.incomings = ko.computed(function () {
             if (typeof(self.reporting()) == 'undefined') return 0;
             var sum = 0.0;
-            $.each(self.reporting().incomings, function(i,val){
+            $.each(self.reporting().incomings, function (i, val) {
                 sum += val.value;
             })
-            return parseFloat(sum).toFixed(2);
+            return parseFloat(sum).toFixed(2) + " " + self.currency();
         }, this);
 
-        self.spending = ko.computed(function() {
+        self.spending = ko.computed(function () {
             if (typeof(self.reporting()) == 'undefined') return 0;
             var sum = 0.0;
-            $.each(self.reporting().spendings, function(i,val){
+            $.each(self.reporting().spendings, function (i, val) {
                 sum += val.value;
             })
-            return parseFloat(sum).toFixed(2);
+            return parseFloat(sum).toFixed(2) + " " + self.currency();
         }, this);
 
     }

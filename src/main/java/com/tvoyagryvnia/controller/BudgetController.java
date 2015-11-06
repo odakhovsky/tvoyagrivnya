@@ -7,6 +7,7 @@ import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.IBudgetService;
 import com.tvoyagryvnia.service.IUserCategoryService;
+import com.tvoyagryvnia.service.IUserCurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,9 @@ import java.util.stream.Collectors;
 @SessionAttributes("userBean")
 public class BudgetController {
 
-    @Autowired
-    private IBudgetService budgetService;
-    @Autowired
-    private IUserCategoryService userCategoryService;
+    @Autowired private IBudgetService budgetService;
+    @Autowired private IUserCategoryService userCategoryService;
+    @Autowired private IUserCurrencyService userCurrencyService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String index(ModelMap map, @RequestParam(value = "budgetId", required = false) Integer budgetId,
@@ -68,6 +68,7 @@ public class BudgetController {
         if (budgetBean.getOwner() != user.getId()) {
             return "redirect:/cabinet/budget/";
         }
+        map.addAttribute("currency", userCurrencyService.getDefaultCurrencyOfUser(user.getId()).getShortName());
         map.addAttribute("budget", budgetBean);
         map.addAttribute("plus", userCategoryService.getAll(budgetBean.getOwner(), true)
                 .stream().filter(c -> c.getOperation().equals(OperationType.plus.name())).collect(Collectors.toList()));
