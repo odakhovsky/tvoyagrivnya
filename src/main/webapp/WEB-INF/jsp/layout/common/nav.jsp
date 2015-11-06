@@ -36,7 +36,7 @@
                     <a href="/cabinet/analysis/">Аналіз витрат</a>
                 </li>
                 <li>
-                    <a href="/cabinet/settings/">Налаштування</a>
+                    <a href="/cabinet/settings/">Настройки</a>
                 </li>
                 <li title="${userBean.email}" class="pull-right">
                     <a class="btn-cursor" onclick="logout()">Вихід</a>

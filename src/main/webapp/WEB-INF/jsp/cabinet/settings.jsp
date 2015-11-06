@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <div class="row well">
-    <h3 align="center"> Налаштування </h3>
+    <h3 align="center"> Настройки </h3>
     <form:form id="edit-user-form" action="/cabinet/settings/user-edit" modelAttribute="profile">
         <form:input path="id" hidden="hidden"/>
         <fieldset class="main edit-user-form col-lg-offset-2 ">
