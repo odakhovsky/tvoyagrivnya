@@ -1,7 +1,9 @@
 package com.tvoyagryvnia.service.impl;
 
-import com.tvoyagryvnia.bean.AnalysisBean;
-import com.tvoyagryvnia.bean.Line;
+import com.tvoyagryvnia.bean.Pair;
+import com.tvoyagryvnia.bean.analysis.AnalysisBean;
+import com.tvoyagryvnia.bean.analysis.ExtendedAnalysisBean;
+import com.tvoyagryvnia.bean.analysis.Line;
 import com.tvoyagryvnia.dao.IOperationDao;
 import com.tvoyagryvnia.dao.IUserCategoryDao;
 import com.tvoyagryvnia.model.OperationEntity;
@@ -71,7 +73,7 @@ public class AnalysisService {
                 }
             }
             result.setCategories(lines);
-            result.setTotal(NumberFormatter.cutFloat(total,2));
+            result.setTotal(NumberFormatter.cutFloat(total, 2));
             result.setCurr(result.getCategories().get(0).getCurr());
             Collections.sort(result.getCategories(), this::compare);
             return result;
@@ -139,5 +141,66 @@ public class AnalysisService {
 
     private List<OperationEntity> getOperations(UserCategoryEntity category, Date from, Date to) {
         return operationDao.getAllOfUserByCategory(category.getOwner().getId(), category.getId(), true, from, to);
+    }
+
+
+    public ExtendedAnalysisBean analysis(String from, String to, int userId) {
+        Map<String, Pair<Integer, Float>> map = new LinkedHashMap<>();
+        AnalysisBean first = analysis(from, userId);
+        AnalysisBean second = analysis(to, userId);
+
+        for (Line line : first.getCategories()) {
+            Pair<Integer, Float> pair = new Pair<>(line.getValue(), line.getPercent());
+            map.put(line.getName(), pair);
+            if (isLineHasSubLines(line)) {
+                fillMapLine(line, map);
+            }
+        }
+
+        for (Line line : second.getCategories()) {
+            Pair<Integer, Float> pair = map.getOrDefault(line.getName(), null);
+            if (!Objects.isNull(pair)) {
+                line.setDiff(NumberFormatter.cutFloat(pair.second - line.getPercent(), 2));
+                if (isLineHasSubLines(line)) {
+                    fillDiffs(line, map);
+                }
+            }
+        }
+
+        ExtendedAnalysisBean result = new ExtendedAnalysisBean();
+        result.setCurr(userCurrencyService.getDefaultCurrencyOfUser(userId).getShortName());
+        result.setFirst(first);
+        result.setSecond(second);
+        result.setRange(from + " " + to);
+        return result;
+    }
+
+
+    private void fillDiffs(Line mainLine, Map<String, Pair<Integer, Float>> map) {
+        for (Line line : mainLine.getSublines()) {
+            Pair<Integer, Float> pair = map.getOrDefault(line.getName(), null);
+            if (!Objects.isNull(pair)) {
+                line.setDiff(NumberFormatter.cutFloat(pair.second - line.getPercent(), 2));
+                System.out.println(line.getName());
+                System.out.println(pair.second + " - " + line.getPercent() + " = " + line.getDiff());
+                if (isLineHasSubLines(line)) {
+                    fillMapLine(line, map);
+                }
+            }
+        }
+    }
+
+    private boolean isLineHasSubLines(Line line) {
+        return line.getSublines().size() > 0;
+    }
+
+    private void fillMapLine(Line mainLine, Map<String, Pair<Integer, Float>> map) {
+        for (Line line : mainLine.getSublines()) {
+            Pair<Integer, Float> pair = new Pair<>(line.getValue(), line.getPercent());
+            map.put(line.getName(), pair);
+            if (isLineHasSubLines(line)) {
+                fillMapLine(line, map);
+            }
+        }
     }
 }

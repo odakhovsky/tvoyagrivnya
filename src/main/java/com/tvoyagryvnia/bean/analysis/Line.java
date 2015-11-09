@@ -1,4 +1,4 @@
-package com.tvoyagryvnia.bean;
+package com.tvoyagryvnia.bean.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ public class Line {
     private int value;
     private float percent;
     private float money;
+    private Float diff;
     private String curr;
     private List<Line> sublines;
 
@@ -70,5 +71,13 @@ public class Line {
 
     public void setSublines(List<Line> sublines) {
         this.sublines = sublines;
+    }
+
+    public Float getDiff() {
+        return diff;
+    }
+
+    public void setDiff(Float diff) {
+        this.diff = diff;
     }
 }

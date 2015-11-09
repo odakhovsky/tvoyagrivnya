@@ -73,3 +73,8 @@
 
 
 <script src="<c:url value="/resources/js/libs/file-download.js" />"></script>
+
+
+<!--HOLD ON SCROLL -->
+<link href="<c:url value="/resources/css/HoldOn.min.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/libs/HoldOn.min.js" />"></script>

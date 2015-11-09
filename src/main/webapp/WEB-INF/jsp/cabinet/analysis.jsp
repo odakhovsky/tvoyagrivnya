@@ -6,6 +6,7 @@
 <div class="well">
     <div class="row">
         <div class="padding-25">
+            <a href="/cabinet/analysis/extended">Розширений аналіз</a>
             <h5 align="center">Період</h5>
 
             <div class="row">
@@ -20,6 +21,16 @@
 </div>
 <script>
     initMonthRange("#date-from");
+    $(document).on({
+        ajaxStart: function() {
+            HoldOn.open({
+                theme:"sk-cube",
+                message:'Зачекайте, йде аналіз даних!',
+                textColor:"white",
+            });
+        },
+        ajaxStop: function() { HoldOn.close(); }
+    });
 </script>
 <script type="text/javascript" data-main="/resources/js/analysis.js"
         src="/resources/js/libs/require.js"></script>
