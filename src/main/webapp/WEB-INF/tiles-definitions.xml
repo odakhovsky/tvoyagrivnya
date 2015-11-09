@@ -90,10 +90,17 @@
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/analysis.jsp"></put-attribute>
     </definition>
 
+    <definition name="cabinet/analysis-ext" extends="baseLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/analysis-ext.jsp"></put-attribute>
+    </definition>
+
     <definition name="cabinet/analysis/result" extends="viewLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/analysis-result.jsp"/>
     </definition>
 
+    <definition name="cabinet/analysis/extend/result" extends="viewLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/cabinet/extended-analysis-result.jsp"/>
+    </definition>
     <!-- SETTINGS PAGES -->
     <definition name="cabinet/settings" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/jsp/cabinet/settings.jsp"></put-attribute>
