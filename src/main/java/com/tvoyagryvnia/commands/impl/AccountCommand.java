@@ -29,7 +29,7 @@ public class AccountCommand implements Command {
     @Autowired
     private ISendMailService sendMailService;
 
-    @Parameter(names = "-show", required = true)
+    @Parameter(names = "-view", required = true)
     private String show;
 
     @Override

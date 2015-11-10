@@ -60,7 +60,20 @@ public class ReceivingMailService {
         try {
             fillCommander(jc);
             String[] args = email.getText().split(" ");
-            jc.parse(args);
+            String[] commandList = new String[args.length];
+            String text;
+            for (int i = 0; i < args.length; i++) {
+                if (!args[i].contains("-")) {
+                    text = args[i].toLowerCase();
+                    String replace = args[i].replace(args[i], translate(text));
+                    commandList[i] = replace;
+                } else {
+                    text = args[i].substring(1, args[i].length());
+                    String replace  = args[i].replace(text, translate(text.toLowerCase()));
+                    commandList[i] = replace;
+                }
+            }
+            jc.parse(commandList);
             String name = jc.getParsedCommand();
             commands.get(name).execute(email.getFrom());
         } catch (ParameterException | IllegalArgumentException ex) {
@@ -87,4 +100,24 @@ public class ReceivingMailService {
     }
 
 
+    private static Map<String, String> translateCommand;
+
+    static {
+        translateCommand = new HashMap<>();
+        translateCommand.put("допомога", "help");
+        translateCommand.put("звіт", "report");
+        translateCommand.put("показати", "view");
+        translateCommand.put("період", "period");
+        translateCommand.put("все", "all");
+        translateCommand.put("прибуток", "incomes");
+        translateCommand.put("витрати", "spends");
+        translateCommand.put("сьогодні", "today");
+        translateCommand.put("місяць", "month");
+        translateCommand.put("рік", "year");
+        translateCommand.put("рахунок", "account");
+    }
+
+    private static String translate(String key) {
+        return translateCommand.getOrDefault(key, "");
+    }
 }
