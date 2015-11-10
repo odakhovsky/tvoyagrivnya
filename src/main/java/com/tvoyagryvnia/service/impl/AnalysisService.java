@@ -181,8 +181,6 @@ public class AnalysisService {
             Pair<Integer, Float> pair = map.getOrDefault(line.getName(), null);
             if (!Objects.isNull(pair)) {
                 line.setDiff(NumberFormatter.cutFloat(pair.second - line.getPercent(), 2));
-                System.out.println(line.getName());
-                System.out.println(pair.second + " - " + line.getPercent() + " = " + line.getDiff());
                 if (isLineHasSubLines(line)) {
                     fillMapLine(line, map);
                 }
