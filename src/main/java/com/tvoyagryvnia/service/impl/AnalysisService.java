@@ -95,8 +95,14 @@ public class AnalysisService {
                 l.setName(category.getName());
                 l.setPercent(percent);
                 l.setMoney(sum);
+
                 l.setCurr(userCurrencyService.getDefaultCurrencyOfUser(category.getOwner().getId()).getShortName());
-                line.getSublines().add(l);
+
+             /*   if (line.getMoney() != l.getMoney()) {
+                    line.getSublines().add(l);
+                }*/
+                //todo check
+
                 if (category.getChildrens().size() > 0) {
                     fillChildrens(category.getChildrens(), l, total, from, to);
                 }

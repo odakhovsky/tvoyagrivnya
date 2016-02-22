@@ -40,4 +40,6 @@ public interface IOperationDao {
 
     List<OperationEntity> getAllAciveByCurrentMonth();
     List<OperationEntity> getAll();
+
+    void deactivate(int id);
 }

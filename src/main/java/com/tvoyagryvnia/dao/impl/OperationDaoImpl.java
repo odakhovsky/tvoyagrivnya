@@ -196,4 +196,10 @@ public class OperationDaoImpl implements IOperationDao {
     public List<OperationEntity> getAll() {
         return session().createCriteria(OperationEntity.class).list();
     }
+
+    @Override
+    public void deactivate(int id) {
+        session().createQuery("update OperationEntity set active = 0 where id  = :id")
+                .setParameter("id", id).executeUpdate();
+    }
 }

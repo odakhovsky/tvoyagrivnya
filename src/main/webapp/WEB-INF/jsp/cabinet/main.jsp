@@ -48,7 +48,7 @@
                 <td>${op.category}</td>
                 <td>
                     <a onclick="edit(${op.id})"><i class="fa fa-edit btn-cursor"></i></a>
-                    <i class="margin-left-5 fa fa-remove btn-cursor"></i>
+                    <i onclick="del(${op.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
                 </td>
                 </tr>
             </c:forEach>
@@ -58,6 +58,25 @@
     <jsp:include page="modal/editoperation.jsp"/>
 </div>
 <script>
+    var del = function(operationId){
+        $.confirm({
+            text: "Ви точно бажаєте видалити данні про операції?",
+            title: "Підтвердження деактивації",
+            confirm: function () {
+                $.post("/cabinet/operations/" + operationId + "/remove", function (data) {
+                    window.location.reload();
+                });
+            },
+            cancel: function (button) {
+            },
+            confirmButton: "Так",
+            cancelButton: "Ні",
+            post: true,
+            confirmButtonClass: "btn-danger",
+            cancelButtonClass: "btn-hide",
+            dialogClass: "modal-dialog modal-lg"
+        });
+    }
     var edit = function (operationId) {
         var $body = $("#edit-modal-body");
         $('#edit-operation-modal').modal('show');

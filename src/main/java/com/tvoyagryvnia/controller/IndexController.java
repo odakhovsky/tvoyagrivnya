@@ -1,6 +1,7 @@
 package com.tvoyagryvnia.controller;
 
 import com.tvoyagryvnia.service.IUserService;
+import com.tvoyagryvnia.util.Cipher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,10 @@ public class IndexController {
 
     @Autowired IUserService userService;
 
-
     @RequestMapping(method = RequestMethod.GET)
-    public String index() {
+    public String index()
+    {
+        System.out.println(Cipher.encrypt("11223354aa"));
         return "index";
     }
 

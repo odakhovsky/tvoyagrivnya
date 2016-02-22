@@ -61,6 +61,58 @@
                 </div>
             </div>
         </form>
+        <div class="list-group col-lg-12 margin-top-15 text-center">
+            <div class="col-lg-3">Повна назва</div>
+            <div class="col-lg-2">Назва</div>
+            <div class="col-lg-2">Скорочення</div>
+            <div class="col-lg-2">Курс до баз.</div>
+            <div class="col-lg-3">Дата оновлення</div>
+            <c:forEach items="${currs}" var="c">
+                <div class="list-group-item col-lg-12 <c:if test="${c.def}">alert alert-info text-bold</c:if>">
+                    <div class="col-sm-3">
+                        <span>
+                                ${c.name}
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span>
+                                ${c.currency}
+                        </span>
+                    </div>
+                    <div class="col-sm-1">
+                        <span>
+                                ${c.shortName}
+                        </span>
+                    </div>
+                    <div class="col-sm-2"><span>
+                        <c:choose>
+                            <c:when test="${not c.def}">
+                                <a href="#"
+                                   class="editable editable-container editable-inline"
+                                   data-type="number"
+                                   data-step="0.0001"
+                                   data-pk="${c.id}"
+                                   data-name="crossRate"
+                                   data-url="/cabinet/control/currencies/editrate"
+                                   data-title="Курс гриві до валюти">
+
+                                        ${c.crossRate}</a>
+                            </c:when>
+                            <c:otherwise>
+                                ${c.crossRate}
+                            </c:otherwise>
+                        </c:choose>
+
+                    </span></div>
+                    <div class="col-sm-3">
+                        <span>
+                                ${c.stringDate}
+                        </span>
+                    </div>
+                </div>
+
+            </c:forEach>
+        </div>
     </div>
 </div>
 <script>
@@ -122,3 +174,9 @@
     })
 </script>
 <script type="text/javascript" data-main="/resources/js/operationView.js" src="/resources/js/libs/require.js"></script>
+
+<script>
+    $('.editable').editable({
+        placement: 'left'
+    });
+</script>

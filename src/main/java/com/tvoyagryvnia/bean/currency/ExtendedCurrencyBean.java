@@ -35,8 +35,7 @@ public class ExtendedCurrencyBean extends CurrencyBean {
     }
 
     private Date getLastDate(List<Date> dates){
-        Collections.sort(dates, Date::compareTo);
-        return dates.get(0);
+        return dates.stream().sorted((o1, o2) -> o2.compareTo(o1)).collect(Collectors.toList()).get(0);
     }
 
     public int getId() {
