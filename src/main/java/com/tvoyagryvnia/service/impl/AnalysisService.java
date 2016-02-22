@@ -98,9 +98,9 @@ public class AnalysisService {
 
                 l.setCurr(userCurrencyService.getDefaultCurrencyOfUser(category.getOwner().getId()).getShortName());
 
-                if (line.getMoney() != l.getMoney()) {
+             /*   if (line.getMoney() != l.getMoney()) {
                     line.getSublines().add(l);
-                }
+                }*/
                 //todo check
 
                 if (category.getChildrens().size() > 0) {

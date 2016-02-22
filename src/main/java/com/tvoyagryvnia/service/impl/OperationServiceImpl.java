@@ -11,6 +11,7 @@ import com.tvoyagryvnia.service.IOperationService;
 import com.tvoyagryvnia.service.IUserCurrencyService;
 import com.tvoyagryvnia.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.Operation;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -238,5 +239,18 @@ public class OperationServiceImpl implements IOperationService {
         return operationDao.getAllAciveOfUserByCurrentMonth(user)
                 .stream().map(OperationBean::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deactivate(int id) {
+        OperationEntity operation = operationDao.getById(id);
+        operationDao.deactivate(id);
+        BalanceEntity balance = balanceDao.getByAccAndCurrency(operation.getAccount().getId(), operation.getCurrency().getId());
+        if(operation.getCategory().getOperation().equals(OperationType.plus)) {
+            balance.setBalance(balance.getBalance() - operation.getMoney());
+        }else if (operation.getCategory().getOperation().equals(OperationType.minus)){
+            balance.setBalance(balance.getBalance() + operation.getMoney());
+        }
+        balanceDao.save(balance);
     }
 }

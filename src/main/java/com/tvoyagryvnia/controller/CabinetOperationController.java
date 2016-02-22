@@ -36,6 +36,7 @@ public class CabinetOperationController {
     public String newOperation(ModelMap map, @ModelAttribute("userBean") UserBean user) {
         map.addAttribute("currencies", userCurrencyService.getAllOfUser(user.getId()));
         map.addAttribute("accounts", accountService.getAllOfUserEnabled(user.getId(), true, true));
+        map.addAttribute("currs", userCurrencyService.getAllOfUser(user.getId()));
         return "cabinet/operations/new";
     }
 
@@ -92,6 +93,12 @@ public class CabinetOperationController {
         map.addAttribute("currencies", userCurrencyService.getAllOfUser(user.getId()));
         map.addAttribute("categories", userCategoryService.getAllByType(user.getId(), OperationType.valueOf(o.getType())));
         return "cabinet/operations/edit/view";
+    }
+
+    @RequestMapping(value = "/{operationId}/remove", method = RequestMethod.POST)
+    public String remove(@PathVariable("operationId")Integer operationId) {
+        operationService.deactivate(operationId);
+        return "redirect:/cabinet/main";
     }
 
 }

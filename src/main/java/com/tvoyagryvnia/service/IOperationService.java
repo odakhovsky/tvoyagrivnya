@@ -31,5 +31,6 @@ public interface IOperationService {
     void update(OperationBean operation);
     List<OperationBean> getAllAciveOfUserByCurrentMonth(int user);
 
+    void deactivate(int id);
 
 }
