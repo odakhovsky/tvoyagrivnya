@@ -15,8 +15,8 @@
                 <div class="list-group">
                     <div class="list-group-item">
                         <a href="/cabinet/accounts/accmanage/${a.id}/info/"> ${a.name}</a>
-                        <span class="pull-right text-bold margin-left-5">${a.currency}</span>
-                        <span class="pull-right">${a.totalBalance}</span>
+                        <span class="pull-right text-bold margin-left-5" >${a.currency}</span>
+                        <span class="pull-right" <c:if test="${a.totalBalance < 0}"> style="color:red; font-weight: bold"  </c:if>>${a.totalBalance}</span>
                     </div>
                 </div>
             </td>

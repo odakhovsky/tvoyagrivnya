@@ -42,7 +42,7 @@
                     <a class="btn-cursor" onclick="logout()">Вихід</a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li class="admin-link">
+                    <li>
                         <a href="/admin/">Адмін панель</a>
                     </li>
                 </sec:authorize>
