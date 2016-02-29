@@ -6,6 +6,13 @@
 <div class="well">
     <div class="row" id="simple-statistic" data-bind="visible:visibleblock">
 
+        <div class="form-group form-inline">
+            <form action="">
+                <label>Вигляд графіка</label>
+                <input type="radio" name="graphView" value="circle" checked> Круговий
+                <input type="radio" name="graphView" value="rect"> Гістограма<br>
+            </form>
+        </div>
         <div class="col-xs-6" >
             <h4 align="center">Дохід </h4>
 

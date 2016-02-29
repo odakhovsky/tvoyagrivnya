@@ -6,6 +6,13 @@
 <div class="well">
     <div class="row">
         <div class="padding-25">
+            <div data-bind="visible:visibleblock" class="form-group form-inline">
+                <form action="">
+                    <label>Вигляд графіка</label>
+                    <input type="radio" name="reportView" value="circle" checked> Круговий
+                    <input type="radio" name="reportView" value="rect"> Гістограма<br>
+                </form>
+            </div>
             <form action="/cabinet/budget/create/" method="post" class="form-inline">
                 <input type="hidden" id="user-id" value="${userBean.id}">
                 Тип
