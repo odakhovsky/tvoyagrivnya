@@ -12,6 +12,7 @@ public class BalanceBean {
     private String currShort;
     private float balance;
     private float rate;
+    private boolean isDefCurrency;
 
     public BalanceBean(BalanceEntity balanceEntity) {
         this.id = balanceEntity.getId();
@@ -21,6 +22,7 @@ public class BalanceBean {
         this.currShort = balanceEntity.getCurrency().getCurrency().getShortName();
         this.balance = NumberFormatter.cutFloat(balanceEntity.getBalance(), 2);
         this.rate = balanceEntity.getCurrency().getCrossRate();
+        this.isDefCurrency = balanceEntity.getCurrency().isDef();
     }
 
     public int getId() {
@@ -77,5 +79,13 @@ public class BalanceBean {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public boolean isDefCurrency() {
+        return isDefCurrency;
+    }
+
+    public void setDefCurrency(boolean defCurrency) {
+        isDefCurrency = defCurrency;
     }
 }

@@ -13,11 +13,19 @@ public class NoteBean {
     private String text;
     private Date date;
     private int owner;
+    private int currencyId;
+    private String currency;
+    private float sum;
 
     public NoteBean(NoteEntity note) {
         this.id = note.getId();
         this.category = (null != note.getCategory()) ? note.getCategory().getName() : "Без категорії";
         this.categoryId = (null != note.getCategory()) ? note.getCategory().getId() : 0;
+        this.currencyId = (null != note.getCurrency()) ? note.getCurrency().getId() : 0;
+        if (currencyId != 0){
+            currency = note.getCurrency().getCurrency().getShortName();
+        }
+        this.sum = note.getSum();
         this.date = note.getDate();
         this.text = note.getText();
         this.owner = note.getOwner().getId();
@@ -70,4 +78,31 @@ public class NoteBean {
     public void setOwner(int owner) {
         this.owner = owner;
     }
+
+    public int getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(int currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public float getSum() {
+        return sum;
+    }
+
+    public void setSum(float sum) {
+        this.sum = sum;
+    }
+
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }
+
+

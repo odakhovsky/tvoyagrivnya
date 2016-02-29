@@ -19,6 +19,8 @@ public class CurrencyBean {
         this.crossRate = currencyEntity.getCrossRate();
     }
 
+    public CurrencyBean(){}
+
     public String getName() {
         return name;
     }

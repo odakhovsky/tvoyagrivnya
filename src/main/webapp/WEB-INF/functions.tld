@@ -14,4 +14,19 @@
         <function-class>com.tvoyagryvnia.util.BalanceUtil</function-class>
         <function-signature>float getTotalBalanceForAllAccounts(java.util.List)</function-signature>
     </function>
+    <function>
+        <name>purpose</name>
+        <function-class>com.tvoyagryvnia.util.BalanceUtil</function-class>
+        <function-signature>java.lang.String getPurposeToGetMoney(java.util.List,com.tvoyagryvnia.bean.currency.ExtendedCurrencyBean,float)</function-signature>
+    </function>
+    <function>
+        <name>absolute</name>
+        <function-class>java.lang.Math</function-class>
+        <function-signature>double abs(double)</function-signature>
+    </function>
+    <function>
+        <name>cut</name>
+        <function-class>com.tvoyagryvnia.util.NumberFormatter</function-class>
+        <function-signature>java.lang.Float cutFloat(float,int)</function-signature>
+    </function>
 </taglib>

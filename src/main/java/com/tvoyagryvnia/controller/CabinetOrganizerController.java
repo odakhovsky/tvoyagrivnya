@@ -7,7 +7,9 @@ import com.tvoyagryvnia.bean.user.UserBean;
 import com.tvoyagryvnia.bean.user.UserFieldBean;
 import com.tvoyagryvnia.dao.IUserCategoryDao;
 import com.tvoyagryvnia.model.UserCategoryEntity;
+import com.tvoyagryvnia.model.enums.OperationType;
 import com.tvoyagryvnia.service.INoteService;
+import com.tvoyagryvnia.service.IUserCurrencyService;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,9 @@ public class CabinetOrganizerController {
     @Autowired
     private IUserCategoryDao userCategoryDao;
 
+    @Autowired
+    private IUserCurrencyService currencyService;
+
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String index(ModelMap map, @ModelAttribute("userBean") UserBean user,
                         @RequestParam(value = "category", required = false, defaultValue = "0") Integer category) {
@@ -48,25 +53,29 @@ public class CabinetOrganizerController {
             default:
                 notes = noteService.getAllOfUserByCategory(user.getId(), category);
         }
-        List<UserCategoryEntity> cats = userCategoryDao.getAll(user.getId(), true);
+        List<UserCategoryEntity> cats = userCategoryDao.getAll(user.getId(), true).stream()
+                .filter(userCategoryEntity -> userCategoryEntity.getOperation().equals(OperationType.minus)).collect(Collectors.toList());
         map.addAttribute("notes", notes);
         map.addAttribute("cats", cats);
+        map.addAttribute("currs", currencyService.getAllOfUser(user.getId()));
         return "cabinet/organizer";
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
     public String create(@RequestParam("text") String text,
-                        @RequestParam("category") Integer category,
-                        @ModelAttribute("userBean") UserBean user) {
-        noteService.create(text, category, user.getId());
+                         @RequestParam("category") Integer category,
+                         @RequestParam(value = "sum", required = false, defaultValue = "0.0") Float sum,
+                         @RequestParam(value = "currency", required = false) Integer currId,
+                         @ModelAttribute("userBean") UserBean user) {
+        noteService.create(text, category, user.getId(),sum, currId);
         return "redirect:/cabinet/organizer/";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String update(@RequestParam("noteId")Integer noteId,
-                        @RequestParam("text") String text,
-                        @RequestParam("category") Integer category,
-                        @ModelAttribute("userBean") UserBean user) {
+    public String update(@RequestParam("noteId") Integer noteId,
+                         @RequestParam("text") String text,
+                         @RequestParam("category") Integer category,
+                         @ModelAttribute("userBean") UserBean user) {
         NoteBean noteBean = noteService.getById(noteId);
         noteBean.setText(text);
         noteBean.setCategoryId(category);
@@ -111,26 +120,26 @@ public class CabinetOrganizerController {
 
     @RequestMapping(value = "/note/{noteId}/remove", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> removeNote(@PathVariable("noteId")Integer id) {
+    public ResponseEntity<String> removeNote(@PathVariable("noteId") Integer id) {
         noteService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/note/{noteId}/info/", method = RequestMethod.GET)
-    public String showpage(@PathVariable("noteId")Integer noteId,ModelMap map) {
+    public String showpage(@PathVariable("noteId") Integer noteId, ModelMap map) {
         NoteBean note = noteService.getById(noteId);
         if (null != note) {
             map.addAttribute("note", note);
             List<UserCategoryEntity> cats = userCategoryDao.getAll(note.getOwner(), true);
             map.addAttribute("cats", cats);
             return "cabinet/organizer/note/info";
-        }else {
+        } else {
             return "redirect:/cabinet/organizer/";
         }
     }
 
     @RequestMapping(value = "/note/view/", method = RequestMethod.GET)
-    public String noteView(@ModelAttribute("userBean")UserBean user, ModelMap map) {
+    public String noteView(@ModelAttribute("userBean") UserBean user, ModelMap map) {
         List<NoteBean> notes = noteService.getLastFiveOfUser(user.getId());
         map.addAttribute("notes", notes);
         return "cabinet/organizer/note/view";

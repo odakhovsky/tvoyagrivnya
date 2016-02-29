@@ -34,9 +34,10 @@ public class UserCurrencyDaoImpl implements IUserCurrencyDao {
     public UserCurrencyEntity getByShortNameForUser(int user, String name) {
         return (UserCurrencyEntity) session().createCriteria(UserCurrencyEntity.class, "uc")
                 .createAlias("uc.owner", "o")
+                .createAlias("uc.currency","c")
                 .add(Restrictions.and(
                         Restrictions.eq("o.id", user),
-                        Restrictions.eq("shortName", name)
+                        Restrictions.eq("c.shortName", name)
                 ))
                 .uniqueResult();
     }

@@ -3,6 +3,7 @@ package com.tvoyagryvnia.service.impl;
 import com.tvoyagryvnia.bean.NoteBean;
 import com.tvoyagryvnia.dao.INoteDao;
 import com.tvoyagryvnia.dao.IUserCategoryDao;
+import com.tvoyagryvnia.dao.IUserCurrencyDao;
 import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.CurrencyEntity;
 import com.tvoyagryvnia.model.NoteEntity;
@@ -32,9 +33,10 @@ public class NoteService implements INoteService {
     private IUserCategoryDao userCategoryDao;
     @Autowired
     private INoteDao noteDao;
+    @Autowired private IUserCurrencyDao userCurrencyDao;
 
     @Override
-    public void create(String text, int usercategory, int owner) {
+    public void create(String text, int usercategory, int owner, float sum, int currency) {
         UserCategoryEntity category = userCategoryDao.getById(usercategory);
         UserEntity user = userDao.getUserById(owner);
         if (Objects.nonNull(user)) {
@@ -44,9 +46,12 @@ public class NoteService implements INoteService {
             note.setCategory(category);
             note.setDate(new Date());
             note.setText(text);
+            if (sum > 0){
+                note.setSum(sum);
+                note.setCurrency(userCurrencyDao.getById(currency));
+            }
             noteDao.save(note);
         }
-
     }
 
     @Override

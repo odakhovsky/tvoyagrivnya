@@ -29,6 +29,13 @@ public class NoteEntity {
     @JoinColumn(name = "CATEGORY")
     private UserCategoryEntity category;
 
+    @ManyToOne
+    @JoinColumn(name = "CURRENCY")
+    private UserCurrencyEntity currency;
+
+    @Column(name = "SUM")
+    private float sum;
+
     public NoteEntity(){}
 
     public int getId() {
@@ -77,5 +84,21 @@ public class NoteEntity {
 
     public void setCategory(UserCategoryEntity category) {
         this.category = category;
+    }
+
+    public UserCurrencyEntity getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(UserCurrencyEntity currency) {
+        this.currency = currency;
+    }
+
+    public float getSum() {
+        return sum;
+    }
+
+    public void setSum(float sum) {
+        this.sum = sum;
     }
 }

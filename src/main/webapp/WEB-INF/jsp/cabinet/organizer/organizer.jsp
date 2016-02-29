@@ -19,32 +19,108 @@
                         </option>
                     </c:forEach>
                 </select>
-                <button class="btn pull-right margin-top-15" type="submit">Додати</button>
+                <div class="row margin-top-15 ">
+                    <div class="form-group">
+                        <input value="0" type="number" name="sum" id="sum" placeholder="Сума" min="0"
+                               class="form-group-sm form-control"
+                               style="width: 100px; margin-left: 15px;">
+
+                        <select id="currencies" name="currency" class="form-control">
+                            <c:forEach var="c" items="${currs}">
+                                <option value="${c.id}">
+                                        ${c.shortName}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <button class="btn pull-right " type="submit">Додати</button>
+
+                </div>
+                <div id="purpose-text"></div>
             </form>
         </div>
     </div>
     <div class="row margin-top-25 note-list">
         <c:forEach items="${notes}" var="n">
             <div class="col-lg-12 margin-top-15 note-item-border">
-                <div class="col-lg-7 truncate-note-organizer" title="${n.text}">
-                    <span class="  ">${n.text}</span>
-                </div>
-                <div class="col-lg-2 ">
-                    ${n.category}
-                </div>
-                <div class="col-lg-2">
-                    <span>${n.date}</span>
-                </div>
-                <div class="col-lg-1">
-                    <a href="/cabinet/organizer/note/${n.id}/info/"><i class="fa fa-edit btn-cursor"></i></a>
-                    <i onclick="remove(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
-                </div>
+                <c:choose>
+                    <c:when test="${n.sum > 0}">
+                        <div class="col-lg-4 truncate-note-organizer-sum" title="${n.text}">
+                            <span class="  ">${n.text}</span>
+                        </div>
+                        <div class="col-lg-2">
+                                ${n.sum} ${n.currency}
+                        </div>
+                        <div class="col-lg-2 ">
+                                ${n.category}
+                        </div>
+                        <div class="col-lg-2">
+                            <span>${n.date}</span>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="/cabinet/organizer/note/${n.id}/info/"><i class="fa fa-edit btn-cursor"></i></a>
+                            <i onclick="remove(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-lg-7 truncate-note-organizer" title="${n.text}">
+                            <span class="  ">${n.text}</span>
+                        </div>
+                        <div class="col-lg-2 ">
+                                ${n.category}
+                        </div>
+                        <div class="col-lg-2">
+                            <span>${n.date}</span>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="/cabinet/organizer/note/${n.id}/info/"><i class="fa fa-edit btn-cursor"></i></a>
+                            <i onclick="remove(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </c:forEach>
     </div>
 </div>
 
 <script>
+
+    $("#currencies").on("change",function(){
+        purpose.call(this);
+    })
+
+    function purpose() {
+        if (this.value == '') {
+            $("#purpose-text").html("").fadeOut( "slow");
+        } else if ($(this).val()) {
+            getPurpose();
+        }
+    }
+    $("#sum").bind('keyup input', function () {
+        purpose.call(this);
+    });
+
+    function getPurpose() {
+
+        var value = $("#sum").val();
+        var currency = $("#currencies").val();
+
+        if (value && value > 0 && currency) {
+            $.ajax({
+                url: "/getPurpose?sum=" + value + "&currency=" + currency,
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                async: true,
+                success: function (result) {
+                }, error: function (result) {
+                    $("#purpose-text").html(result.responseText).fadeIn( "slow");
+                }
+            });
+        }
+    }
+
     $("#categories").select2();
     function remove(id) {
         $.confirm({

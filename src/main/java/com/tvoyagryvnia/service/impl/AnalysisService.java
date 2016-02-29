@@ -72,6 +72,9 @@ public class AnalysisService {
                     lines.add(line);
                 }
             }
+
+            clearLines(lines);
+
             result.setCategories(lines);
             result.setTotal(NumberFormatter.cutFloat(total, 2));
             result.setCurr(result.getCategories().get(0).getCurr());
@@ -81,6 +84,27 @@ public class AnalysisService {
             return new AnalysisBean();
         }
     }
+
+    private void clearLines(List<Line> lines) {
+        lines.stream().filter(this::isSingle).forEach(line -> {
+            Line last = findLast(line.getSublines().get(0));
+            line.getSublines().clear();
+            line.getSublines().add(last);
+        });
+    }
+
+    private boolean isSingle(Line line) {
+        return line.getSublines().size() == 1;
+    }
+
+    private Line findLast(Line line) {
+        Line result = line;
+        while (result.getSublines().size() != 0){
+            result = result.getSublines().get(0);
+        }
+        return result;
+    }
+
 
     private void fillChildrens(Set<UserCategoryEntity> cat, Line line, float total, Date from, Date to) {
 
@@ -101,6 +125,9 @@ public class AnalysisService {
              /*   if (line.getMoney() != l.getMoney()) {
                     line.getSublines().add(l);
                 }*/
+
+                line.getSublines().add(l);
+
                 //todo check
 
                 if (category.getChildrens().size() > 0) {

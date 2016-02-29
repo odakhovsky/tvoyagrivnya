@@ -31,7 +31,7 @@
         ajaxStart: function () {
             HoldOn.open({
                 theme: "sk-cube",
-                message: 'Зачекайте, йде аналіз даних!',
+                message: 'Зачекайте, триває обробка даних!',
                 textColor: "white",
             });
         },

@@ -22,7 +22,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-default btn-lg btn-block">Увійти в систему</button>
-                    <a  id="forgot-password-go" class="page-scroller" href="#forgot-password"><span class="remember-password-text pull-right">Забув пароль?</span></a>
+                    <%--<a  id="forgot-password-go" class="page-scroller" href="#forgot-password"><span class="remember-password-text pull-right">Забув пароль?</span></a>--%>
                 </form>
             </div>
 

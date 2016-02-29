@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface INoteService {
 
-    void create(String text, int usercategory, int owner);
+    void create(String text, int usercategory, int owner, float sum, int currency);
     void update(NoteBean noteBean);
     void delete(int note);
     NoteBean getById(int id);
