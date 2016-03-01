@@ -8,7 +8,7 @@
         <div class="padding-25">
             <div data-bind="visible:visibleblock" class="form-group form-inline">
                 <form action="">
-                    <label>Вигляд графіка</label>
+                    <label>Вигляд діаграми</label>
                     <input type="radio" name="reportView" value="circle" checked> Круговий
                     <input type="radio" name="reportView" value="rect"> Гістограма<br>
                 </form>

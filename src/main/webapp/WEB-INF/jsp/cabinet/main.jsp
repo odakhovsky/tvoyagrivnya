@@ -8,7 +8,7 @@
 
         <div class="form-group form-inline">
             <form action="">
-                <label>Вигляд графіка</label>
+                <label>Вигляд діаграми</label>
                 <input type="radio" name="graphView" value="circle" checked> Круговий
                 <input type="radio" name="graphView" value="rect"> Гістограма<br>
             </form>
