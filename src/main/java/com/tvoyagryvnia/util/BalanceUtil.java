@@ -66,7 +66,7 @@ public class BalanceUtil {
                 sb.insert(0, "Візміть гроші з рахунків ");
             }
 
-            sb.append(".</br>").append("Залишок по рахункам після придбання складнатиме <b>" + diff + "</b> " + cb.getShortName());
+            sb.append(".</br>").append("Залишок по рахункам після сплати складнатиме <b>" + diff + "</b> " + cb.getShortName());
             return sb.toString();
         }
     }
