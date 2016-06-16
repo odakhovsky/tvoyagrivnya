@@ -72,6 +72,7 @@
             confirm: function () {
                 $.post("/cabinet/operations/" + operationId + "/remove", function (data) {
                     window.location.reload();
+                    console.log('hello');
                 });
             },
             cancel: function (button) {

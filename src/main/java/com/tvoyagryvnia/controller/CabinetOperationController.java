@@ -98,7 +98,7 @@ public class CabinetOperationController {
     @RequestMapping(value = "/{operationId}/remove", method = RequestMethod.POST)
     public String remove(@PathVariable("operationId")Integer operationId) {
         operationService.deactivate(operationId);
-        return "redirect:/cabinet/main";
+        return "redirect:/cabinet/main/";
     }
 
 }

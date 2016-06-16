@@ -8,7 +8,7 @@
             <div class="list-group-item margin-top-5">
                 <div class="row">
                     <div class="col-lg-8 truncate-note-sidebar">
-                        <a href="/cabinet/organizer/note/${note.id}/info/">${note.text}</a>
+                        <a href="/cabinet/organizer/note/${note.id}/info/" title="${note.text}">${note.text}</a>
                     </div>
                     <div class="col-lg-4 no-padding">
                         <span class="pull-right text-bold margin-left-5">${note.date}</span>

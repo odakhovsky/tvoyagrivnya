@@ -63,7 +63,14 @@
                         <span> ${budget.grandTotal.fact}</span>
                     </div>
                     <div class="col-lg-2">
-                        <span> ${budget.grandTotal.budget}</span>
+                        <c:choose>
+                            <c:when test="${(budget.grandTotal.budget eq 0) or (budget.grandTotal.budget gt 0)}">
+                                <span style="color:green">${budget.grandTotal.budget}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span style="color: red">${budget.grandTotal.budget}</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="col-lg-2">
                         <c:choose>

@@ -33,8 +33,6 @@ public class UserBean {
 
     private Set<Integer> roles = new HashSet<>();
 
-    private Set<UserBean> members = new HashSet<>();
-
     private boolean active;
 
     private boolean owner;
@@ -56,10 +54,6 @@ public class UserBean {
         active = userEntity.getActive();
         this.owner = userEntity.hasRole(RoleEntity.Name.ROLE_OWNER);
         this.superMember = userEntity.hasRole(RoleEntity.Name.ROLE_SUPER_MEMBER);
-        this.members = (null != userEntity.getMembers()) ?
-                userEntity.getMembers().stream().map(UserBean::new).collect(Collectors.toSet()) : new HashSet<>();
-
-        this.inviter = (null == userEntity.getInviter()) ? null : userEntity.getInviter().getId();
     }
 
     public UserBean(String name, String email) {
@@ -139,14 +133,6 @@ public class UserBean {
 
     public void setOwner(boolean owner) {
         this.owner = owner;
-    }
-
-    public Set<UserBean> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<UserBean> members) {
-        this.members = members;
     }
 
     public boolean isSuperMember() {

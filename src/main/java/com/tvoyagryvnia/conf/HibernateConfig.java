@@ -8,8 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -59,7 +59,13 @@ public class HibernateConfig {
             {
                 setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
                 setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-                setProperty("hibernate.current_session_context_class", "org.springframework.orm.hibernate4.SpringSessionContext");
+                setProperty("current_session_context_class", "thread");
+                setProperty("hibernate.max_fetch_depth","1");
+                setProperty("hibernate.id.new_generator_mappings", "false");
+                //setProperty("hibernate.implicit_naming_strategy", "org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl");
+                //setProperty("hibernate.physical_naming_strategy", "com.tvoyagryvnia.model.LegacyPhysicalNamingStrategy");
+
+
             }
         };
     }

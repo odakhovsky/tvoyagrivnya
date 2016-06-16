@@ -39,6 +39,7 @@ public class EmailConfig {
                 setProperty("mail.smtp.host", env.getProperty("host"));
                 setProperty("mail.smtp.user", env.getProperty("email.account"));
                 setProperty("mail.smtp.password", env.getProperty("email.password"));
+                setProperty("mail.smtp.localhost", "localhost");
                 setProperty("mail.smtp.port", "587");
                 setProperty("mail.smtp.auth", "true");
                 setProperty("mail.debug", "true");

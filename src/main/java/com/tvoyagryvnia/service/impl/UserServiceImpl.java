@@ -13,13 +13,16 @@ import com.tvoyagryvnia.util.Cipher;
 import com.tvoyagryvnia.util.password.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -231,12 +234,7 @@ public class UserServiceImpl implements IUserService {
         userEntity.setDateOfBirth(userBean.getDateOfBirth());
         userEntity.setPassword(userBean.getPassword());
         userEntity.setRoles(toRoleEntitySet(userBean.getRoles()));
-        userEntity.setMembers(toMemberEntitySet(userBean.getMembers().stream().map(UserBean::getId).collect(Collectors.toSet())));
         userEntity.setActive(userBean.isActive());
-
-        if (null != userBean.getInviter()) {
-            userEntity.setInviter(userDao.getUserById(userBean.getInviter()));
-        }
 
         userEntity.setSettings(userSettingsDao.getByUserID(userBean.getId()));
 
@@ -258,8 +256,6 @@ public class UserServiceImpl implements IUserService {
         UserEntity userEntity = toUserEntity(invited);
         userEntity.setActive(true);
         userEntity.setPassword(Cipher.encrypt(invited.getPassword()));
-        userEntity.setInviter(toUserEntity(inviter));
-
 
         UserSettingsEntity settings = new UserSettingsEntity();
         userSettingsDao.saveOrUpdate(settings);

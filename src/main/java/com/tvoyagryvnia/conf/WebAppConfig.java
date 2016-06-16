@@ -1,6 +1,5 @@
 package com.tvoyagryvnia.conf;
 
-import com.tvoyagryvnia.bean.AdminMainStatisticBean;
 import com.tvoyagryvnia.service.impl.AdminStatisticService;
 import com.tvoyagryvnia.service.impl.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;

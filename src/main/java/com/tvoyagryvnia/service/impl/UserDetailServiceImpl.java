@@ -1,5 +1,6 @@
 package com.tvoyagryvnia.service.impl;
 
+import com.tvoyagryvnia.dao.IRoleDao;
 import com.tvoyagryvnia.dao.IUserDao;
 import com.tvoyagryvnia.model.RoleEntity;
 import com.tvoyagryvnia.model.UserEntity;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired private IUserDao userDao;
+    @Autowired private IRoleDao roleDao;
 
     @Override
     @Transactional(readOnly = true)

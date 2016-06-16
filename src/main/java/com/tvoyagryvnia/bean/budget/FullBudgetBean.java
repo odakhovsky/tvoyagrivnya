@@ -20,7 +20,7 @@ public class FullBudgetBean {
         FullBudgetResultLine result = new FullBudgetResultLine();
         result.setFact(getIncomesTotal().getFact() - getSpendingTotal().getFact());
         result.setBudget(getIncomesTotal().getBudget() - getSpendingTotal().getBudget());
-        result.setDiff(getIncomesTotal().getDiff() - getSpendingTotal().getDiff());
+        result.setDiff(getIncomesTotal().getDiff() + getSpendingTotal().getDiff());
         return result;
     }
 

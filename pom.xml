@@ -10,9 +10,9 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <spring.version>4.0.2.RELEASE</spring.version>
-        <hibernate.version>4.3.4.Final</hibernate.version>
-        <spring-securiry.version>3.2.0.RELEASE</spring-securiry.version>
+        <spring.version>4.2.5.RELEASE</spring.version>
+        <hibernate.version>5.1.0.Final</hibernate.version>
+        <spring-securiry.version>4.0.4.RELEASE</spring-securiry.version>
         <junit.version>4.11</junit.version>
         <jetty.version>9.2.2.v20140723</jetty.version>
         <checkstyle.file>checkstyle.xml</checkstyle.file>

@@ -19,19 +19,19 @@
                                 <p align="center"><a
                                         href="/cabinet/accounts/accmanage/${acc.id}/info/">${acc.name}</a></p></div>
                             <div class="col-sm-4">
-                        <span>
-                            <c:choose>
-                                <c:when test="${acc.enabled}">
-                                    <a class="btn-cursor btn-default btn btn-sm" onclick="deactivate(${acc.id})">Деактивувати</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="btn-cursor btn-default btn btn-sm" onclick="activate(${acc.id})">Активувати</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </span>
-                        <span class="pull-right">
-                            <a class="btn-cursor" onclick="remove(${acc.id})"> <i class="fa fa-remove"></i> </a>
-                        </span>
+                                <span>
+                                    <c:choose>
+                                        <c:when test="${acc.enabled}">
+                                            <a class="btn-cursor btn-default btn btn-sm" onclick="deactivate(${acc.id})">Деактивувати</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn-cursor btn-default btn btn-sm" onclick="activate(${acc.id})">Активувати</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </span>
+                                <span class="pull-right">
+                                    <a class="btn-cursor" > <i onclick="removeAccount(${acc.id})" class="fa fa-remove"></i> </a>
+                                </span>
                             </div>
                             <c:forEach items="${acc.balances}" var="balance">
                                 <div title="${balance.currFull}"
@@ -47,7 +47,7 @@
         </div>
         <div class="row padding-25">
             <h4 align="center">Обміни по рахунках</h4>
-            <table id="exchanges" class="col-lg-12" >
+            <table id="exchanges" class="col-lg-12">
                 <c:forEach items="${exchanges}" var="operation">
                 <tbody>
                 <tr class="alert alert-info ">
@@ -103,6 +103,29 @@
 </div>
 
 <script>
+    function removeAccount(id) {
+        $.confirm({
+            text: "Після видалення рахунку, буде не можливо відновити данні по рахунку(прибутки, витрати, інше)?",
+            title: "Підтвердження видалення",
+            confirm: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/cabinet/accounts/" + id + "/remove",
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            },
+            cancel: function (button) {
+            },
+            confirmButton: "Так, видалити",
+            cancelButton: "Ні, відмовляюсь",
+            post: true,
+            confirmButtonClass: "btn-danger",
+            cancelButtonClass: "btn-hide",
+            dialogClass: "modal-dialog modal-lg"
+        });
+    }
     $(document).ready(function () {
 
         $("#accounts").paging({
@@ -120,7 +143,8 @@
             activePage: 0,
             rows: []
 
-        });$("#exchanges").paging({
+        });
+        $("#exchanges").paging({
 
             limit: 10,
             rowDisplayStyle: 'block',
@@ -154,30 +178,6 @@
             cancel: function (button) {
             },
             confirmButton: "Так, деактивувати",
-            cancelButton: "Ні, відмовляюсь",
-            post: true,
-            confirmButtonClass: "btn-danger",
-            cancelButtonClass: "btn-hide",
-            dialogClass: "modal-dialog modal-lg"
-        });
-    }
-
-    function remove(id) {
-        $.confirm({
-            text: "Після видалення рахунку, буде не можливо відновити данні по рахунку(прибутки, витрати, інше)?",
-            title: "Підтвердження видалення",
-            confirm: function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/cabinet/accounts/" + id + "/remove",
-                    success: function () {
-                        location.reload();
-                    }
-                });
-            },
-            cancel: function (button) {
-            },
-            confirmButton: "Так, видалити",
             cancelButton: "Ні, відмовляюсь",
             post: true,
             confirmButtonClass: "btn-danger",

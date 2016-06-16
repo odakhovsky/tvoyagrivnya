@@ -9,25 +9,30 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "FIRST_NAME", nullable = false)
+    @Basic
     private String name;
 
 
     @Column(name = "EMAIL", unique = true, nullable = false)
+    @Basic
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
+    @Basic
     private String password;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "DATE_OF_BIRTH")
+    @Basic
     private Date dateOfBirth;
 
     @Column(name = "ACTIVE")
+    @Basic
     private Boolean active = true;
 
     @ManyToMany
@@ -38,21 +43,6 @@ public class UserEntity {
     )
     private Set<RoleEntity> roles;
 
-    @OneToMany
-    @JoinTable(
-            name = "USER_MEMBERS",
-            joinColumns = {@JoinColumn(name = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "MEMBER_ID")}
-    )
-    private Set<UserEntity> members;
-
-    @ManyToOne
-    @JoinTable(
-            name = "USER_MEMBERS",
-            joinColumns = {@JoinColumn(name = "MEMBER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "USER_ID")}
-    )
-    private UserEntity inviter;
 
     @OneToOne
     @JoinColumn(name = "SETTINGS_ID", updatable=true)
@@ -127,21 +117,5 @@ public class UserEntity {
 
     public boolean hasRole(RoleEntity.Name role) {
         return roles.stream().anyMatch(roleEntity -> roleEntity.getName().equals(role));
-    }
-
-    public Set<UserEntity> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<UserEntity> members) {
-        this.members = members;
-    }
-
-    public UserEntity getInviter() {
-        return inviter;
-    }
-
-    public void setInviter(UserEntity inviter) {
-        this.inviter = inviter;
     }
 }

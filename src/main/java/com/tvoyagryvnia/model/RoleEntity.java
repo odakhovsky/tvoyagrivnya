@@ -13,7 +13,7 @@ public class RoleEntity {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "NAME", nullable = false)
     @Enumerated(EnumType.STRING)

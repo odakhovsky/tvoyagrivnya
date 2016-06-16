@@ -42,7 +42,7 @@
                     <span style="color:green" >${budget.spendingTotal.diff}</span>
                 </c:when>
                 <c:otherwise>
-                    <span >${budget.spendingTotal.diff}</span>
+                    <span style="color:red">${budget.spendingTotal.diff}</span>
                 </c:otherwise>
             </c:choose>
         </div>

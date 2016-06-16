@@ -57,9 +57,11 @@
                         <div class="col-lg-2">
                             <span>${n.date}</span>
                         </div>
+
                         <div class="col-lg-1">
                             <a href="/cabinet/organizer/note/${n.id}/info/"><i class="fa fa-edit btn-cursor"></i></a>
-                            <i onclick="remove(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
+
+                            <i onclick="removeNote(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -74,7 +76,7 @@
                         </div>
                         <div class="col-lg-1">
                             <a href="/cabinet/organizer/note/${n.id}/info/"><i class="fa fa-edit btn-cursor"></i></a>
-                            <i onclick="remove(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
+                            <i onclick="removeNote(${n.id})" class="margin-left-5 fa fa-remove btn-cursor"></i>
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -85,13 +87,37 @@
 
 <script>
 
-    $("#currencies").on("change",function(){
+    function removeNote(id) {
+        $.confirm({
+            text: "Впевнені що бажаете видалити нотатку?",
+            title: "Підтвердження видалення",
+            confirm: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/cabinet/organizer/note/" + id + "/remove",
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            },
+            cancel: function (button) {
+            },
+            confirmButton: "Так, видалити",
+            cancelButton: "Ні, відмовляюсь",
+            post: true,
+            confirmButtonClass: "btn-danger",
+            cancelButtonClass: "btn-hide",
+            dialogClass: "modal-dialog modal-lg"
+        });
+    }
+
+    $("#currencies").on("change", function () {
         purpose.call(this);
     })
 
     function purpose() {
         if (this.value == '') {
-            $("#purpose-text").html("").fadeOut( "slow");
+            $("#purpose-text").html("").fadeOut("slow");
         } else if ($(this).val()) {
             getPurpose();
         }
@@ -115,35 +141,13 @@
                 async: true,
                 success: function (result) {
                 }, error: function (result) {
-                    $("#purpose-text").html(result.responseText).fadeIn( "slow");
+                    $("#purpose-text").html(result.responseText).fadeIn("slow");
                 }
             });
         }
     }
 
     $("#categories").select2();
-    function remove(id) {
-        $.confirm({
-            text: "Впевнені що бажаете видалити нотатку?",
-            title: "Підтвердження видалення",
-            confirm: function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/cabinet/organizer/note/" + id + "/remove",
-                    success: function () {
-                        location.reload();
-                    }
-                });
-            },
-            cancel: function (button) {
-            },
-            confirmButton: "Так, видалити",
-            cancelButton: "Ні, відмовляюсь",
-            post: true,
-            confirmButtonClass: "btn-danger",
-            cancelButtonClass: "btn-hide",
-            dialogClass: "modal-dialog modal-lg"
-        });
-    }
+
 </script>
 <script src="/resources/js/organizer.js"></script>

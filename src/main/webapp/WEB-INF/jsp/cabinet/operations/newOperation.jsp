@@ -61,7 +61,8 @@
                 </div>
             </div>
         </form>
-        <div class="list-group col-lg-12 margin-top-15 text-center">
+        </br>
+        <div style="margin-top:50px" class="list-group col-lg-12 margin-top-15 text-center">
             <H3>Поточний курс валют</H3>
             <c:forEach items="${currs}" var="c">
                 <div class="list-group-item col-lg-12 <c:if test="${c.def}">alert alert-info text-bold</c:if>">
